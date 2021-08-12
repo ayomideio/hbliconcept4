@@ -1,0 +1,549 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description"
+            content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
+        <title>iConcept4 Callover</title>
+        <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/bootcss/bootstrap.css' %}" >
+        <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/bootcss/bootstrap.min.css' %}">
+        <link rel='stylesheet' type='text/css' media='screen' href="{% static 'fontawesome/css/all.css' %}">
+        <link rel='stylesheet' type='text/css' media='screen' href="{% static 'jqueryui/jquery-ui.css' %}">
+        <link rel='stylesheet' type='text/css' media='screen' href="{% static 'jqueryui/jquery-ui.theme.css' %}">
+        <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/datetimecss/bootstrap-datetimepicker.css' %}">
+        <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/datetimecss/bootstrap-datetimepicker.min.css' %}">
+        <script src="{% static 'js/lib/jquerymin.js' %}"></script>
+        <script src="{% static 'js/bootjs/bootstrap.bundle.js' %}"></script>
+        <script src="{% static 'js/bootjs/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'jqueryui/jquery-ui.js' %}"></script>
+        <script src="{% static 'js/lib/moment.min.js' %}"></script>
+       
+    
+        <script src="{% static 'js/datetimejs/bootstrap-datetimepicker.js' %}"></script>
+        <script src="{% static 'js/datetimejs/bootstrap-datetimepicker.min.js' %}"></script>
+    <!-- destroy -->
+        <!-- using online links -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+            integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+            integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <link rel="stylesheet" href="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
+    
+        <!-- using local links -->
+        <!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css"> -->
+    
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        <link rel="stylesheet" href="{% static 'css/sidebar-themes.css' %}">
+        <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}" />
+    
+    
+        <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+                  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+                  crossorigin="anonymous"> -->
+            <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+            <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+            <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+            <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"/> -->
+    
+    
+     <script>
+         window.setTimeout(clickit, 500);
+    
+    function clickit(){
+       document.getElementById("fmp-button").click();
+    }
+     </script>
+    </head>
+
+<body background-color:white>
+    <div class="page-wrapper default-theme sidebar-bg bg1 toggled">
+        <nav id="sidebar" class="sidebar-wrapper" style="width:300px;">
+            <div class="sidebar-content">
+          <!-- sidebar-brand  -->
+          <!-- <div class="sidebar-item sidebar-brand">
+              <a href="#">pro sidebar</a>
+          </div> -->
+          <!-- sidebar-header  -->
+          <div class="sidebar-item sidebar-header d-flex flex-nowrap">
+              <div class="user-pic">
+                  <img class="img-responsive img-rounded" src="{% static 'img/user.jpg' %}" alt="User picture">
+              </div>
+              <div class="user-info">
+                  <span class="user-name">
+                      <strong>{{ username }}</strong>
+                  </span>
+                  <!-- <span class="user-role">Administrator</span> -->
+                  <span class="user-status">
+                      <i class="fa fa-circle"></i>
+                      <span>Online</span>
+                  </span>
+              </div>
+          </div>
+          <!-- sidebar-search  -->
+       
+          <!-- sidebar-menu  -->
+          <div class=" sidebar-item sidebar-menu">
+             
+              <ul>
+                  <li class="header-menu">
+                      <span>Callover</span>
+                  </li>
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-shopping-cart"></i>
+                          <span class="menu-text">Branch Service Tellers</span>
+                        
+                      </a>
+                      <div class="sidebar-submenu">
+                        {% for group in grouplist %}
+                        <ul>
+                              <li>   
+
+                           <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+
+                                  </li>
+                              
+                          </ul>
+                           {% endfor %}
+                      </div>
+                  </li>
+                  {% if grouplistbsm %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="far fa-gem"></i>
+                          <span class="menu-text">Branch Service BSM/HTS</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                        {% for group in grouplistbsm %}    
+                         <ul>
+                              <li>    
+                          <a href="{% url group.URL %}">{{group.MENU_NAME}}</a>  
+                           </li>
+                              
+                          </ul>
+                           {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+                  {% if grouplistbc %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Branch Control</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                       {% for group in  grouplistbc %}
+                       <ul>
+                              <li>
+                         
+                       <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+                         </li>
+                              
+                          </ul>
+                             
+                           {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+                  {% if grouplistfot %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Foreign Operation Tellers</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                       {% for group in grouplistfot %}
+                          <ul>
+                              <li>
+                         
+                                  <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+                                </li>
+                              
+                          </ul>
+                          
+                          {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+                  {% if grouplistfoc %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Foreign Operation Control</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                       {% for group in grouplistfoc %}
+                          <ul>
+                              <li>
+                         
+                                  <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+                                </li>
+                              
+                          </ul>
+                          
+                          {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+                  {% if grouplisttrs %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Treasury Operation Tellers</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                       {% for group in grouplisttrs %}
+                          <ul>
+                              <li>
+                         
+                                  <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+                                </li>
+                              
+                          </ul>
+                          
+                          {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+                  {% if grouplisttrc %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Treasury Operation Control</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                       {% for group in grouplisttrc %}
+                          <ul>
+                              <li>
+                         
+                                  <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+                                </li>
+                              
+                          </ul>
+                          
+                          {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+                  {% if grouplistcon %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Concurrency</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                        {% for group in grouplistcon %}
+                          <ul>
+                              <li>
+                                   <a href="{% url group.URL   %}">{{group.MENU_NAME}}</a> 
+                              </li>
+                              
+                          </ul>
+                          {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+
+                  {% if grouplist_ce %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Callover Exception</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                        {% for group in grouplist_ce %}
+                          <ul>
+                              <li>
+                                   <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+                              </li>
+                              
+                          </ul>
+                          {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+                  {% if grouplist_ca %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Callover Assignment</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                        {% for group in grouplist_ca %}
+                          <ul>
+                              <li>
+                                   <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+                              </li>
+                              
+                          </ul>
+                          {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+                  {% if grouplist_db %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Downgraded Branch</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                        {% for group in grouplist_db %}
+                          <ul>
+                              <li>
+                                   <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+                              </li>
+                              
+                          </ul>
+                          {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+                  {% if grouplist_ei %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Exception Investigation</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                        {% for group in grouplist_ei %}
+                          <ul>
+                              <li>
+                                   <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+                              </li>
+                              
+                          </ul>
+                          {% endfor %}
+                      </div>
+                  </li>
+                 {% endif %}
+              </ul>
+          </div>
+          <!-- sidebar-menu  -->
+      </div>
+      <!-- sidebar-footer  -->
+      <div class="sidebar-footer">
+          <div class="dropdown">
+
+              <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-bell"></i>
+                  <span class="badge badge-pill badge-warning notification">3</span>
+              </a>
+              <div class="dropdown-menu notifications" aria-labelledby="dropdownMenuMessage">
+                  <div class="notifications-header">
+                      <i class="fa fa-bell"></i>
+                      Notifications
+                  </div>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">
+                      
+                  </a>
+                  <!-- <a class="dropdown-item" href="#">
+                      <div class="notification-content">
+                          <div class="icon">
+                              <i class="fas fa-exclamation text-info border border-info"></i>
+                          </div>
+                          <div class="content">
+                              <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                                  elit. In totam explicabo</div>
+                              <div class="notification-time">
+                                  Today
+                              </div>
+                          </div>
+                      </div>
+                  </a>
+                  <a class="dropdown-item" href="#">
+                      <div class="notification-content">
+                          <div class="icon">
+                              <i class="fas fa-exclamation-triangle text-warning border border-warning"></i>
+                          </div>
+                          <div class="content">
+                              <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                                  elit. In totam explicabo</div>
+                              <div class="notification-time">
+                                  Yesterday
+                              </div>
+                          </div>
+                      </div>
+                  </a> -->
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item text-center" href="#">View all notifications</a>
+              </div>
+          </div>
+          <!-- <div class="dropdown">
+              <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-envelope"></i>
+                  <span class="badge badge-pill badge-success notification">7</span>
+              </a>
+              <div class="dropdown-menu messages" aria-labelledby="dropdownMenuMessage">
+                  <div class="messages-header">
+                      <i class="fa fa-envelope"></i>
+                      Messages
+                  </div>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">
+                      <div class="message-content">
+                          <div class="pic">
+                              <img src="{% static 'img/user.jpg' %}" alt="">
+                          </div>
+                          <div class="content">
+                              <div class="message-title">
+                                  <strong> Jhon doe</strong>
+                              </div>
+                              <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                                  elit. In totam explicabo</div>
+                          </div>
+                      </div>
+
+                  </a>
+                  <a class="dropdown-item" href="#">
+                      <div class="message-content">
+                          <div class="pic">
+                              <img src="{% static 'img/user.jpg' %}" alt="">
+                          </div>
+                          <div class="content">
+                              <div class="message-title">
+                                  <strong> Jhon doe</strong>
+                              </div>
+                              <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                                  elit. In totam explicabo</div>
+                          </div>
+                      </div>
+
+                  </a>
+                  <a class="dropdown-item" href="#">
+                      <div class="message-content">
+                          <div class="pic">
+                              <img src="img/user.jpg" alt="">
+                          </div>
+                          <div class="content">
+                              <div class="message-title">
+                                  <strong> Jhon doe</strong>
+                              </div>
+                              <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                                  elit. In totam explicabo</div>
+                          </div>
+                      </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item text-center" href="#">View all messages</a>
+
+              </div>
+          </div> -->
+          <div class="dropdown">
+              <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-cog"></i>
+                  <span class="badge-sonar"></span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuMessage">
+                  
+                  <a class="dropdown-item" href="#">Help</a>
+                 
+              </div>
+          </div>
+          <div>
+              <a href="{% url 'login' %}">
+                  <i class="fa fa-power-off"></i>
+              </a>
+          </div>
+          <div class="pinned-footer">
+              <a href="#">
+                  <i class="fas fa-ellipsis-h"></i>
+              </a>
+          </div>
+      </div>
+  </nav>
+        <!-- page-content  -->
+      
+
+        
+
+        {% block content %}
+
+        {% endblock %}
+        <!-- page-content" -->
+     </div>
+    <!-- page-wrapper -->
+
+
+    <script>
+        (function () {
+            'use strict';
+            var $ = jQuery;
+            $.fn.extend({
+                filterTable: function () {
+                    return this.each(function () {
+                        $(this).on('keyup', function (e) {
+                            $('.filterTable_no_results').remove();
+                            var $this = $(this),
+                                search = $this.val().toLowerCase(),
+                                target = $this.attr('data-filters'),
+                                $target = $(target),
+                                $rows = $target.find('tbody tr');
+    
+                            if (search == '') {
+                                $rows.show();
+                            } else {
+                                $rows.each(function () {
+                                    var $this = $(this);
+                                    $this.text().toLowerCase().indexOf(search) === -1 ? $this.hide() : $this.show();
+                                })
+                                if ($target.find('tbody tr:visible').size() === 0) {
+                                    var col_count = $target.find('tr').first().find('td').size();
+                                    var no_results = $('<tr class="filterTable_no_results"><td colspan="' + col_count + '">No results found</td></tr>')
+                                    $target.find('tbody').append(no_results);
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+            $('[data-action="filter"]').filterTable();
+        })(jQuery);
+    
+        $(function () {
+            // attach table filter plugin to inputs
+            $('[data-action="filter"]').filterTable();
+    
+            $('.container').on('click', '.panel-heading span.filter', function (e) {
+                var $this = $(this),
+                    $panel = $this.parents('.panel');
+    
+                $panel.find('.panel-body').slideToggle();
+                if ($this.css('display') != 'none') {
+                    $panel.find('.panel-body input').focus();
+                }
+            });
+            $('[data-toggle="tooltip"]').tooltip();
+        })
+    </script>
+    <!-- using online scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+    </script>
+    <script src="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+
+    <!-- using local scripts -->
+    <!-- <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script> -->
+
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

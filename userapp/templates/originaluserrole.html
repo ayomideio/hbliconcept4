@@ -1,0 +1,293 @@
+<html>
+<head>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+</head>
+<body>
+    
+<div class="container">
+ 
+    
+  <form id="createrole" method="POST" action="{% url 'createrole'   %}">
+    {% csrf_token %}
+        
+    <div class="form-group">
+      <label>Role Name:</label>
+      <input type="text" name="rolename"  id="rolename" class="form-control"  required="">
+    </div>
+    
+    <div class="form-group">
+      <label>Group </label>
+      <!-- <select name="email" class="form-control"  required=""> -->
+        <select name="groupname" id="groupname" class="form-control">
+          {% for f in group %}
+          <option >{{ f.Group_Name }} </option>
+         {%  endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+    <Label for="exampleEmail" className="mr-sm-2" style="margin-left:1.8rem">Add Action</Label>
+    <Input type="checkbox" name="addaction" id="addaction"   style="width: 12rem;height:1.5rem; margin-left:1rem" />
+    
+      <Label for="exampleEmail" className="mr-sm-2" style="margin-left:20rem">Edit Action</Label>
+      <Input type="checkbox" name="editaction" id="editaction" style="width: 12rem; height:1.5rem;margin-left:-1rem" />
+     <br><br>
+     <Label for="exampleEmail" className="mr-sm-2" style="margin-left:1.3rem">Delete Action</Label>
+     <Input type="checkbox" name="deleteaction" id="deleteaction"  style="width: 12rem; height:1.5rem;margin-left: 0.1rem;"/>
+    </div>
+    <button type="submit" class="btn btn-success save-btn">Save</button>
+    
+  </form>
+ 
+  <br/>
+  <table class="table table-bordered data-table" id="ayo">
+    <thead>
+      <th>Group Name</th>
+      <th>Role</th>
+      <th>Add Action</th>
+      <th>Edit Action</th>
+      <th>Delete Action</th>
+      
+      <th width="200px">Action</th>
+      <th style="display: none;">Actionjgcrrjgjce</th>
+    </thead>
+    <tbody>
+     
+      {% for roles in role %}
+      <tr data-groupname='{{  roles.Group_Name  }}' data-rolename='{{ roles.Menu_Name }}'
+       data-addaction='{{ roles.Add }}'
+       data-editaction='{{ roles.Edit }}' data-deleteaction='{{ roles.Delete }}'>
+       <td>{{ roles.Group_Name }}</td>
+       <td>{{ roles.Menu_Name }}</td>
+       <td>{{ roles.Add }}</td>
+       <td>{{ roles.Edit }}</td>
+       <td>{{ roles.Delete }}</td>
+      
+          <td><button class='btn btn-info btn-xs btn-edit'>Edit</button>
+            <button class='btn btn-danger btn-xs btn-delete'>Delete</button></td>
+            <td style="display:none;"> {{ roles.ID }} </td> 
+            <td style="display:none;">
+              <form id="editrole" method="POST" style="display: none;" action="{%  url 'editrole' roles.Menu_Name %}">
+                {% csrf_token %} 
+            <div class="form-group">
+              <label>Group Name:</label>
+              <input type="text" name="groupname2" class="form-control"  required="">
+              <input type="text" name="roleid" id="roleid" class="form-control" value=''  required="">
+            </div>
+            
+            <div class="form-group">
+              <label>UserRole</label>
+              <input type="text" name="userrole2" class="form-control"  required="">
+            </div>
+            <div class="form-group">
+              <Label for="exampleEmail" className="mr-sm-2" style="margin-left:1.8rem">Add Action</Label>
+              <Input type="checkbox" name="addaction2" id="addaction2"   style="width: 12rem;height:1.5rem; margin-left:1rem" />
+              
+                <Label for="exampleEmail" className="mr-sm-2" style="margin-left:20rem">Edit Action</Label>
+                <Input type="checkbox" name="editaction2" id="editaction2" style="width: 12rem; height:1.5rem;margin-left:-1rem" />
+               <br><br>
+               <Label for="exampleEmail" className="mr-sm-2" style="margin-left:1.3rem">Delete Action</Label>
+               <Input type="checkbox" name="deleteaction2" id="deleteaction2"  style="width: 12rem; height:1.5rem;margin-left: 0.1rem;"/>
+              </div>
+            <button type="submit" class="btn btn-success save-btn">Save</button>
+            
+          </form>
+            </td>
+            <td style="display:none;">
+              <form id="deleterole" method="POST" style="display: none;" action="{%  url 'deleterole' roles.Menu_Name %}">
+                {% csrf_token %} 
+            <div class="form-group">
+              <label>Group Name:</label>
+              <input type="text" name="groupname3" class="form-control"  required="">
+              <input type="text" name="roleid" id="roleid3" class="form-control" value=''  required="">
+            </div>
+            
+            <div class="form-group">
+              <label>UserRole</label>
+              <input type="text" name="userrole3" class="form-control"  required="">
+            </div>
+            <div class="form-group">
+              <Label for="exampleEmail" className="mr-sm-2" style="margin-left:1.8rem">Add Action</Label>
+              <Input type="checkbox" name="addaction3" id="addaction3"   style="width: 12rem;height:1.5rem; margin-left:1rem" />
+              
+                <Label for="exampleEmail" className="mr-sm-2" style="margin-left:20rem">Edit Action</Label>
+                <Input type="checkbox" name="editaction3" id="editaction3" style="width: 12rem; height:1.5rem;margin-left:-1rem" />
+               <br><br>
+               <Label for="exampleEmail" className="mr-sm-2" style="margin-left:1.3rem">Delete Action</Label>
+               <Input type="checkbox" name="deleteaction3" id="deleteaction3"  style="width: 12rem; height:1.5rem;margin-left: 0.1rem;"/>
+              </div>
+            <button type="submit" class="btn btn-success save-btn">Save</button>
+            
+          </form>
+            </td>
+          </tr>
+     
+      {% endfor %}
+    </tbody>
+  </table>
+   
+</div>
+   
+<script type="text/javascript">
+   var ade
+    $("form").submit(function(e){
+        e.preventDefault();
+        // var groupname = $("input[name='rolename']").val();
+        var rolename = $("input[name='rolename']").val();
+        var groupname = document.getElementById("groupname").value;
+        var addaction= document.getElementById("addaction").value;
+        var editaction= document.getElementById("editaction").value
+        var deleteaction= document.getElementById("addaction").value
+        if(document.getElementById("addaction").checked){
+    addaction="true"
+        }
+        else{
+        addaction="false"
+        }
+        if(document.getElementById("editaction").checked){
+       
+         editaction="true"
+        }
+        else{
+        editaction="false"
+        }
+        if(document.getElementById("deleteaction").checked){
+      deleteaction="true"
+     }
+     else{
+     deleteaction="false"
+     }
+    
+        $(".data-table tbody").append("<tr data-groupname='"+groupname+"' data-rolename='"+rolename+"' data-addaction='"+addaction+
+        "' data-editaction='"+editaction+"' data-deleteaction='"+deleteaction +"'><td >"+
+          groupname+"</td><td>"+rolename+
+            "</td><td>"+addaction+"</td><td>"+editaction+"</td><td>"+deleteaction+"</td><td><button class='btn btn-info btn-xs btn-edit'>Edit</button><button class='btn btn-danger btn-xs btn-delete'>Delete</button></td></tr>");
+    ade=name
+    document.getElementById('createrole').submit();
+        $("input[name='name']").val('');
+        $("input[name='email']").val('');
+    });
+   
+    $("body").on("click", ".btn-delete", function(){
+      var name = $(this).parents("tr").attr('data-rolename');
+       
+        $("input[name='userrole3']").val(name);
+        document.getElementById('deleterole').submit();
+        $(this).parents("tr").remove();
+    });
+    var globe
+    $("body").on("click", ".btn-edit", function(){
+        
+        var rolename = $(this).parents("tr").attr('data-rolename'); 
+        globe= $(this).parents("tr").attr('data-rolename');
+        var addaction=$(this).parents("tr").attr('data-addaction')
+        var editaction=$(this).parents("tr").attr('data-editaction')
+        var deleteaction=$(this).parents("tr").attr('data-deleteaction')
+        var txt
+        $("#groupname > option").each(function() {
+          txt +="<option"
+          txt+=" value="
+         txt+=this.value+" >"
+          txt+=this.value +"</option>"
+    // alert(this.text + ' ' + this.value);
+});
+var addact
+// alert(addaction)
+
+
+        $(this).parents("tr").find("td:eq(0)").html('<select name="edit_groupname"  class="form-control" style="width:30px" >'+txt+'</select>');
+        $(this).parents("tr").find("td:eq(1)").html('<input name="edit_rolename"  class="form-control"  value="'+rolename+'">');
+        if (addaction==="true"){
+        $(this).parents("tr").find("td:eq(2)").html('<Input type="checkbox" name="edit_addaction" id="edit_addaction"  checked="true"  style="width: 12rem;height:1.5rem; margin-left:1rem" />');
+        
+      }
+        else{
+          $(this).parents("tr").find("td:eq(2)").html('<Input type="checkbox" name="edit_addaction" id="edit_addaction" style="width: 12rem;height:1.5rem; margin-left:1rem" />');
+        
+        }
+        if(editaction==="true"){
+        $(this).parents("tr").find("td:eq(3)").html('<Input type="checkbox" name="edit_editaction" id="edit_editaction"  checked="true"  style="width: 12rem;height:1.5rem; margin-left:1rem" />');
+        
+      }
+        else{
+          $(this).parents("tr").find("td:eq(3)").html('<Input type="checkbox" name="edit_editaction" id="edit_editaction"    style="width: 12rem;height:1.5rem; margin-left:1rem" />');
+        
+        }
+        if(deleteaction==="true"){
+        $(this).parents("tr").find("td:eq(4)").html('<Input type="checkbox" name="edit_deleteaction" id="edit_deleteaction"  checked="true"  style="width: 12rem;height:1.5rem; margin-left:1rem" />');
+        
+      }
+        else{
+          $(this).parents("tr").find("td:eq(4)").html('<Input type="checkbox" name="edit_deleteaction" id="edit_deleteaction"    style="width: 12rem;height:1.5rem; margin-left:1rem" />');
+        
+        }
+        var groupname = document.getElementById("groupname").value;
+   
+        
+  
+        $(this).parents("tr").find("td:eq(5)").prepend("<button class='btn btn-info btn-xs btn-update'>Update</button><button class='btn btn-warning btn-xs btn-cancel'>Cancel</button>")
+        $(this).hide();
+    });
+   
+    $("body").on("click", ".btn-cancel", function(){
+        var name = $(this).parents("tr").attr('data-name');
+        var email = $(this).parents("tr").attr('data-email');
+    
+        $(this).parents("tr").find("td:eq(0)").text(name);
+        $(this).parents("tr").find("td:eq(1)").text(email);
+   
+        $(this).parents("tr").find(".btn-edit").show();
+        $(this).parents("tr").find(".btn-update").remove();
+        $(this).parents("tr").find(".btn-cancel").remove();
+    });
+   
+    $("body").on("click", ".btn-update", function(){
+      // var tst=document.getElementsByName('edit_groupname')
+      // var evt=tst.options[tst.selectedIndex].value
+      // var ay=document.getElementById("")
+      var addaction,editaction,deleteaction
+         var groupname = $(this).parents("tr").find("select[name='edit_groupname']").val();
+      
+         var rolename=$(this).parents("tr").find("input[name='edit_rolename']").val();
+        //  alert(rolename)
+       
+        //  var editaction=$(this).parents("tr").find("input[name='edit_editaction']").val()
+        //  var addaction=$(this).parents("tr").find("input[name='edit_addaction']").val()
+        //  var deleteaction=$(this).parents("tr").find("input[name='edit_deleteaction']").val()
+       
+        document.getElementById("roleid").value=(globe)
+        // document.getElementById("userrole2").val(rolename)
+        // document.getElementById("addaction2").val("off")
+        //       document.getElementById("editaction2").val("off")
+        // document.getElementById("deleteaction2").val("off")
+        
+
+        $(this).parents("tr").find("td:eq(0)").text(groupname);
+        $(this).parents("tr").find("td:eq(1)").text(rolename);
+        $("input[name='groupname2']").val(groupname);
+
+        $("input[name='userrole2']").val(rolename);
+    
+        document.getElementById('editrole').submit();
+       
+        //  alert(JSON.stringify(editaction2.))
+        // var email = $(this).parents("tr").find("input[name='edit_email']").val();
+
+        // $(this).parents("tr").find("td:eq(0)").text(name);
+        // $(this).parents("tr").find("td:eq(1)").text(email);
+        // $("input[name='name2']").val(name);
+        // $("input[name='email2']").val(email);
+        // document.getElementById("editform").submit();
+        // $(this).parents("tr").attr('data-name', name);
+        // $(this).parents("tr").attr('data-email', email);
+    
+        // $(this).parents("tr").find(".btn-edit").show();
+        // $(this).parents("tr").find(".btn-cancel").remove();
+        // $(this).parents("tr").find(".btn-update").remove();
+    });
+    
+</script>
+     
+</body>
+</html>

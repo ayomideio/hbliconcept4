@@ -1,0 +1,70 @@
+{% extends 'basic2.html' %}
+{% load static %}
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!--Custom styles-->
+     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+   
+    <title>U-Review</title>
+</head>
+{% block content %}
+    <div class="login-body">
+        <div class="login-panel"></div>
+        <div class="login-content">
+            <img src="{% static 'images/logo_ubn.png' %}" alt="babylon-layout"/>
+            <h1><span> U-Review</span></h1>
+            <p>Welcome, please use the form to sign-in</p>
+
+            <form  method="POST">
+            {% csrf_token %}
+            <div class="login-input-wrapper">
+                <input type="text" id="username" name="username" placeholder="Username" onfocusout="tosmall();" class="p-inputtext p-component"/>
+            </div>
+            <div class="login-input-wrapper">
+                <input type="password" id="password" name="password" placeholder="password" class="p-inputtext p-component"/>
+            </div>
+            <button class="p-button p-component p-button-text-only">
+                <span class="p-button-text">Sign In</span></button>  
+
+                <p style="color: red">{{ error }}</p>
+            </form> 
+
+                {% comment %} <form action="{% url 'account_login' %}" method="POST">
+                      {% csrf_token %}
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text" style="background-color: #007bff"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" id="{{ form.login.id_for_label }}" name="{{ form.login.html_name}}" class="form-control" placeholder="username">
+
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text" style="background-color: #007bff"><i class="fas fa-key"></i></span>
+						</div>
+						<input id="{{ form.password.id_for_label }} " name="{{ form.password.html_name}}" type="password" class="form-control" placeholder="password">
+					</div>
+					<div class="row align-items-center remember">
+						<input id="{{ form.remember.id_for_label }}"  name="{{ form.remember.html_name}}" type="checkbox">Remember Me
+					</div>
+                     {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{% url 'home' %}" />
+                        {% endif %}
+					<div class="form-group">
+						<input type="submit" value="Login" class="btn float-right login_btn" style="background-color: #007bff;color: white">
+					</div>
+				</form> 
+        </div>
+         <p style="color: red">{{ error }}</p>
+    </div> {% endcomment %}  
+    <script>
+        function tosmall(){
+          var username=document.getElementById('username').value
+        document.getElementById('username').value=username.toLowerCase();  
+        }
+        
+        
+        </script>
+    {% endblock %}

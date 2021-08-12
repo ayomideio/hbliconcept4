@@ -1,0 +1,251 @@
+{% extends 'acc_back.html' %}
+{% load static %}
+
+{% block content %}
+        <!-- page-content  -->
+<main class="page-content pt-2">
+         
+    <a href="#" id="fmp-button" data-theme="ice-theme" class="theme ice-theme" style="display: none;"></a>
+    <div id="overlay" class="overlay"></div>
+    <div class="container-fluid p-5">
+      <div class="card" style="margin:auto;margin-top: 3rem;">
+        <div class="card-header" style="background-color: #2c6db8;height:2.5rem; color:white">
+          <h5 style="margin-top: -0.5rem;">Risk Assessment Manager</h5>
+        </div> 
+        <form class="form-horizontal" style="margin-top: 1rem;" id='calloverexceptionreview' method="POST" action="{% url 'followreview_acceptreview' %}"  enctype="multipart/form-data">
+          {% csrf_token %}
+        <div class="bs-example">
+            <nav class="navbar navbar-expand-md navbar-light">
+                 
+                   
+                    <div class="navbar-nav ml-auto">
+                      {% if isOwner %}
+                      <input type="submit"  class="btn btn-success" value="Accept" />
+                        {% endif %}
+                        <button type="button" class="btn btn-primary ml-2" id='btnSend'>Save</button>
+                        <button type="button" class="btn btn-primary ml-2" id='btnSend' disabled>Message</button>
+                        <button type="button" class="btn btn-danger ml-2"><a href="{% url 'followupindexall' %}">Close</a></button>
+                    </div>
+            </nav>
+        </div>
+      
+      
+  {% for result in results %}
+    <div class="card-header" style="background-color: #2c6db8; margin: 1rem; color: white; height:2.4rem;">
+        <h5 style="margin-top: -0.5rem;">Exception Risk Details</h5>
+     </div>
+    
+     <div style="margin-right: 3rem;">
+    <div class="form-group" style="margin-top: 1rem;">
+      <label class="control-label col-sm-2" for="callover">Alert ID*</label>
+      <div class="col-sm-10">          
+        <input type="text" class="form-control" value="{{ result.ALERT_ID }}" readOnly id="callover" name="alertid">
+        <input type="text" class="form-control" value="{{ result.ID }}" readOnly id="id" name="id" hidden>
+        <input type="text" class="form-control" style="display: none;"  id="sendSignal" name="sendSignal">
+      </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="branch">Branch Code*</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" value="{{ result.BRANCH_CODE }}" readOnly id="branch"  name="branchCode">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="observe">Exception *</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" value="{{ result.EXCEPTION }}" readOnly id="observe" name="exception">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="observe">Upload File</label>
+        <div class="col-sm-10">          
+          <input type="file" class="form-control"  id="fp" name="fp">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="severe">Severity Level</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" value="{{ result.SEVERITY_LEVEL }}" readOnly id="severe"  name="severity">
+        </div>
+      </div>
+      <div class="card-header" style="background-color: #2c6db8;margin: 1rem; color: white; height:2.3rem;">
+        <h5 style="margin-top: -0.5rem;">Owner, Next Owner, Respondent Details</h5>
+     </div>
+    
+     <div class="form-group">
+      <label class="control-label col-sm-2" for="action">Owner</label>
+      <div class="col-sm-10">    
+        <input type="text" class="form-control" readOnly value="{{ result.OWNER }}" id="officer"  name="owner">
+      </div>
+    </div>
+
+    
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="action">Next Owner Details</label>
+      <div class="col-sm-10">    
+        <input type="text" class="form-control" readOnly value="{{ result.NEXT_OWNER_DETAIL}}" id="officer"  name="nextownerdetail">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="action">Owner Detail</label>
+      <div class="col-sm-10">    
+        <input type="text" class="form-control" readOnly value="{{ result.OWNER_DETAIL}}" id="officer"  name="ownerdetail">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="action">Receiver</label>
+      <div class="col-sm-10">    
+        <input type="text" class="form-control" readOnly value="{{ result.RECEIVER}}" id="officer"  name="calloverOfficer">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="action">Next Owner</label>
+      <div class="col-sm-10">    
+        <input type="text" class="form-control" readOnly value="{{ result.NEXT_OWNER}}" id="officer"  name="calloverOfficer">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="action">Respondent Detail</label>
+      <div class="col-sm-10">    
+        <input type="text" class="form-control" readOnly value="{{ result.RESPONDENT_DETAIL}}" id="officer"  name="respondentdetail">
+      </div>
+    </div>  
+    <div class="card-header" style="background-color: #2c6db8;margin: 1rem; color: white; height:2.3rem;">
+      <h5 style="margin-top: -0.5rem;">Other Receivers Details</h5>
+   </div>
+  
+   <div class="form-group">
+    <label class="control-label col-sm-2" for="action">Other Receivers</label>
+    <div class="col-sm-10">    
+      <input type="text" class="form-control" readOnly value="{{ result.OTHER_RECEIVER }}" id="officer"  name="otherreceivers">
+    </div>
+  </div>
+     
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="action">Update Other Receivers</label>
+    <div class="col-sm-10">    
+      <input type="text" class="form-control"  value="{{ result.UPDATE_OTHER_RECEIVERS}}" id="officer"  name="updateotherreceivers">
+    </div>
+  </div>
+  
+<div class="card-header" style="background-color: #2c6db8;margin: 1rem; color: white; height:2.3rem;">
+  <h5 style="margin-top: -0.5rem;">Amount & Currency Details</h5>
+</div>
+
+<div class="form-group">
+<label class="control-label col-sm-2" for="action">Transaction CCY</label>
+<div class="col-sm-10">    
+  <input type="text" class="form-control" readOnly value="{{ result.IC4_TRANS_CCY }}" id="officer"  name="calloverOfficer">
+</div>
+</div>
+ 
+<div class="form-group">
+<label class="control-label col-sm-2" for="action">Transaction Amount</label>
+<div class="col-sm-10">    
+  <input type="text" class="form-control" readOnly value="{{ result.IC4_TRANS_AMOUNT}}" id="officer"  name="calloverOfficer">
+</div>
+</div>
+
+
+<div class="card-header" style="background-color: #2c6db8;margin: 1rem; color: white; height:2.3rem;">
+  <h5 style="margin-top: -0.5rem;">Risk Rating, Priority Indicator</h5>
+</div>
+
+<div class="form-group">
+<label class="control-label col-sm-2" for="action">Maturity Rating</label>
+<div class="col-sm-10">    
+  <input type="text" class="form-control" readOnly value="{{ result.MATURITY_RATING }}" id="officer"  name="calloverOfficer">
+</div>
+</div>
+ 
+<div class="form-group">
+<label class="control-label col-sm-2" for="action">Risk Indicator</label>
+<div class="col-sm-10">    
+  <input type="text" class="form-control" readOnly value="{{ result.RISK_INDICATOR}}" id="officer"  name="calloverOfficer">
+</div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-sm-2" for="action">Issue Priority</label>
+  <div class="col-sm-10">    
+    <input type="text" class="form-control" readOnly value="{{ result.ISSUE_PRIORITY }}" id="officer"  name="calloverOfficer">
+  </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="action">Review</label>
+    <div class="col-sm-10">    
+      <input type="text" class="form-control" readOnly value="{{ result.REVIEW_DATE }}" id="officer"  name="calloverOfficer">
+    </div>
+    </div>
+<div class="card-header" style="background-color: #2c6db8;margin: 1rem; color: white; height:2.3rem;">
+  <h5 style="margin-top: -0.5rem;">Comments Recommendations</h5>
+</div>
+
+
+<div style="margin-right: 3rem;">
+  <div class="form-group" style="margin-top: 1rem;">
+     <label class="control-label col-sm-2" for="others">Comment Recommendations</label>
+     <div class="col-sm-10">          
+       <textarea type="others" class="form-control"  id="comments"  name="comments"></textarea>
+
+       <input type="text" class="form-control" readOnly value="{{ result.ALERT_COMMENTS }}" id="officer"  name="prevcomments">
+     </div>
+   </div>
+ </div>
+
+ 
+    {% endfor %}
+  </form>
+
+</div>
+<scr src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+crossorigin="anonymous"></scr>
+<scr src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+crossorigin="anonymous"></scr>
+<scr src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+crossorigin="anonymous"></scr>
+
+<script>
+  document.getElementById('btnSend').onclick=function(){
+
+  
+        // var inputF = document.getElementById("sendSignal"); 
+  
+      
+        //     inputF.value = "textValue"; 
+        document.getElementById('sendSignal').value='send'
+        // alert(document.getElementById('sendSignal').value)
+        // calloverexceptionreview
+  
+  document.getElementById('calloverexceptionreview').submit()
+    
+  }
+  
+  
+</script>
+{#<scr src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></scr>#}
+{#    <!-- jQuery UI !-->#}
+{#<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>#}
+
+{% block script %}
+
+<script src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
+<script>
+$('.basicAutoComplete').autoComplete(
+    {minLength: 1}
+);
+$('.dropdown-menu').css({'top': 'auto', 'left': 'auto'})
+
+</script>
+<script>
+$("td.contribution").each(function() { $(this).html(parseFloat($(this).text()).toLocaleString('en-US', { style: "currency", currency: "USD" })); })
+</script>
+{% endblock %}
+
+</main>
+
+{% endblock %}

@@ -1,0 +1,142 @@
+:root{
+    --primaryColor:#3091f6 ;
+    --mainWhite: #fdfdfd;
+    --maindark:  #141415;
+    --lightPurple: #6b89ed;
+    --lightGrey: #b3b5bb;
+}
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+/* GLOBAL */
+body{
+    background-color: var(--primaryColor);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1{
+    margin:2rem 0;
+    color: var(--mainWhite);
+    font-size: 3rem;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+/* MAIN CONTAINER DATE PICKER */
+.date-picker{
+ position:relative;
+ width:100%;
+ max-width: 320px;
+ height: 60px;
+ background-color:  var(--mainWhite);
+ margin:2rem auto;
+ box-shadow: 0px 3px 10px rgba(0,0,0,.2);
+ 
+ cursor: pointer;
+ user-select: none;
+}
+
+/* DATE - TODAY BY DEFAULT || SELECTED DATE - */
+.date-picker .selected-date:hover{
+    background-color:  var(--mainWhite);
+}
+
+.date-picker .selected-date{
+ display:flex;
+ justify-content: center;
+ align-items: center;
+
+ width:100%;
+ height: 100%;
+ font-size: 1.75rem;
+ color:  rgba(0,0,0,.2);;
+ font-weight: 900;
+ font-size: 1.75rem;
+ background: rgba(48, 145, 246, .7);;
+}
+
+/* DATES CONTAINER */
+.date-picker .dates{
+ display:none;
+ position: absolute;
+ top:100%;
+ left:0;
+ right:0;
+
+ background-color:  var(--mainWhite);
+}
+
+/* get display dynamically */
+.date-picker .dates.active{
+ display:block;
+}
+
+.date-picker .dates .month{
+ display:flex;
+ justify-content: space-between;
+ align-items:center;
+ border-bottom: 2px solid #eee;
+ padding: 1rem 0;
+
+ text-transform: capitalize;
+}
+
+/* BTN ARROW */
+.arrows{
+    width:35px;
+    height:35px;
+
+ display:flex;
+ justify-content: center;
+ align-items:center;
+ color: #6b89ed;
+ font-size: 1.5rem;
+}
+
+.arrows:hover{
+  background-color: #f3f3f3;
+color: var(--maindark)
+}
+ .arrows:active{
+  background-color:  var(--lightPurple);
+}
+
+/*  WEEK DAYS */
+
+.week_days {  
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+.day-name{
+    color:  var( --lightGrey);
+    padding: 1rem 0;
+}
+/*  END WEEK DAYS */
+
+
+
+/* DAY BLOCK */
+/* dynamically populate days */
+.days{
+    width: 100%;
+    height:200px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.day,
+.day-name{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.day.selected{
+    background-color: var(--lightPurple);
+    cursor: pointer;
+}

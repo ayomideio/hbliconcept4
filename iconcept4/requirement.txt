@@ -1,0 +1,9 @@
+Django==3.1.7
+cx-oracle==8.1.0
+jinja2==2.11.3
+pandas==1.2.2
+django-grappelli==2.14.3
+django-allauth==0.44.0
+django-cors-headers==3.7.0
+django-reverse-admin==2.9.4
+ldap3==2.9

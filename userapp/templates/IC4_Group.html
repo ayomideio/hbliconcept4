@@ -1,0 +1,244 @@
+
+{% load static %}
+
+<html>
+<head>
+  <link rel='stylesheet' type='text/css' media='screen' href={% static "bootcss/bootstrap.css" %} >
+    <link rel='stylesheet' type='text/css' media='screen' href={% static "bootcss/bootstrap.min.css" %} >
+  <script src={% static 'bootjquery/jquery-3.4.0.min.js' %}></script>
+</head>
+<body>
+ 
+<div class="container mt-4">
+   
+  <form id="groupform"  method="POST" action="{% url 'creategroup' %}">
+    {% csrf_token %}
+    <div class="d-grid gap-2 d-md-flex mb-2 justify-content-md-end">
+      <button type="submit" class="btn btn-primary btn-sm">Save</button>
+      <button type="button" id="Cancell" onclick="doFunction();" class="btn btn-danger btn-sm">Cancel</button>
+    </div>
+    
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            User Group
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+    <div class="form-group row mb-2">
+      <label class="col-sm-2 col-form-label">Group ID:</label>
+      <div class="col-sm-10">
+      <input type="text" name="name" class="form-control"  required="">
+    </div>
+    </div>
+    <div class="form-group row mb-2">
+      <label class="col-sm-2 col-form-label">Group Name:</label>
+      <div class="col-sm-10">
+      <input type="text" name="id" class="form-control"  required="">
+    </div>
+    </div>
+    
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Group Description</label>
+      <div class="col-sm-10">
+      <input type="text" name="email" class="form-control"  required="">
+    </div>
+    </div>
+   
+    <!-- <button type="submit" class="btn btn-success save-btn">Save</button> -->
+  </div>
+</div>
+</div>
+  </form>
+  <br/>
+  <div class="accordion" id="accordionExample2">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingTwo">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          Group Details
+        </button>
+      </h2>
+      <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+        <div class="accordion-body">
+  <table id="grouptable" class="table table-borderless table-striped data-table">
+    <thead>
+      <th>Group ID</th>
+      <th>Group Name</th>
+      <th>Group Description</th>
+      <th width="200px">Action</th>
+    </thead>
+    <tbody>
+      {% for f in group %}
+      <tr data-id={{ f.Group_Id }} data-name={{ f.Group_Name }} data-email={{ f.Description }}>
+        <td>{{ f.Group_Id }}</td>
+        <td>{{ f.Group_Name }}</td>
+        <td>{{ f.Description }}</td>
+        <td><button class='btn btn-info btn-sm btn-edit ' style='padding:0; margin-right:4px;'>Edit</button><button class='btn btn-danger btn-sm btn-delete' style='padding:0;'>Delete</button></td>
+      
+        <td style="display:none;"> 
+          <form id="editform" method="POST" style="display:none;" action="{% url 'editgroup' f.Group_Name %}">
+            {% csrf_token %}
+        <div class="form-group">
+          <label>Group Name:</label>
+          <input type="text" name="name2" id="name2" value="whereeee" class="form-control"  required="">
+          <input type="text" name="name4" id="name4" value="whereeee" class="form-control"  required="">
+          <input type="text" name="id4" id="id4" value="whereeee" class="form-control"  required="">
+        </div>
+        
+        <div class="form-group">
+          <label>Group Description</label>
+          <input type="text" name="email2" id="email2" value="whereeee" class="form-control"  required="">
+        </div>
+       
+        <button type="submit" class="btn btn-success save-btn">Save</button>
+        
+      </form>
+        </td>
+        <td style="display:none;"> 
+          <form id="deleteform" method="POST" style="display:none;" action="{% url 'deletegroup' f.Group_Id %}">
+            {% csrf_token %}
+        <div class="form-group">
+          <label>Group Name:</label>
+          <input type="text" name="name3" id="name3" value="whereeee" class="form-control"  required="">
+        </div>
+        
+        <div class="form-group">
+          <label>Group Description</label>
+          <input type="text" name="email3" id="email3" value="whereeee" class="form-control"  required="">
+        </div>
+       
+        <button type="submit" class="btn btn-success save-btn">Save</button>
+        
+      </form>
+        </td>
+      </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+   
+</div>
+</div>
+</div>
+
+</div>
+   
+<script type="text/javascript">
+    function doFunction() { 
+    Location.reload()
+    location.reload()
+    location.reload()
+        } 
+   $("form").submit(function(e){
+        e.preventDefault();
+        var name = $("input[name='name']").val();
+        var email = $("input[name='email']").val();
+        var table = document.getElementById("grouptable");
+        var conf
+        for (let row of table.rows) 
+{
+    for(let cell of row.cells) 
+    {
+      if(cell.innerText===name){
+        
+        conf="YES"
+      }
+       
+    }
+}
+if(conf==="YES"){
+  alert("value already exist")
+}
+else{
+        // $(".data-table tbody").append("<tr data-name='"+name+"' data-email='"+email+"'><td>"+name+"</td><td>"+email+"</td><td><button class='btn btn-info btn-sm btn-edit ' style='padding:0; margin-right:4px;'>Edit</button><button class='btn btn-danger btn-sm btn-delete' style='padding:0;'>Delete</button></td></tr>");
+        
+        document.getElementById("groupform").submit();
+        $("input[name='name']").val('');
+        $("input[name='email']").val('');
+}
+    });
+   
+    $("body").on("click", ".btn-delete", function(){
+      var name = $(this).parents("tr").attr('data-id');
+      // alert(name)
+      $("input[name='name3']").val(name);
+        document.getElementById("deleteform").submit();
+        // $(this).parents("tr").remove();
+    });
+    var globe
+    $("body").on("click", ".btn-edit", function(){
+      var t = document.getElementById('grouptable');
+      var namee,emailee
+for(var k =1; k < t.rows.length; k++) {
+  if((t.rows[k].cells[1].innerHTML).includes($(this).parents("tr").attr('data-name'))) {
+    
+  namee=t.rows[k].cells[1].innerHTML
+  //  alert( t.rows[k].cells[1].innerHTML)
+  }
+ 
+// if( t.rows[k].cells[1].innerHTML == val) { t.rows[k].style.display="table-row"; }
+// else { t.rows[k].style.display="none"; }
+ } 
+ for(var k =1; k < t.rows.length; k++) {
+   if((t.rows[k].cells[2].innerHTML).includes($(this).parents("tr").attr('data-email'))){
+    emailee= t.rows[k].cells[2].innerHTML
+  }
+ 
+// if( t.rows[k].cells[1].innerHTML == val) { t.rows[k].style.display="table-row"; }
+// else { t.rows[k].style.display="none"; }
+ } 
+
+//  alert(emailee)
+      var name = $(this).parents("tr").attr('data-name');
+      // alert(name)
+        globe=$(this).parents("tr").attr('data-id')
+        // alert(globe)
+        var email = $(this).parents("tr").attr('data-email');
+      var nam2= $("input[name='name2']").val();
+      
+        $(this).parents("tr").find("td:eq(1)").html('<input type="textarea" name="edit_name" value=\"'+namee+'\">');
+        $(this).parents("tr").find("td:eq(2)").html('<input name="edit_email" value="'+emailee+'">');
+        $("input[name='name3']").val(name);
+    
+        $(this).parents("tr").find("td:eq(3)").prepend("<button class='btn btn-info btn-sm btn-update' style='padding:0; margin-right:4px;'>Update</button><button class='btn btn-warning btn-sm btn-cancel' style='padding:0; margin-right:4px;'>Cancel</button>")
+        $(this).hide();
+    });
+   
+    $("body").on("click", ".btn-cancel", function(){
+      var name = $(this).parents("tr").attr('data-name');
+        var email = $(this).parents("tr").attr('data-email');
+    
+        $(this).parents("tr").find("td:eq(1)").text(name);
+        $(this).parents("tr").find("td:eq(2)").text(email);
+   
+        $(this).parents("tr").find(".btn-edit").show();
+        $(this).parents("tr").find(".btn-update").remove();
+        $(this).parents("tr").find(".btn-cancel").remove();
+    });
+   
+    $("body").on("click", ".btn-update", function(){
+      var name = $(this).parents("tr").find("input[name='edit_name']").val();
+        var email = $(this).parents("tr").find("input[name='edit_email']").val();
+    
+        $(this).parents("tr").find("td:eq(1)").text(name);
+        $(this).parents("tr").find("td:eq(2)").text(email);
+        $("input[name='name2']").val(name);
+        $("input[name='email2']").val(email);
+        $("input[name='name3']").val(name);
+        $("input[name='name4']").val(globe);
+        $("input[name='id4']").val(name);
+        // alert(name)
+        document.getElementById("editform").submit();
+        $(this).parents("tr").attr('data-name', name);
+        $(this).parents("tr").attr('data-email', email);
+    
+        $(this).parents("tr").find(".btn-edit").show();
+        $(this).parents("tr").find(".btn-cancel").remove();
+        $(this).parents("tr").find(".btn-update").remove();
+    });
+    
+</script>
+     
+</body>
+</html>

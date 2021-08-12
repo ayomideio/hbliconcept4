@@ -1,0 +1,327 @@
+
+{% load static %}
+<html>
+<head>
+  
+    <link rel='stylesheet' type='text/css' media='screen' href={% static "bootcss/bootstrap.css" %} >
+    <link rel='stylesheet' type='text/css' media='screen' href={% static "bootcss/bootstrap.min.css" %} >
+  <script src={% static 'bootjquery/jquery-3.4.0.min.js' %}></script>
+  <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+      
+      <!-- Javascript -->
+      <script>
+         $(function() {
+            var availableTutorials  =  [
+               "ActionScript",
+               "Bootstrap",
+               "C",
+               "C++",
+            ];
+            $( "#automplete-1" ).autocomplete({
+               source: availableTutorials
+            });
+         });
+      </script>
+      <style type="text/css">
+    .a option {
+        height: 100px;
+    }
+      </style>
+</head>
+<body>
+    
+<div class="container">
+ 
+    
+    <div class="container mt-4">
+        <form id="userform" method="POST" action="{% url 'createuserrole' %}">
+            {% csrf_token %}
+        <div class="d-grid gap-2 d-md-flex mb-2 justify-content-md-end">
+            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+            <button type="button" id="Cancell" onclick="doFunction();" class="btn btn-danger btn-sm">Cancel</button>
+          </div>
+
+    <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button"  data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            User Role
+          </button>
+        </h2>
+        <div id="collapseOne" class=" collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="mb-1 row">
+                
+                
+              <div class="mb-1 row">
+
+                <label for="Concurrency" class="col-sm-2 col-form-label ">User ID</label>
+                <div class="col-sm-10">
+                 
+                  <select name="name" id="name" style="width:32.6rem; height:2rem;"
+                  
+                  >
+                     
+                    {% for conts in cont %}
+                    <option class="dropdown-item"  value={{ conts.USER_ID }} >{{  conts.USER_ID_ALIAS }}</option>
+                    {% endfor %}
+                </select>
+                  <!-- <input type="text" name="name" class="form-control form-control-sm"  id="Concurrency"> -->
+                </div>
+              
+                
+              </div>
+
+              <div class="mb-1 row">
+                <label for="status" class="col-sm-2 col-form-label ">Group Name</label>
+                <div class="col-sm-10">
+                  <select name="email" id="email"  style="width:32.6rem; height:2rem;">
+                     {% for groups in group %}
+                    
+                    <option class="dropdown-item" value={{ groups.Group_Id }}>{{ groups.Group_Name }}</option>
+                    {% endfor %}
+                </select>
+                </div>
+
+              </div>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+</form>
+
+<div class="mb-1 row">
+     
+
+    
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="comticketOne">
+        <button class="accordion-button" type="button"  data-bs-target="#comcollapseOne" aria-expanded="true" aria-controls="comcollapseOne">
+          User Role Detail
+        </button>
+      </h2>
+      <div id="comcollapseOne" class=" collapse show" aria-labelledby="comticketOne" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+    <div style="overflow-x: auto; height: 178px; overflow-y: auto;">
+<table class="table table-striped table-borderless data-table">
+    <thead>
+  
+      <th>User ID</th>
+      <th>Group Name</th>
+      <th width="200px">Action</th>
+    </thead>
+    <tbody>
+      {% for useroles in userrole %}
+      <tr data-name='{{ useroles.User_Id }}'   data-email={{ useroles.Group_Name }}>
+        
+        <td>{{ useroles.User_Id }}</td>
+        <td>{{ useroles.Group_Name }}</td>
+        <td><button class='btn btn-info btn-sm btn-edit ' style='padding:0; margin-right:4px;'>Edit</button> <button class='btn btn-danger btn-sm btn-delete' style='padding:0;'>Delete</button>
+        </td>
+        <td style="display: none;">
+          <form id="edituserform" method="POST" action="{% url 'edituserrole' useroles.User_Id  %}">
+            {% csrf_token %}
+        <div class="d-grid gap-2 d-md-flex mb-2 justify-content-md-end">
+            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+            <button type="button" class="btn btn-danger btn-sm">Cancel</button>
+          </div>
+
+    <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button"  data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            User Role
+          </button>
+        </h2>
+        <div id="collapseOne" class=" collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="mb-1 row">
+                
+                
+              <div class="mb-1 row">
+
+                <label for="Concurrency" class="col-sm-2 col-form-label ">User ID</label>
+                <div class="col-sm-10">
+                 
+                  <input name="name2" id="name2" class="a"  >
+                     
+                  
+            
+                  <!-- <input type="text" name="name" class="form-control form-control-sm"  id="Concurrency"> -->
+                </div>
+              
+                
+              </div>
+
+              <div class="mb-1 row">
+                <label for="status" class="col-sm-2 col-form-label ">Group Name</label>
+                <div class="col-sm-10">
+                  <input name="email2" id="email2" class="a"  >
+                </div>
+
+              </div>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+</form>
+        </td>
+        <td style="display: none;">
+          <form id="deleteuserform" method="POST" action="{% url 'deleteuserrole' useroles.User_Id  %}">
+            {% csrf_token %}
+        <div class="d-grid gap-2 d-md-flex mb-2 justify-content-md-end">
+            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+            <button type="button" class="btn btn-danger btn-sm">Cancel</button>
+          </div>
+
+    <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button"  data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            User Role
+          </button>
+        </h2>
+        <div id="collapseOne" class=" collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="mb-1 row">
+                
+                
+              <div class="mb-1 row">
+
+                <label for="Concurrency" class="col-sm-2 col-form-label ">User ID</label>
+                <div class="col-sm-10">
+                 
+                  <input name="name3" id="name3" class="a"  >
+                     
+                  
+            
+                  <!-- <input type="text" name="name" class="form-control form-control-sm"  id="Concurrency"> -->
+                </div>
+              
+                
+              </div>
+
+              <div class="mb-1 row">
+                <label for="status" class="col-sm-2 col-form-label ">Group Name</label>
+                <div class="col-sm-10">
+                  <input name="email3" id="email3" class="a"  >
+                </div>
+
+              </div>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+</form>
+        </td>
+      </tr>
+      {% endfor %}
+       
+    </tbody>
+  </table>
+
+</div>
+</div>
+</div>
+</div>
+
+
+</div>
+   
+</div>
+   
+<script type="text/javascript">
+    function doFunction() { 
+      document.getElementById("name").value = "";
+      document.getElementById("email").value = ""; 
+    // alert("how are you");  
+        } 
+    $("form").submit(function(e){
+        e.preventDefault();
+        var name =document.getElementById("name").value;
+        // alert(name)
+        var email = document.getElementById("email").value;
+
+        
+     
+        // $(".data-table tbody").append("<tr data-name='"+name+"' data-email='"+email+"'><td>"+name+"</td><td>"+email+"</td><td><button class='btn btn-info btn-sm btn-edit ' style='padding:0; margin-right:4px;'>Edit</button><button class='btn btn-danger btn-sm btn-delete' style='padding:0;'>Delete</button></td></tr>");
+        document.getElementById("userform").submit()
+        // $("input[name='name']").val('');
+        // $("input[name='email']").val('');
+    });
+   var globe
+    $("body").on("click", ".btn-delete", function(){
+      var name = $(this).parents("tr").attr('data-name');
+      $("input[name='name3']").val(name);
+      document.getElementById("deleteuserform").submit()
+        // $(this).parents("tr").remove();
+    });
+    
+    $("body").on("click", ".btn-edit", function(){
+        var name = $(this).parents("tr").attr('data-name');
+        // alert(name)
+        var email = $(this).parents("tr").attr('data-email');
+        var txt
+var txd
+$("#name > option").each(function() {
+  txt +="<option"
+  txt+=" value="
+ txt+=this.value+" >"
+  txt+=this.text +"</option>"
+// alert(this.text + ' ' + this.value);
+});
+$("#email > option").each(function() {
+  txd +="<option"
+  txd+=" value="
+ txd+=this.value+" >"
+  txd+=this.text +"</option>"
+// alert(this.text + ' ' + this.value);
+});
+// $(this).parents("tr").find("td:eq(0)").html('<select name="edit_name" >'+txt+'</select>');
+// document.getElementById("name").value=name
+globe=name
+$(this).parents("tr").find("td:eq(1)").html('<select name="edit_email" >'+txd+'</select>');
+    document.getElementById("email").value=email
+        $(this).parents("tr").find("td:eq(2)").prepend("<button class='btn btn-info btn-sm btn-update' style='padding:0; margin-right:4px;'>Update</button><button class='btn btn-warning btn-sm btn-cancel' style='padding:0; margin-right:4px;'>Cancel</button>")
+        $(this).hide();
+    });
+   
+    $("body").on("click", ".btn-cancel", function(){
+        var name = $(this).parents("tr").attr('data-name');
+        var email = $(this).parents("tr").attr('data-email');
+    
+        $(this).parents("tr").find("td:eq(0)").text(name);
+        $(this).parents("tr").find("td:eq(1)").text(email);
+   
+        $(this).parents("tr").find(".btn-edit ").show();
+        $(this).parents("tr").find(".btn-update").remove();
+        $(this).parents("tr").find(".btn-cancel").remove();
+    });
+   
+    $("body").on("click", ".btn-update", function(){
+        var name = $(this).parents("tr").find("select[name='edit_name']").val();
+        var email = $(this).parents("tr").find("select[name='edit_email']").val();
+        $("input[name='email2']").val(email);
+        $("input[name='name2']").val(globe);
+        document.getElementById("edituserform").submit()
+        $(this).parents("tr").find("td:eq(0)").text(name);
+        $(this).parents("tr").find("td:eq(1)").text(email);
+     
+        $(this).parents("tr").attr('data-name', name);
+        $(this).parents("tr").attr('data-email', email);
+    
+        $(this).parents("tr").find(".btn-edit ").show();
+        $(this).parents("tr").find(".btn-cancel").remove();
+        $(this).parents("tr").find(".btn-update ").remove();
+    });
+    
+</script>
+     
+</body>
+</html>

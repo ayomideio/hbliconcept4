@@ -1,0 +1,239 @@
+
+{% extends 'libraryback.html' %}
+{% load static %}
+
+{% block content %}
+        <!-- page-content  -->
+      
+
+        <main class="page-content pt-2">
+         
+            <a href="#" id="fmp-button" data-theme="ice-theme" class="theme ice-theme" style="display: none;"></a>
+            <div id="overlay" class="overlay"></div>
+            
+               
+                <div class="container-fluid p-5" >
+                    
+                    <div class="col-md-15">
+                        <a onclick="generateWord();"  title="Export to Word"><img src="{% static 'img/word-icon.png' %}" width="25" alt="word file icon" /></a>
+                        <a   onclick="generate();"   title="Export to Pdf"><img src="{% static 'img/pdf-icon.png' %}" width="25" alt="png pdf file icon" /></a>
+                        <a id="btnExport" title="Export to Excel"><img src="{% static 'img/xls-icon.png'  %}" width="25" alt="Excel Icon Small" /></a>
+                      <button  style="background-color: #d9534f;">  <a  style="color:#ffff;background-color:#d9534f ;" href="{% url 'index' %}">Back</a></button>
+            <div style="height:5px"></div>
+            
+           
+       
+             
+          
+            
+         
+            
+                        <div class="panel panel-primary" >
+                            <div class="panel-heading" style="height:30px;">
+                          
+                                <h6 class="panel-title" style="height:20px;">Callover for Tellers</h6>
+                                <!-- <div class="float-right">
+                                    <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter"
+                                          data-container="body">
+                                        <i style="margin-top:1.0rem; color:#d9534f;" class="fas fa-search"></i>
+                                    </span>
+                                </div> -->
+                            </div>
+                            <div class="panel-body">
+                                <input type="text" class="form-control" id="dev-table-filter" data-action="filter"
+                                       data-filters="#dev-table" placeholder="Filter Callovers"/>
+                                       <div style="height: 10px;"></div>
+                                       <form method="POST" id="profileform" action="{% url 'bank_trans' branch_id %}" >
+                                        {% csrf_token %}
+                                       <select   class="form-control"  name="profile" id="myselect" style="border-color: #337ab7;height: 40px;" required>
+                                        <option value="">{{ prof_session }}</option>
+                                        {% for prof in profile %}
+                                       
+                                            <option value={{ prof.IC4_INPUTTER }}>{{ prof.PROFILE_NAME }} </option>
+                                        
+                                           {% endfor %}
+                                           
+                                        </select>
+                                        {% for result in results %}
+                                        <input hidden name="dateVal" value={{ result.GRP_BY_DATE  }} />
+                                        {% endfor %}
+                                    </form>
+                                   
+                                    <div style="height: 10px;"></div>
+                                      <select class="form-control" name="state" id="maxRows" >
+                                        <option value="5000">Show ALL Rows</option>
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                        <option value="20">20</option>
+                                        <option value="50">50</option>
+                                        <option value="70">70</option>
+                                        <option value="100">100</option>
+                                      </select>
+                            </div>
+                        
+                            <table id="dev-table" class="table table-bordered table-striped table-hover mytable"
+                            style="line-height: 1;  display: block; margin-bottom: 0; white-space: nowrap; ">
+        
+                                <thead class="thead-light">
+                                <tr>
+                                    <th style="background-color: #1565C0; color: white;"></th>
+                                    <th style="background-color: #1565C0; color: white;">ITEM / ENTRY NO</th>
+                                    <th style="background-color: #1565C0; color: white;">ENTRY DATE</th>
+                                    <th style="background-color: #1565C0; color: white;width: 300px;">ENTRY USER ID</th>
+                                    <th style="text-align: right;background-color: #1565C0; color: white;">NO OF ENTRIES</th>
+                                    <th style="text-align: right;background-color: #1565C0; color: white;">CREDIT FREQUENCY</th>
+                                    <th style="text-align: right;background-color: #1565C0; color: white;">TOTAL CREDIT</th>
+                                    <th style="text-align: right;background-color: #1565C0; color: white;">DEBIT FREQUENCY</th>
+                                    <th style="text-align: right;background-color: #1565C0; color: white;">TOTAL DEBIT</th>
+                                </tr>
+                                </thead>
+                                <tbody id="myTable">
+                                {% for result in results %}
+                                 <form id='tran{{ result.GRP_BY_DATE}}{{ result.GRP_BY_REF}}' method="POST" action="{% url 'acc_trans' result.GRP_BY_REF %}" >
+                                        {% csrf_token %}
+                                    <tr>
+                                        <td><input type="checkbox" class="checkthis"/></td>
+                                    
+                                            <input type="text" style="display: none;" name="vala" id="vala" value={{ result.GRP_BY_DATE }} />
+                                         
+                                        <td style="text-align: left;"><a style="color: #1565C0;cursor: pointer;"  id='submittrans' onclick="document.getElementById('tran{{ result.GRP_BY_DATE}}{{ result.GRP_BY_REF}}').submit();">&nbsp;{{ result.GRP_BY_REF }}</a></td>
+                                        <td style="text-align: left;">{{ result.GRP_BY_DATE }}</td>
+                                        <td style="text-align: left;" title="this is uer">{{ result.GRP_BY_USER }}</td>
+                                        <td style="text-align: right;">{{ result.CALL_NO_OF_VOUCHERS }}</td>
+                                        <td style="text-align: right;">{{ result.CALL_CREDIT_FREQ }}</td>
+                                        <td style="text-align: right;">{{ result.CALL_CREDIT_TOTAL }}</td>
+                                        <td style="text-align: right;">{{ result.CALL_DEBIT_FREQ }}</td>
+                                        <td style="text-align: right;">{{ result.CALL_DEBIT_TOTAL }}</td>
+                                    </tr>
+                                    </form>
+                                {% endfor %}
+        
+        
+                                </tbody>
+        
+                            </table>
+        
+        
+                        </div>
+                        
+                        <div class="col col-lg-6" style=" padding-right: 3px; border-radius: 10px;  ">
+                            <nav>
+                              <ul class="pagination">
+                                <li data-page="prev" >
+                                  <span> < <span class="sr-only">(current)</span></span>
+                                </li>
+                                <!--	Here the JS Function Will Add the Rows -->
+                                <li data-page="next" id="prev">
+                                  <span> > <span class="sr-only">(current)</span></span>
+                                </li>
+                               
+                              </ul>
+                             
+                            </nav>
+                           
+                         
+                          </div>
+                          <div class="col col-lg-2" style=" padding-right: 3px; border-radius: 10px; margin-left: 85%; ">
+                        
+                        
+                          <input id="toalnpages" type="text" style="border: none;" />
+                          </div>
+
+                    </div>
+        
+               
+                {% block javascript %}
+                {#checkbox script#}
+                <script>
+                        $("#myselect").change(function () {
+
+                            // var selectedVal = $("#myselect option:selected").text();
+                            var selectedVal = $("#myselect option:selected").text();
+                            if(selectedVal)
+                            {
+                        document.getElementById("profileform").submit()
+
+                            }
+
+                            });
+                </script>
+                <script>
+                    $(document).ready(function () {
+                        $(".mytable #checkall").click(function () {
+                            if ($(".mytable #checkall").is(':checked')) {
+                                $(".mytable input[type=checkbox]").each(function () {
+                                    $(this).prop("checked", true);
+                                });
+                
+                            } else {
+                                $(".mytable input[type=checkbox]").each(function () {
+                                    $(this).prop("checked", false);
+                                });
+                            }
+                        });
+                
+                        $("[data-toggle=tooltip]").tooltip();
+                    });
+                
+                </script>
+                {#search field script#}
+                <script>
+                    (function () {
+                        'use strict';
+                        var $ = jQuery;
+                        $.fn.extend({
+                            filterTable: function () {
+                                return this.each(function () {
+                                    $(this).on('keyup', function (e) {
+                                        $('.filterTable_no_results').remove();
+                                        var $this = $(this),
+                                            search = $this.val().toLowerCase(),
+                                            target = $this.attr('data-filters'),
+                                            $target = $(target),
+                                            $rows = $target.find('tbody tr');
+                
+                                        if (search == '') {
+                                            $rows.show();
+                                        } else {
+                                            $rows.each(function () {
+                                                var $this = $(this);
+                                                $this.text().toLowerCase().indexOf(search) === -1 ? $this.hide() : $this.show();
+                                            })
+                                            if ($target.find('tbody tr:visible').size() === 0) {
+                                                var col_count = $target.find('tr').first().find('td').size();
+                                                var no_results = $('<tr class="filterTable_no_results"><td colspan="' + col_count + '">No results found</td></tr>')
+                                                $target.find('tbody').append(no_results);
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        });
+                        $('[data-action="filter"]').filterTable();
+                    })(jQuery);
+                
+                    $(function () {
+                        // attach table filter plugin to inputs
+                        $('[data-action="filter"]').filterTable();
+                
+                        $('.container').on('click', '.panel-heading span.filter', function (e) {
+                            var $this = $(this),
+                                $panel = $this.parents('.panel');
+                
+                            $panel.find('.panel-body').slideToggle();
+                            if ($this.css('display') != 'none') {
+                                $panel.find('.panel-body input').focus();
+                            }
+                        });
+                        $('[data-toggle="tooltip"]').tooltip();
+                    })
+                </script>
+                
+                {% endblock javascript %}
+
+        </main>
+        <!-- page-content" -->
+    
+    
+  {% endblock %}

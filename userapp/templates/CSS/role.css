@@ -1,0 +1,48 @@
+  .btn-sm{
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+  }
+  .th{
+      width: 10rem;
+  }
+  .content-end{
+      margin:auto
+  }
+  .page-link{
+   height: 2rem;
+  }
+  .group_name{
+      margin-left: 2rem;
+      margin-top: 2rem;
+  }
+ .modal-title{
+     margin-top: 2rem;
+     margin-left: 1rem;
+ }
+ .close{
+     margin-right: 3rem;
+     font-size: large;
+     background-color: white;
+ }
+ .page{
+     margin:auto
+ }
+ .modal{
+     margin-top: 10rem;
+     height: 30rem
+ }
+ .select{
+     margin-left: 1rem;
+     width: 14rem;
+ }
+ .describe{
+     margin-left: 1.5rem;
+ }
+ .label{
+    margin-left: 2rem;
+ }
+ input[type="text"]{
+     width: 20rem;
+     margin-top: 1rem;
+     margin-left: 1rem;
+ }

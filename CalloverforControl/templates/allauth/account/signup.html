@@ -1,0 +1,78 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block head_title %}ProjectName{% endblock %}
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+<title>Bootstrap Sign up Form Horizontal</title>
+ <!--Custom styles-->
+	<link rel="stylesheet" type="text/css" href={% static "bootstrap/css/styles.css" %}>
+</head>
+
+    {% block content %}
+
+<div class="container">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card" style="height: auto;">
+			<div class="card-header">
+				<h3>Sign Up</h3>
+			</div>
+			<div class="card-body">
+                <form action="{% url 'account_signup' %}" method="post" class="form-horizontal">
+          {% csrf_token %}
+        <div class="form-group">
+			<label for="{{ form.first_name.id_for_label }}" class="control-label col-xs-4 card-text">First Name</label>
+			<div class="col-xs-8">
+                <input type="text" id="{{ form.first_name.id_for_label }}" class="form-control" name="{{ form.first_name.html_name }}" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+			<label for="{{ form.last_name.id_for_label }}" class="control-label col-xs-4 card-text">Last Name</label>
+			<div class="col-xs-8">
+                <input type="text" id="{{ form.last_name.id_for_label }}" class="form-control" name="{{ form.last_name.html_name }}" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+			<label for="{{ form.username.id_for_label }}" class="control-label col-xs-4 card-text">Username</label>
+			<div class="col-xs-8">
+                <input type="text" id="{{ form.username.id_for_label }}" class="form-control" name="{{ form.username.html_name }}" required="required">
+            </div>
+        </div>
+		<div class="form-group">
+			<label for="{{ form.email.id_for_label }}" class="control-label col-xs-4 card-text">Email Address</label>
+			<div class="col-xs-8">
+                <input type="email" id="{{ form.email.id_for_label }}" class="form-control" name="{{ form.email.html_name }}" required="required">
+            </div>
+        </div>
+		<div class="form-group">
+			<label for="{{ form.password1.id_for_label }}" class="control-label col-xs-4 card-text">Password</label>
+			<div class="col-xs-8">
+                <input type="password" id="{{ form.password1.id_for_label }}" class="form-control" name="{{ form.password1.html_name }}" required="required">
+            </div>
+        </div>
+		<div class="form-group">
+			<label for="{{ form.password2.id_for_label }}" class="control-label col-xs-4 card-text">Confirm Password</label>
+			<div class="col-xs-8">
+                <input type="password" id="{{ form.password2.id_for_label }}" class="form-control" name="{{ form.password2.html_name }}" required="required">
+            </div>
+        </div>
+{#          <input type="hidden" name="{{ redirect_field_name }}" value="{{ "login" }}" />#}
+		<div class="form-group">
+			<div class="col-xs-8 col-xs-offset-4">
+				<p><label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a>.</label></p>
+				<button type="submit" class="btn float-left login_btn">Sign Up</button>
+			</div>
+		</div>
+        <div>
+            <p style="color: red">{{ form.errors }}</p>
+        </div>
+    </form>
+	<div class="text-center">Already have an account? <a  href="{% url 'login' %}">Login here</a></div>
+</div>
+</div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,1170 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description"
+            content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
+        <title>iConcept4 Callover</title>
+        <script src="{% static 'jquery/jquery.js' %}"></script>
+        <!-- using online links -->
+        <link rel="stylesheet" href="{% static 'jquery/bootstrap.min.css' %}">
+
+        <link rel="stylesheet" href="{% static 'bootstrap4/css/bootstrap.min.css' %}">
+
+        <link rel="stylesheet" href="{% static 'jquery/fontawesome.css' %}">
+        <link rel="stylesheet" href="{% static 'jquery/jqueryscrollbar.min.css' %}">
+        <!-- using local links -->
+        <!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css"> -->
+    
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        <link rel="stylesheet" href="{% static 'css/sidebar-themes.css' %}">
+        <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}" />
+    
+    
+        <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+                  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+                  crossorigin="anonymous"> -->
+            <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+            <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+            <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+            <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"/> -->
+    
+        <script src="{% static 'jquery/jquery.js' %}"></script>
+            <style>
+    
+    
+    
+    
+    
+    
+    
+                /* Add padding and center-align text to the container */
+                .container {
+                  padding: 16px;
+                  text-align: center;
+                }
+                
+                /* The Modal (background) */
+                .modal {
+                 position: fixed; /* positioning in center of page */
+                  top: 50vh;
+                  left: 50vw;
+                  z-index: 1; /* Sit on top */
+                  height: 600px; /* size */
+                  width: 1300px;
+                  background-color: white; /* background color */
+                
+                
+                
+                /* new */
+                
+                }
+                
+                /* The Modal (background) */
+                .modal2 {
+                 display: none; /* Hidden by default */
+                  position: fixed; /* Stay in place */
+                  z-index: 1; /* Sit on top */
+                  padding-top: 100px; /* Location of the box */
+                  left: 0;
+                  top: 0;
+                  width: 50%; /* Full width */
+                  height: 50%; /* Full height */
+                  overflow: auto; /* Enable scroll if needed */
+                  
+                
+                }
+                
+                /* Modal Content/Box */
+                .modal-content {
+                background-color: #fefefe;
+                  margin: auto;
+                  padding: 20px;
+                  border: 1px solid #888;
+                  width: 80%;
+                }
+                
+                /* Style the horizontal ruler */
+                hr {
+                  border: 1px solid #f1f1f1;
+                  margin-bottom: 25px;
+                }
+                 
+                /* The Modal Close Button (x) */
+                .close {
+                  position: absolute;
+                  right: 35px;
+                  top: 15px;
+                  font-size: 40px;
+                  font-weight: bold;
+                  color: #f1f1f1;
+                }
+                
+                .close:hover,
+                .close:focus {
+                  color: #f44336;
+                  cursor: pointer;
+                }
+                
+                /* Clear floats */
+                .clearfix::after {
+                  content: "";
+                  clear: both;
+                  display: table;
+                }
+                
+                /* Change styles for cancel button and delete button on extra small screens */
+                
+                </style>    
+        <!-- using local links -->
+        <!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css"> -->
+    
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        <link rel="stylesheet" href="{% static 'css/sidebar-themes.css' %}">
+        <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}" />
+    
+        <script src="{% static 'fg1998/jquery-bootstrapExportExcel.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'jquery/boot3.min.css' %}">
+        <script src="{% static 'jquery/jquery1.11.3.min.js' %}"></script>
+        <script src="{% static 'jquery/boot3.3.5.min.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'jquery/boot3.3.5.min.css' %}">
+        <script src="{% static 'jquery/jquery1.11.3.min.js' %}"></script>
+    
+    <style>
+          .panel{margin-bottom:0;background-color:#fff;border:1px solid transparent;border-radius:4px;-webkit-box-shadow:0 1px 1px rgba(0,0,0,.05);box-shadow:0 1px 1px rgba(0,0,0,.05)}.panel-body{padding:15px}.panel-heading{padding:10px 15px;border-bottom:1px solid transparent;border-top-left-radius:3px;border-top-right-radius:3px}
+          .panel-primary{border-color:#2c6db8}.panel-primary>.panel-heading{color:#fff;background-color:#2c6db8;border-color:#2c6db8}.panel-primary>.panel-heading+.panel-collapse>.panel-body{border-top-color:#2c6db8}.panel-primary>.panel-heading .badge{color:#2c6db8;background-color:#fff}.panel-primary>.panel-footer+.panel-collapse>.panel-body{border-bottom-color:#2c6db8}
+        
+    </style>
+<script src="{% static 'jquery/jspdf.min.js' %}"></script>  
+<script src="{% static 'jquery/jspdf.plugin.autotable.min.js' %}"></script>
+
+
+<link rel="shortcut icon" type="image/png" href="{% static 'jquery/jquery.datatables.min.css' %}" />
+  
+<link rel="shortcut icon" type="image/png" href="{% static 'jquery/jquery.datatables.min.js' %}" />  
+<style>
+    /* Table styles. */
+/* Pagination. */
+.pagination {
+	
+	padding: 1rem;
+	margin-bottom: 1rem;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+    height: 25px;
+}
+
+#numbers {
+	padding: 0;
+	margin: 0 2rem;
+	list-style-type: none;
+    font: weight 1000px;
+	display: flex;
+    color: #333;
+}
+
+#numbers li a {
+	color: #333;
+	padding: .5rem 1rem;
+	text-decoration: none;
+	opacity: .7;
+}
+
+#numbers li a:hover {
+	opacity: 1;
+    color: #333;
+}
+
+#numbers li a.active {
+	opacity: 1;
+	background: #fff;
+	color: #333;
+}
+
+
+</style>
+
+<style>
+    .table          { overflow: auto; max-height: 280px; }
+.table thead th { position: sticky; top: 0; z-index: 1; }
+
+/* Just common table stuff. Really. */
+table  { border-collapse: collapse; width: 100%; }
+th, td { padding: 8px 16px; }
+th     { background:#2c6db8; }
+</style>
+
+
+
+
+    <script>
+        window.setTimeout(clickit, 500);
+    
+    function clickit(){
+      document.getElementById("fmp-button").click();
+    }
+    </script>
+     <style>
+
+.pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+.pagination > li {
+  display: inline;
+}
+.pagination > li > a,
+.pagination > li > span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #337ab7;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+  margin-left: 0;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+  z-index: 2;
+  color: #23527c;
+  background-color: #eee;
+  border-color: #ddd;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  z-index: 3;
+  color: #fff;
+  cursor: default;
+  background-color: #337ab7;
+  border-color: #337ab7;
+}
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+  color: #777;
+  cursor: not-allowed;
+  background-color: #fff;
+  border-color: #ddd;
+}
+.pagination-lg > li > a,
+.pagination-lg > li > span {
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.3333333;
+}
+.pagination-lg > li:first-child > a,
+.pagination-lg > li:first-child > span {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.pagination-lg > li:last-child > a,
+.pagination-lg > li:last-child > span {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.pagination-sm > li > a,
+.pagination-sm > li > span {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.pagination-sm > li:first-child > a,
+.pagination-sm > li:first-child > span {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.pagination-sm > li:last-child > a,
+.pagination-sm > li:last-child > span {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+     </style>
+    </head>
+
+<body background-color:white>
+    <div class="page-wrapper default-theme sidebar-bg bg1 toggled">
+        <nav id="sidebar" class="sidebar-wrapper" style="width:300px;">
+            <div class="sidebar-content">
+          <!-- sidebar-brand  -->
+          <!-- <div class="sidebar-item sidebar-brand">
+              <a href="#">pro sidebar</a>
+          </div> -->
+          <!-- sidebar-header  -->
+          <div class="sidebar-item sidebar-header d-flex flex-nowrap">
+              <div class="user-pic">
+                  <img class="img-responsive img-rounded" src="{% static 'img/user.jpg' %}" alt="User picture">
+              </div>
+              <div class="user-info">
+                  <span class="user-name">
+                      <strong>{{ username }}</strong>
+                  </span>
+                  <!-- <span class="user-role">Administrator</span> -->
+                  <span class="user-status">
+                      <i class="fa fa-circle"></i>
+                      <span>Online</span>
+                  </span>
+              </div>
+          </div>
+          <!-- sidebar-search  -->
+       
+          <!-- sidebar-menu  -->
+          <div class=" sidebar-item sidebar-menu">
+             
+              <ul>
+                  <li class="header-menu">
+                      <span>Callover</span>
+                  </li>
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-shopping-cart"></i>
+                          <span class="menu-text">Branch Service Tellers</span>
+                        
+                      </a>
+                      <div class="sidebar-submenu">
+                        {% for group in grouplist %}
+                        <ul>
+                              <li>   
+
+                           <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+
+                                  </li>
+                              
+                          </ul>
+                           {% endfor %}
+                      </div>
+                  </li>
+                  {% if grouplistbsm %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="far fa-gem"></i>
+                          <span class="menu-text">Branch Service BSM/HTS</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                        {% for group in grouplistbsm %}    
+                         <ul>
+                              <li>    
+                          <a href="{% url group.URL %}">{{group.MENU_NAME}}</a>  
+                           </li>
+                              
+                          </ul>
+                           {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+                  {% if grouplistbc %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Branch Control</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                       {% for group in  grouplistbc %}
+                       <ul>
+                              <li>
+                         
+                       <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+                         </li>
+                              
+                          </ul>
+                             
+                           {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+                  {% if grouplistfot %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Foreign Operation Tellers</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                       {% for group in grouplistfot %}
+                          <ul>
+                              <li>
+                         
+                                  <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+                                </li>
+                              
+                          </ul>
+                          
+                          {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+                  {% if grouplistfoc %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Foreign Operation Control</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                       {% for group in grouplistfoc %}
+                          <ul>
+                              <li>
+                         
+                                  <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+                                </li>
+                              
+                          </ul>
+                          
+                          {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+                  {% if grouplisttrs %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Treasury Operation Tellers</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                       {% for group in grouplisttrs %}
+                          <ul>
+                              <li>
+                         
+                                  <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+                                </li>
+                              
+                          </ul>
+                          
+                          {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+                  {% if grouplisttrc %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Treasury Operation Control</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                       {% for group in grouplisttrc %}
+                          <ul>
+                              <li>
+                         
+                                  <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+                                </li>
+                              
+                          </ul>
+                          
+                          {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+                  {% if grouplistcon %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Concurrency</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                        {% for group in grouplistcon %}
+                          <ul>
+                              <li>
+                                   <a href="{% url group.URL   %}">{{group.MENU_NAME}}</a> 
+                              </li>
+                              
+                          </ul>
+                          {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+
+                  {% if grouplist_ce %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Callover Exception</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                        {% for group in grouplist_ce %}
+                          <ul>
+                              <li>
+                                   <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+                              </li>
+                              
+                          </ul>
+                          {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+                  {% if grouplist_ca %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Callover Assignment</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                        {% for group in grouplist_ca %}
+                          <ul>
+                              <li>
+                                   <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+                              </li>
+                              
+                          </ul>
+                          {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+                  {% if grouplist_db %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Downgraded Branch</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                        {% for group in grouplist_db %}
+                          <ul>
+                              <li>
+                                   <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+                              </li>
+                              
+                          </ul>
+                          {% endfor %}
+                      </div>
+                  </li>
+                  {% endif %}
+                  {% if grouplist_ei %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Exception Manager</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                        {% for group in grouplist_ei %}
+                          <ul>
+                              <li>
+                                   <a href="{% url group.URL %}">{{group.MENU_NAME}}</a> 
+                              </li>
+                              
+                          </ul>
+                          {% endfor %}
+                      </div>
+                  </li>
+                 {% endif %}
+
+                 {% if grouplist_report %}
+                  <li class="sidebar-dropdown">
+                      <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span class="menu-text">Reports</span>
+                      </a>
+                      <div class="sidebar-submenu">
+                        {% for group in grouplist_report %}
+                          <ul>
+                              <li>
+                                   <a href="{{ group.URL }}">{{group.MENU_NAME}}</a> 
+                              </li>
+                              
+                          </ul>
+                          {% endfor %}
+                      </div>
+                  </li>
+                 {% endif %}
+              </ul>
+          </div>
+          <!-- sidebar-menu  -->
+      </div>
+      <!-- sidebar-footer  -->
+      <div class="sidebar-footer">
+          <div class="dropdown">
+
+              <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-bell"></i>
+                  <span class="badge badge-pill badge-warning notification">3</span>
+              </a>
+              <div class="dropdown-menu notifications" aria-labelledby="dropdownMenuMessage">
+                  <div class="notifications-header">
+                      <i class="fa fa-bell"></i>
+                      Notifications
+                  </div>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">
+                      
+                  </a>
+                  <!-- <a class="dropdown-item" href="#">
+                      <div class="notification-content">
+                          <div class="icon">
+                              <i class="fas fa-exclamation text-info border border-info"></i>
+                          </div>
+                          <div class="content">
+                              <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                                  elit. In totam explicabo</div>
+                              <div class="notification-time">
+                                  Today
+                              </div>
+                          </div>
+                      </div>
+                  </a>
+                  <a class="dropdown-item" href="#">
+                      <div class="notification-content">
+                          <div class="icon">
+                              <i class="fas fa-exclamation-triangle text-warning border border-warning"></i>
+                          </div>
+                          <div class="content">
+                              <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                                  elit. In totam explicabo</div>
+                              <div class="notification-time">
+                                  Yesterday
+                              </div>
+                          </div>
+                      </div>
+                  </a> -->
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item text-center" href="#">View all notifications</a>
+              </div>
+          </div>
+          <!-- <div class="dropdown">
+              <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-envelope"></i>
+                  <span class="badge badge-pill badge-success notification">7</span>
+              </a>
+              <div class="dropdown-menu messages" aria-labelledby="dropdownMenuMessage">
+                  <div class="messages-header">
+                      <i class="fa fa-envelope"></i>
+                      Messages
+                  </div>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">
+                      <div class="message-content">
+                          <div class="pic">
+                              <img src="{% static 'img/user.jpg' %}" alt="">
+                          </div>
+                          <div class="content">
+                              <div class="message-title">
+                                  <strong> Jhon doe</strong>
+                              </div>
+                              <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                                  elit. In totam explicabo</div>
+                          </div>
+                      </div>
+
+                  </a>
+                  <a class="dropdown-item" href="#">
+                      <div class="message-content">
+                          <div class="pic">
+                              <img src="{% static 'img/user.jpg' %}" alt="">
+                          </div>
+                          <div class="content">
+                              <div class="message-title">
+                                  <strong> Jhon doe</strong>
+                              </div>
+                              <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                                  elit. In totam explicabo</div>
+                          </div>
+                      </div>
+
+                  </a>
+                  <a class="dropdown-item" href="#">
+                      <div class="message-content">
+                          <div class="pic">
+                              <img src="img/user.jpg" alt="">
+                          </div>
+                          <div class="content">
+                              <div class="message-title">
+                                  <strong> Jhon doe</strong>
+                              </div>
+                              <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                                  elit. In totam explicabo</div>
+                          </div>
+                      </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item text-center" href="#">View all messages</a>
+
+              </div>
+          </div> -->
+          <div class="dropdown">
+              <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-cog"></i>
+                  <span class="badge-sonar"></span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuMessage">
+                  
+                  <a class="dropdown-item" href="#">Help</a>
+                 
+              </div>
+          </div>
+          <div>
+              <a href="{% url 'login' %}">
+                  <i class="fa fa-power-off"></i>
+              </a>
+          </div>
+          <div class="pinned-footer">
+              <a href="#">
+                  <i class="fas fa-ellipsis-h"></i>
+              </a>
+          </div>
+      </div>
+  </nav>
+        <!-- page-content  -->
+      
+
+        
+
+        {% block content %}
+
+        {% endblock %}
+        <!-- page-content" -->
+     </div>
+
+     <script>
+
+        var xport = {
+          _fallbacktoCSV: true,  
+          toXLS: function(tableId, filename) {   
+            this._filename = (typeof filename == 'undefined') ? tableId : filename;
+            
+            //var ieVersion = this._getMsieVersion();
+            //Fallback to CSV for IE & Edge
+            if ((this._getMsieVersion() || this._isFirefox()) && this._fallbacktoCSV) {
+              return this.toCSV(tableId);
+            } else if (this._getMsieVersion() || this._isFirefox()) {
+              alert("Not supported browser");
+            }
+        
+            //Other Browser can download xls
+            var htmltable = document.getElementById(tableId);
+            var html = htmltable.outerHTML;
+        
+            this._downloadAnchor("data:application/vnd.ms-excel" + encodeURIComponent(html), 'xls'); 
+          },
+          toCSV: function(tableId, filename) {
+            this._filename = (typeof filename === 'undefined') ? tableId : filename;
+            // Generate our CSV string from out HTML Table
+            var csv = this._tableToCSV(document.getElementById(tableId));
+            // Create a CSV Blob
+            var blob = new Blob([csv], { type: "text/csv" });
+        
+            // Determine which approach to take for the download
+            if (navigator.msSaveOrOpenBlob) {
+              // Works for Internet Explorer and Microsoft Edge
+              navigator.msSaveOrOpenBlob(blob, this._filename + ".csv");
+            } else {      
+              this._downloadAnchor(URL.createObjectURL(blob), 'csv');      
+            }
+          },
+          _getMsieVersion: function() {
+            var ua = window.navigator.userAgent;
+        
+            var msie = ua.indexOf("MSIE ");
+            if (msie > 0) {
+              // IE 10 or older => return version number
+              return parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)), 10);
+            }
+        
+            var trident = ua.indexOf("Trident/");
+            if (trident > 0) {
+              // IE 11 => return version number
+              var rv = ua.indexOf("rv:");
+              return parseInt(ua.substring(rv + 3, ua.indexOf(".", rv)), 10);
+            }
+        
+            var edge = ua.indexOf("Edge/");
+            if (edge > 0) {
+              // Edge (IE 12+) => return version number
+              return parseInt(ua.substring(edge + 5, ua.indexOf(".", edge)), 10);
+            }
+        
+            // other browser
+            return false;
+          },
+          _isFirefox: function(){
+            if (navigator.userAgent.indexOf("Firefox") > 0) {
+              return 1;
+            }
+            
+            return 0;
+          },
+          _downloadAnchor: function(content, ext) {
+              var anchor = document.createElement("a");
+              anchor.style = "display:none !important";
+              anchor.id = "downloadanchor";
+              document.body.appendChild(anchor);
+        
+              // If the [download] attribute is supported, try to use it
+              
+              if ("download" in anchor) {
+                anchor.download = this._filename + "." + ext;
+              }
+              anchor.href = content;
+              anchor.click();
+              anchor.remove();
+          },
+          _tableToCSV: function(table) {
+            // We'll be co-opting `slice` to create arrays
+            var slice = Array.prototype.slice;
+        
+            return slice
+              .call(table.rows)
+              .map(function(row) {
+                return slice
+                  .call(row.cells)
+                  .map(function(cell) {
+                    return '"t"'.replace("t", cell.textContent);
+                  })
+                  .join(",");
+              })
+              .join("\r\n");
+          }
+        };
+        
+        </script>
+        
+             
+             <script>
+                function sortTable(n) {
+                  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                  table = document.getElementById("dev-table");
+                  switching = true;
+                  //Set the sorting direction to ascending:
+                  dir = "asc"; 
+                  /*Make a loop that will continue until
+                  no switching has been done:*/
+                  while (switching) {
+                    //start by saying: no switching is done:
+                    switching = false;
+                    rows = table.rows;
+                    /*Loop through all table rows (except the
+                    first, which contains table headers):*/
+                    for (i = 1; i < (rows.length - 1); i++) {
+                      //start by saying there should be no switching:
+                      shouldSwitch = false;
+                      /*Get the two elements you want to compare,
+                      one from current row and one from the next:*/
+                      x = rows[i].getElementsByTagName("TD")[n];
+                      y = rows[i + 1].getElementsByTagName("TD")[n];
+                      /*check if the two rows should switch place,
+                      based on the direction, asc or desc:*/
+                      if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                          //if so, mark as a switch and break the loop:
+                          shouldSwitch= true;
+                          break;
+                        }
+                      } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                          //if so, mark as a switch and break the loop:
+                          shouldSwitch = true;
+                          break;
+                        }
+                      }
+                    }
+                    if (shouldSwitch) {
+                      /*If a switch has been marked, make the switch
+                      and mark that a switch has been done:*/
+                      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                      switching = true;
+                      //Each time a switch is done, increase this count by 1:
+                      switchcount ++;      
+                    } else {
+                      /*If no switching has been done AND the direction is "asc",
+                      set the direction to "desc" and run the while loop again.*/
+                      if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                      }
+                    }
+                  }
+                }
+                </script>
+        
+             <script type="text/javascript" src="{% static 'paginate/js/js.js' %}"></script>
+             <script type="text/javascript">
+               getPagination('#dev-table');
+               //getPagination('.table-class');
+               //getPagination('table');
+             </script>
+        <script>
+            // Returns an array of maxLength (or less) page numbers
+        // where a 0 in the returned array denotes a gap in the series.
+        // Parameters:
+        //   totalPages:     total number of pages
+        //   page:           current page
+        //   maxLength:      maximum size of returned array
+        function getPageList(totalPages, page, maxLength) {
+            if (maxLength < 5) throw "maxLength must be at least 5";
+        
+            function range(start, end) {
+                return Array.from(Array(end - start + 1), (_, i) => i + start); 
+            }
+        
+            var sideWidth = maxLength < 9 ? 1 : 2;
+            var leftWidth = (maxLength - sideWidth*2 - 3) >> 1;
+            var rightWidth = (maxLength - sideWidth*2 - 2) >> 1;
+            if (totalPages <= maxLength) {
+                // no breaks in list
+                return range(1, totalPages);
+            }
+            if (page <= maxLength - sideWidth - 1 - rightWidth) {
+                // no break on left of page
+                return range(1, maxLength - sideWidth - 1)
+                    .concat(0, range(totalPages - sideWidth + 1, totalPages));
+            }
+            if (page >= totalPages - sideWidth - 1 - rightWidth) {
+                // no break on right of page
+                return range(1, sideWidth)
+                    .concat(0, range(totalPages - sideWidth - 1 - rightWidth - leftWidth, totalPages));
+            }
+            // Breaks on both sides
+            return range(1, sideWidth)
+                .concat(0, range(page - leftWidth, page + rightWidth),
+                        0, range(totalPages - sideWidth + 1, totalPages));
+        }
+        
+        // Below is an example use of the above function.
+        $(function () {
+            // Number of items and limits the number of items per page
+            var numberOfItems = $("#jar .content").length;
+            var limitPerPage = 2;
+            // Total pages rounded upwards
+            var totalPages = Math.ceil(numberOfItems / limitPerPage);
+            // Number of buttons at the top, not counting prev/next,
+            // but including the dotted buttons.
+            // Must be at least 5:
+            var paginationSize = 7; 
+            var currentPage;
+        
+            function showPage(whichPage) {
+                if (whichPage < 1 || whichPage > totalPages) return false;
+                currentPage = whichPage;
+                $("#jar .content").hide()
+                    .slice((currentPage-1) * limitPerPage, 
+                            currentPage * limitPerPage).show();
+                // Replace the navigation items (not prev/next):            
+                $(".pagination li").slice(1, -1).remove();
+                getPageList(totalPages, currentPage, paginationSize).forEach( item => {
+                    $("<li>").addClass("page-item")
+                             .addClass(item ? "current-page" : "disabled")
+                             .toggleClass("active", item === currentPage).append(
+                        $("<a>").addClass("page-link").attr({
+                            href: "javascript:void(0)"}).text(item || "...")
+                    ).insertBefore("#next-page");
+                });
+                // Disable prev/next when at first/last page:
+                $("#previous-page").toggleClass("disabled", currentPage === 1);
+                $("#next-page").toggleClass("disabled", currentPage === totalPages);
+                return true;
+            }
+        
+            // Include the prev/next buttons:
+            $(".pagination").append(
+                $("<li>").addClass("page-item").attr({ id: "previous-page" }).append(
+                    $("<a>").addClass("page-link").attr({
+                        href: "javascript:void(0)"}).text("Prev")
+                ),
+                $("<li>").addClass("page-item").attr({ id: "next-page" }).append(
+                    $("<a>").addClass("page-link").attr({
+                        href: "javascript:void(0)"}).text("Next")
+                )
+            );
+            // Show the page links
+            $("#jar").show();
+            showPage(1);
+        
+            // Use event delegation, as these items are recreated later    
+            $(document).on("click", ".pagination li.current-page:not(.active)", function () {
+                return showPage(+$(this).text());
+            });
+            $("#next-page").on("click", function () {
+                return showPage(currentPage+1);
+            });
+        
+            $("#previous-page").on("click", function () {
+                return showPage(currentPage-1);
+            });
+        });
+        </script>
+             <script>
+                var table = document.getElementsByTagName('table')[0],
+                 rows = table.getElementsByTagName('tr'),
+                 text = 'textContent' in document ? 'textContent' : 'innerText';
+               var lastindex
+               for (var i = 0, len = rows.length; i < len; i++) {
+                   if(i>0){
+                    rows[i].children[0][text] = i  + rows[i].children[0][text];
+                   }
+                   else{
+                    rows[i].children[0][text] = 'S/N'  ;
+                            
+                   }
+              lastindex=i
+            
+               }
+               document.getElementById('toalnpages').value="TOTAL NO OF ROWS: "+lastindex
+               </script>
+        <script>
+            $(document).ready( function () {
+            $('#dev-table').DataTable();
+        } );
+        
+        </script>
+             <script type="text/javascript">  
+                function generate() {  
+                    // maxRows
+                    $('.selecter option:eq(1)')
+                    var doc = new jsPDF('p', 'pt', 'letter');  
+                    var htmlstring = '';  
+                    var tempVarToCheckPageHeight = 0;  
+                    var pageHeight = 0;  
+                    pageHeight = doc.internal.pageSize.height;  
+                    specialElementHandlers = {  
+                        // element with id of "bypass" - jQuery style selector  
+                        '#bypassme': function(element, renderer) {  
+                            // true = "handled elsewhere, bypass text extraction"  
+                            return true  
+                        }  
+                    };  
+               
+                  
+                    doc.autoTable({  
+                        html: '#dev-table',  
+                         
+                       
+                         
+                    })  
+                    let date = new Date();
+                    doc.save('ic4_callover'+date.getTime()+'.pdf');  
+                }  
+        
+        
+           function generateWord(){
+                  var htmltable= document.getElementById('dev-table');
+                var html = htmltable.outerHTML;
+                window.open('data:application/msword,' + '\uFEFF' + encodeURIComponent(html));
+         
+          Response.AddHeader("Content-Disposition", "attachment;filename=myfilename.docx");
+           }
+             
+                </script>  
+            <!-- page-wrapper -->
+            <script>
+                $("#myselect").change(function () {
+        
+                    // var selectedVal = $("#myselect option:selected").text();
+                    var selectedVal = $("#myselect option:selected").text();
+                    if(selectedVal)
+                    {
+                document.getElementById("profileform").submit()
+        
+                    }
+        
+                    });
+        </script>
+        
+        
+        
+        <script>
+                
+             $('#btnExport').bootstrapExcelExport({ tableSelector : '#dev-table' });
+        
+        </script>
+           
+            <script>
+                (function () {
+                    'use strict';
+                    var $ = jQuery;
+                    $.fn.extend({
+                        filterTable: function () {
+                            return this.each(function () {
+                                $(this).on('keyup', function (e) {
+                                    $('.filterTable_no_results').remove();
+                                    var $this = $(this),
+                                        search = $this.val().toLowerCase(),
+                                        target = $this.attr('data-filters'),
+                                        $target = $(target),
+                                        $rows = $target.find('tbody tr');
+            
+                                    if (search == '') {
+                                        $rows.show();
+                                    } else {
+                                        $rows.each(function () {
+                                            var $this = $(this);
+                                            $this.text().toLowerCase().indexOf(search) === -1 ? $this.hide() : $this.show();
+                                        })
+                                        if ($target.find('tbody tr:visible').size() === 0) {
+                                            var col_count = $target.find('tr').first().find('td').size();
+                                            var no_results = $('<tr class="filterTable_no_results"><td colspan="' + col_count + '">No results found</td></tr>')
+                                            $target.find('tbody').append(no_results);
+                                        }
+                                    }
+                                });
+                            });
+                        }
+                    });
+                    $('[data-action="filter"]').filterTable();
+                })(jQuery);
+            
+                $(function () {
+                    // attach table filter plugin to inputs
+                    $('[data-action="filter"]').filterTable();
+            
+                    $('.container').on('click', '.panel-heading span.filter', function (e) {
+                        var $this = $(this),
+                            $panel = $this.parents('.panel');
+            
+                        $panel.find('.panel-body').slideToggle();
+                        if ($this.css('display') != 'none') {
+                            $panel.find('.panel-body input').focus();
+                        }
+                    });
+                    $('[data-toggle="tooltip"]').tooltip();
+                })
+            </script>
+            <!-- using online scripts -->
+            <script src="{% static 'jquery/jquery3.5.1.min.js' %}"></script>
+            <script src="{% static 'jquery/popper.min.js' %}">
+            </script>
+            <script src="{% static 'jquery/bootstrap.min.js' %}">
+            </script>
+            <script src="{% static 'jquery/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+        
+            <!-- using local scripts -->
+            <!-- <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+            <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
+            <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+            <script src="../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script> -->
+        
+        
+            <script src="{% static 'js/main.js' %}"></script>
+        </body>
+        
+        </html>

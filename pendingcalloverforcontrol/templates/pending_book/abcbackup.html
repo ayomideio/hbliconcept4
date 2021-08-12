@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Employee Records</title>
+     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+</head>
+<body>
+<table class="table table-striped table-bordered table-sm">
+    <thead class="thead-dark">
+    <tr>
+        <th>Employee ID</th>
+        <th>Entry User ID</th>
+        <th>NO of Entries</th>
+        <th>Credit Frequency</th>
+        <th>Total Credit</th>
+        <th>Debit Frequency</th>
+        <th>Total Debit</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+
+{% for employee in employees %}
+    <tr>
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.Entry_User_ID }}</td>
+        <td>{{ employee.NO_OF_ENTRIES }}</td>
+        <td>{{ employee.CREDIT_FREQ }}</td>
+        <td>{{ employee.TOTAL_CREDIT }}</td>
+        <td>{{ employee.DEBIT_FREQ }}</td>
+        <td>{{ employee.TOTAL_DEBIT }}</td>
+        <td>
+            <a href="/edit/{{ employee.id }}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
+            <a href="/delete/{{ employee.id }}">Delete</a>
+        </td>
+    </tr>
+{% endfor %}
+    </tbody>
+</table>
+<br>
+<br>
+<center><a href="/emp" class="btn btn-primary">Add New Record</a></center>
+</body>
+</html>

@@ -1,0 +1,76 @@
+{#{% extends 'book/library.html' %}#}
+{% extends 'basic.html' %}
+{#{% block content %}#}
+{#    <center>#}
+{#    <h1 class="display-6" style="background-color:#7F7F7F;color:white; width: 500px;margin-top: 10px;#}
+{#        border-radius: 10px; margin-bottom: 0px">Upload Employee</h1>#}
+{#    <form method = 'POST' enctype="multipart/form-data">#}
+{#        {% csrf_token %}#}
+{#        <table class = ' table table-dark' style="border-radius:5px;background-color:#F2F6F2;">#}
+{##}
+{#        <table class = ' table table-dark  table-borderless table-sm' style="height: 300px; width: 500px ;#}
+{#        background-color: #7F7F7F;border-radius: 10px; margin-top: 0px;border-radius-top:0px " >#}
+{##}
+{#            {% for field in upload_form %}#}
+{#            <tr align="center">#}
+{#                <th >{{field.label}}</th>#}
+{#                <td > {{ field }}</td>#}
+{##}
+{#            </tr>#}
+{#            {% endfor %}#}
+{#        </table>#}
+{##}
+{#        <button type="submit" class="btn btn-lg btn-primary" >Submit</button>#}
+{##}
+{#    </form>#}
+{#</center>#}
+{#{% endblock %}#}
+
+
+
+{% block content %}
+    <style>
+    .abc {
+        box-shadow: 10px 10px 5px gray;
+        background-color: white;
+        margin: auto;
+        margin-top: 15px;
+        height: 480px ;
+
+        border-radius: 10px;
+    }
+</style>
+
+
+    <div style="background-color: #eeeeee;height: 550px; width: 100%; position: fixed"  >
+
+        <div class="abc w-50" align="center">
+            <h2 align="center"> Upload Data </h2>
+            <form method='POST' enctype="multipart/form-data">
+                {% csrf_token %}
+                <table class=' table table-light table-sm' style="border-radius:5px;">
+
+
+{#                    <table class=' table table-dark  table-borderless table-sm' style="height: 300px; width: 500px ;#}
+{#        background-color: #7F7F7F;border-radius: 10px; margin-top: 0px;border-radius-top:0px ">#}
+
+                        {% for field in upload_form %}
+                            <tr align="center" >
+                                <th>{{ field.label }}</th>
+                                <td style="height: 10px"> {{ field }}</td>
+
+                            </tr>
+                        {% endfor %}
+                    </table>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+            </form>
+
+        </div>
+
+
+
+    </div>
+
+{% endblock %}

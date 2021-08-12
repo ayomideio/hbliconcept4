@@ -1,0 +1,1086 @@
+
+{% extends 'acc_back.html' %}
+{% load static %}
+
+{% block content %}
+        <main class="page-content pt-2">
+         
+   <!-- Button trigger modal -->
+
+            <a href="#" id="fmp-button" data-theme="ice-theme" class="theme ice-theme" style="display: none;"></a>
+                <div class="row">
+                   
+
+
+                    <div id="overlay" class="overlay"></div>
+                    <div class="container-fluid p-5">
+                        
+                          
+                          
+                                 
+                        
+                          
+                      
+                        
+                        <!-- <button class="btn btn-primary btn-lg" 
+                                 >
+                            Exception
+                        </button> -->
+                        
+                        
+                          
+                          
+        
+                        <button class="btn btn-danger btn-lg edit-button"  id="exept-buttondd"
+                            data-toggle="modal"
+                            type="button"
+                            style=" background-color: green;"
+                            data-target="#addContactModal">
+                        Create
+                                    </button>
+                           
+                    
+                                    
+                           
+
+                                
+                           
+                           <div class="panel panel-primary">
+                            <div class="panel-heading" style="height:30px;">
+                                <h6 class="panel-title" style="height:20px;">Manual Exception</h6>
+                                <!-- <div class="float-right">
+                                    <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter"
+                                          data-container="body">
+                                        <i style="margin-top:1.0rem; color:#d9534f;" class="fas fa-search"></i>
+                                    </span>
+                                </div> -->
+                            </div>
+                            <div class="panel-body">
+                                
+                                       
+                            </div>
+                            {#                    <table id="dev-table" class="table  table-bordered table-striped table-sm" data-link="row" style="line-height: 1; margin-bottom: 0">#}
+                            {#                        <thead class="thead-light">#}
+                              {% comment %} {% for cbs in cb %}
+                              <div> {{ cbs.GRP_BY_REF}}  </div>
+                              {% endfor %} {% endcomment %}
+
+                            
+                                    <div style="min-width: 80%;">
+                                        
+                    <div class="col col-lg-2" style=" padding-right: 3px; border-radius: 10px; margin-left: 90%; ">
+                        
+                        
+                        <a onclick="generateWord();"  title="Export to Word"><img src="{% static 'img/word-icon.png' %}" width="25" alt="word file icon" /></a>
+                          <a   onclick="generate();"   title="Export to Pdf"><img src="{% static 'img/pdf-icon.png' %}" width="25" alt="png pdf file icon" /></a>
+                          <a id="btnExport" title="Export to Excel"><img src="{% static 'img/xls-icon.png'  %}" width="25" alt="Excel Icon Small" /></a>
+                      
+                        </div>
+                                   
+                                      
+                                    </div>
+                          
+                              
+                               
+                          
+                        <div id='loading' style="display: none;">
+
+                                            
+                                <div class="spinner-grow text-primary" role="status" id='l1'>
+                                    <span class="sr-only">Loading...</span>
+                                  </div>
+                                  <div class="spinner-grow text-secondary" role="status" id='l2'>
+                                    <span class="sr-only">Loading...</span>
+                                  </div>
+                                  <div class="spinner-grow text-success" role="status" id='l3'>
+                                    <span class="sr-only">Loading...</span>
+                                  </div>
+                                  <div class="spinner-grow text-danger" role="status" id='l4'>
+                                    <span class="sr-only">Loading...</span>
+                                  </div>
+                                  <div class="spinner-grow text-warning" role="status" id='l5'>
+                                    <span class="sr-only">Loading...</span>
+                                  </div>
+                                  <div class="spinner-grow text-info" role="status" id='l6'>
+                                    <span class="sr-only">Loading...</span>
+                                  </div>
+                                  <div class="spinner-grow text-light" role="status" id='l6'>
+                                    <span class="sr-only">Loading...</span>
+                                  </div>
+                                  <div class="spinner-grow text-dark" role="status" id='l7'>
+                                    <span class="sr-only">Loading...</span>
+                                  </div>
+                                </div>
+
+                                <!-- {% if uploaded_file_url %}
+                                <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+                              {% endif %} -->
+                               
+                                <table id="dev-table" class="table table-bordered table-striped table-sm mytable tableFixHead"
+                                style="line-height: 1;  display: block; margin-bottom: 0; white-space: nowrap; overflow: scroll;">
+     
+                                <thead  style="background-color: #2c6db8; ">
+                                    <tr>
+                                       
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">EXCEPTION ID</th>
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">EXCEPTION TITLE</th>
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">RECIPIENT</th>
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">RECIPIENT EMAIL</th>
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">BRANCH CODE</th>                          
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">SEVERITY LEVEL</th>                          
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">ADDITIONAL RECIPIENTS</th>                          
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">CONTROL PROCESS</th>
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">REVIEW DATE</th>
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">EXCEPTION STATUS</th>
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">EXCEPTION DATE</th>
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">EXCEPTION OWNER</th>
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">IC4_INPUTTER</th>
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">ACCEPT DATE</th>
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">OBSERVATION</th>
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">EXCEPTION DETAIL</th>
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">IMPLICATION</th>
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">ACTION</th>
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">RECOMMENDATION</th>
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">IC4_REASON</th>
+                                        <th style="background-color: #1565C0; color: white;text-align: left;">IC4 SEVERITY ID</th>
+                                      
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                 {% for result in results %}
+                                 <tr>
+                                
+                                    <td  >
+                                        <a href="{% url  'manual_exception'  result.EXCEPTION_ID %}"> {{ result.EXCEPTION_ID }} </a> 
+                                     </td>
+                                     <td  >
+                                        {{ result.EXCEPTION_TITLE }} 
+                                     </td>
+                                     <td  >
+                                         {{ result.RECIPIENT }}  
+                                     </td>
+    
+                                     <td  >
+                                        {{ result.RECIPIENT_EMAIL }}  
+                                    </td>
+                                    <td  >
+                                        {{ result.BRANCH_CODE }}  
+                                    </td>
+                                    <td  >
+                                        {{ result.SEVERITY_LEVEL }}  
+                                    </td>
+                                    <td  >
+                                        {{ result.ADDITIONAL_RECIPIENTS }}  
+                                    </td>
+                                    <td  >
+                                        {{ result.CONTROL_PROCESS }}  
+                                    </td>
+                                    <td  >
+                                        {{ result.REVIEW_DATE }}  
+                                    </td>
+                                    <td  >
+                                        {{ result.EXCEPTION_STATUS }}  
+                                    </td>
+                                    <td  >
+                                        {{ result.EXCEPTION_DATE }}  
+                                    </td>
+                                    <td  >
+                                        {{ result.EXCEPTION_DATE }}  
+                                    </td>
+                                    <td  >
+                                        {{ result.EXCEPTION_OWNER }}  
+                                    </td>
+                                    <td  >
+                                        {{ result.IC4_INPUTTER }}  
+                                    </td>
+                                    <td  >
+                                        {{ result.ACCEPT_DATE }}  
+                                    </td>
+                                    <td  >
+                                        {{ result.OBSERVATION}}  
+                                    </td>
+    
+                                    <td  >
+                                        {{ result.ACCEPT_DATE }}  
+                                    </td>
+                                    <td  >
+                                        {{ result.EXCEPTION_DETAIL }}  
+                                    </td>
+                                    <td  >
+                                        {{ result.IMPLICATION }}  
+                                    </td>
+                                    <td  >
+                                        {{ result.ACTION }}  
+                                    </td>
+                                    <td  >
+                                        {{ result.RECOMMENDATION }}  
+                                    </td>
+                                    <td  >
+                                        {{ result.IC4_REASON }}  
+                                    </td>
+                                    <td  >
+                                        {{ result.IC4_SEVERITY_ID}}  
+                                    </td>
+                                  
+                                
+                                  
+                                </tr>
+                                 {% endfor %}
+         
+         
+                                 </tbody>
+ 
+                         </table>
+                            
+                           
+
+                        </div>
+            
+            
+                    </div> 
+    
+                    <input type="hidden" value="{{ voucher_id }}" id="voucher_ID">
+                    <input type="hidden" value="{{ IP_Address }}" id="IP_Address">
+                    <input type="hidden" value="{{ trans_ID }}" id="trans_id">
+                
+                  
+                    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true"
+                         id="update-model">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="exampleModalLongTitle">Edit Your Detail</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="update-form">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="trans_id" class="col-sm-2 col-form-label">Transaction ID</label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" id="trans_id" name="trans-ID"
+                                                       placeholder="email@example.com">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="branch" class="col-sm-2 col-form-label">Branch Code</label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" id="branch" name="branch"
+                                                       placeholder="email@example.com">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="account-number" class="col-sm-2 col-form-label">Account Number</label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" id="account-number" name="acc-number"
+                                                       placeholder="email@example.com">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="acc-name" class="col-sm-2 col-form-label">Account Name</label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" id="acc-name" name="acc-name"
+                                                       placeholder="email@example.com">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="date" class="col-sm-2 col-form-label">Date</label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" id="date" name="date"
+                                                       placeholder="email@example.com">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="amount" class="col-sm-2 col-form-label">Amount</label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" id="amount" name="amount"
+                                                       placeholder="email@example.com">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="narrative" class="col-sm-2 col-form-label">Narrative</label>
+                                            <div class="col-md-12">
+                                                <textarea rows="2" class="form-control" id="narrative" name="narrative"
+                                                          placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan"></textarea>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" class="form-control" id="ID" name="id">
+                                        <input id="update" type="submit" class="btn btn-warning btn-lg" value="Update"
+                                               style="width: 100%;">
+                                    </form>
+                
+                                </div>
+                                <div class="modal-footer ">
+                
+                
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                   
+                
+                 
+
+                    <div class="modal fade" id="addContactModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="background-color: transparent;min-height: 100%;width: 100%;margin-right: auto;" >
+                        <div class="modal-dialog modal-md" role="document" style="min-width: 100%;min-height: 100%;" >
+                          <div class="modal-content" >
+                               
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                                <div class="panel-heading" style="height:40px;background-color:  #337ab7;font-weight: bolder;color:#fff;">
+                                    <h3 class="panel-title" style="height:20px;">Manual Exception</h3>
+                                   
+                                </div>
+                             
+                              <!-- <h4 class="modal-title" id="myModalLabel">Add Exception</h4> -->
+                            
+                              <form action="{% url 'manualexception_acceptreview' %}" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                            <div class="modal-body" >
+                               
+                                <div class="container-fluid" >
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            
+                                <div class="form-group">
+                                <label for="contactfname" style="color: #337ab7;">Manual Exception ID</label>
+                                <input  class="form-control" type="text" name="manualexceptionid" value='{{ manualexceptionid }}' id="manualexceptionid" style="border-color: #337ab7;" disabled required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactfname" style="color: #337ab7;">Exception Title</label>
+                                    <input  class="form-control" type="text" name="exceptiontitle" id="exceptiontitle" style="border-color: #337ab7;"  required>
+                                    </div>
+                                <div class="form-group">
+                                    <label for="contactfname" style="color: #337ab7;">Recipient</label>
+                                    <input  class="form-control" type="text" name="recipient" id="recipient" style="border-color: #337ab7;"  required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contactfname" style="color: #337ab7;">Recipient Email</label>
+                                        <input  class="form-control" type="text" name="recipientemail" id="recipientemail" style="border-color: #337ab7;"  required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contactmname" style="color: #337ab7;">Control Process</label>
+                                            <select   class="form-control"  name="grouping" id="myselect" style="border-color: #337ab7;height: 40px;" required>
+                                              <option value="">Select Process</option>
+                                              {% for f in controlprocess %}
+                                                  <option value='{{ f.DESCRIPTION }}' title="{{ f.DESCRIPTION }}" style="font-size: smaller;">{{ f.DESCRIPTION}}</option>
+                                                  {% endfor %}
+                                              </select>
+                                          
+                                            </div>
+                                        <div class="form-group">
+                                            <label for="contactfname" style="color: #337ab7;">Recipient Branch</label>
+                                            <input  class="form-control" type="text" name="recipientbranch" id="recipientbranch" style="border-color: #337ab7;"  required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="contactgroup" style="color: #337ab7;"  >Amount*</label>
+                                                <input type="text" class="form-control" id='mexamount' name='mexamount' value='10' style="border-color: #337ab7;" required>
+                                                </div>
+                                <div class="form-group">
+                                    <label for="contactnum" style="color: #337ab7;">Supervisor</label>
+                                    <input type="text" class="form-control" name="supervisor" id="supervisor" style="border-color: #337ab7;"  required>
+                                    </div>
+  
+                                    <div class="form-group">
+                                      <label for="contactnum" style="color: #337ab7;">Other Receivers</label>
+                                      <input type="text" class="form-control" name="otherreceivers" id="otherreceivers" style="border-color: #337ab7;"  required>
+                                      </div>
+  
+                                   
+                                </div>
+                                     <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group">
+                                <label for="contactea" style="color: #337ab7;">Severity Level</label>
+                                <input type="text" class="form-control" name="severitylevel1" id="severitylevel" value="" style="border-color: #337ab7;" disabled required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactea" style="color: #337ab7;">Upload File</label>
+                                    <input type="file"  class="form-control" name="fp">
+                                </div>
+                                                                
+                                <div class="form-group">
+                                <label for="contactnum" style="color: #337ab7;">Exception Weight</label>
+                                <input type="text" class="form-control" name="exceptionweight" id="exceptionweight" style="border-color: #337ab7;" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactnum" style="color: #337ab7;">Additional Recipients</label>
+                                    <input type="text" class="form-control" name="additionalrecipients" id="additionalrecipients" style="border-color: #337ab7;" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contactnum" style="color: #337ab7;">Created By</label>
+                                        <input type="text" class="form-control" name="createdby" id="createdby" style="border-color: #337ab7;"  required>
+                                        </div>
+                                <div class="form-group">
+                                <label for="contactgroup" style="color: #337ab7;"  >Accept Date *</label>
+                                <input type="text" class="form-control" id='acceptdate' name='acceptdate' disabled  value='30-05-2000' style="border-color: #337ab7;" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactgroup" style="color: #337ab7;"  >Review Date *</label>
+                                    <input type="text" class="form-control" id='reviewdate' name='reviewdate' disabled  value='30-05-2000' style="border-color: #337ab7;" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contactgroup" style="color: #337ab7;"  >Currency *</label>
+                                        <input type="text" class="form-control" id='currency' name='currency' disabled value='NGN' style="border-color: #337ab7;" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contactgroup" style="color: #337ab7;"  >Observation *</label>
+                                            <input type="text" class="form-control" id='mexobservation' name='mexobservation' disabled value='NGN' style="border-color: #337ab7;" required>
+                                            </div>
+                                        <div class="form-group">
+                                            <label for="contactgroup" style="color: #337ab7;"  >Owner *</label>
+                                            <input type="text" class="form-control" id='owner' name='owner'  style="border-color: #337ab7;" required>
+                                            </div>
+                                
+
+                                  
+                                  
+                                  
+                                        <input type="hidden", name="transID" id="transID">
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label for="contactnum" style="color: #337ab7;">Exception Detail</label>
+                                <textarea class="form-control" id="exceptiondetail" name="exceptiondetail" style="border-color: #337ab7;" rows="6"  required>
+                                  </textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label for="contactnum" style="color: #337ab7;">Recommendation</label>
+                                    <textarea class="form-control" id="mexrecommendation" name="mexrecommendation" style="border-color: #337ab7;" rows="6"  required>
+                                      </textarea>
+                                    </div>
+                                </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                
+                              
+
+                                <div class="form-group">
+                                    <label for="contactnum" style="color: #337ab7;">Action</label>
+                                    <textarea class="form-control" id="action"  name="action" rows="2" style="border-color: #337ab7;" disabled required>
+                                        </textarea>
+
+                                    </div>  
+                  
+                                 
+                                      
+                  
+
+                                    
+                                    </div>
+                                     <div class="col-md-6 col-sm-6 col-xs-6">
+                                   
+                          
+                                        <div class="form-group">
+                                            <label for="contactlname" style="color: #337ab7;">Implication</label>
+                                            <textarea id="implication" name="implication" rows="2" class="form-control" style="border-color: #337ab7;" disabled  required>
+                                              </textarea>
+                      
+                                            </div>
+                                          
+                                           
+        
+                                  
+                                        <input type="hidden", name="transID" id="transID">
+
+                                        <input type="hidden" name="calloverurl" id="calloverurl" value={{ calloverurl }}>
+                            </div>
+                            
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: tomato;">Close</button>
+                              <button type="submit" class="btn btn-primary"  id="exception-modal-btn" disabled="disabled">Save </button> 
+                              <!-- <input type="submit" name="addgroupbtn" class="btn btn-primary" value="Save Contact"> -->
+                                  </div>
+                                </div>
+                                    </div>
+                                
+                            </div>
+                        </form>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      
+{% block javascript %}
+
+<script src="//mozilla.github.io/pdf.js/build/pdf.js"></script>
+<script>
+    var fields = "#bsmheadteller,#severitylevel,#myselect";
+    
+    $(fields).on('change', function() {
+        if (allFilled()) {
+            $('#exception-modal-btn').removeAttr('disabled');
+        } 
+        // else {
+        //     $('#exception-modal-btn').attr('disabled', 'disabled');
+        // }
+    });
+    
+    function allFilled() {
+        var filled = true;
+        $(fields).each(function() {
+            if ($(this).val() == '') {
+                filled = false;
+            }
+        });
+        return filled;
+    }
+    </script>
+
+
+ <script>
+      
+        function ab(status){
+            var calloverurl=$("#calloverurl").val()
+            if ($('input.checkthis').not(':checked').length > 0) {
+                alert("please check all checkboxes");
+            } 
+            else {
+                var trans_id = $("#trans_id").val();
+                
+                var voucher_id = $('#voucher_ID').val();
+                console.log(pdffile);
+                args = {
+                    id: trans_id,
+                    pdf: pdffile,
+                    voucher: voucher_id,
+                    status: status,
+                };
+                $.ajax({
+                    url: calloverurl+'check_ocr2/',
+                    type: 'POST',
+
+                    dataType: 'JSON',
+                    data: args,
+                    success: function (response) {
+                         if (response.success) {
+                            console.log('it worked!');
+                        } else {
+                            console.log('there was a problem...');
+                            console.log(response.additionalData);
+                        }
+                    
+                        var flag = false;
+                        if (flag){
+                        $.notify.addStyle('happyblue', {
+                            html: "<div><span data-notify-text/></div>",
+                            classes: {
+                                base: {
+                                    "white-space": "nowrap",
+                                    "background-color": "lightblue",
+                                    "padding": "15px",
+                                    "border": "10px"
+                                },
+                                superblue: {
+                                    "color": "white",
+                                    "background-color": "blue"
+                                }
+                            }
+                        });
+                    
+                        document.getElementById('id01').style.display='block'
+                                                   
+                 
+                           
+
+                      
+                    
+                        } 
+                        
+                        else {
+                            $("#exception-modal-btn").show();
+                            {#var exception_result = response.exception_result;#}
+                            var query_result = response.query_result;
+                            var offreplace=response.callover
+                            
+                            $('#branchCode').val(query_result.branch);
+                            $('#enteryDate').val(query_result.date3);
+                            $('#calloverDate').val(response.today_date);
+                            $('#reviewDate').val(response.tomorrow);
+                            $('#officer').val(offreplace.replace("local","com")); 
+                            $('#transID').val(query_result.trans_id);
+                            $('#email').val(response.inputterEmail);
+                            $('#transRef').val(response.profileId+''+query_result.date2 +''+response.current_tim2+''+query_result.trans_id);
+
+
+                           
+                        }
+                    }
+                });
+            
+            
+            }
+        }
+        
+        $("#exept-button").click(function () {
+            ab("True");
+        });
+        $("#confirm").click(function () {
+            ab("False");
+        });
+        
+    </script>
+
+<script>
+    var calloverurl=$("#calloverurl").val()
+        $(document).ready(function () {
+            $("#myselect").change(function () {
+
+                // var selectedVal = $("#myselect option:selected").text();
+                var selectedVal = $("#myselect option:selected").text();
+                if(selectedVal)
+                {
+                     args = {
+                    selected: selectedVal,
+               
+                     };
+                     $.ajax({
+                url: calloverurl+'manual_exception/observation/',
+                type: 'POST',
+                dataType: 'JSON',
+                data: args,
+                success: function (response) {
+                     
+                
+                   
+                    
+                        var query_result = response.query_result;
+                        $('#severitylevel').val(response.severitylevel); 
+                        $('#implication').val(response.implication);
+                        $('#action').val(response.action);
+                        
+
+
+                       
+                    
+                }
+            });
+                   
+    
+                }
+
+            });
+        });
+    </script>
+
+
+
+  <script>
+  
+    function cde(status){
+            console.log('yes')
+            // var manualexceptionid = $("#manualexceptionid").val();
+            // var severitylevel = $('#severitylevel').val();
+            // var exceptiontitle = $('#exceptiontitle').val();
+            // var amount=$('#mexamount').val();
+            // var observation=$('#mexobservation').val();
+            // var mexrecommendation=$('#mexrecommendation').val();
+            
+            // var exceptionweight = $('#exceptionweight').val();
+            // var recipient = $('#recipient').val();
+            // var additionalrecipients = $('#additionalrecipients').val();
+            // var recipientemail = $('#recipientemail').val();
+            // var createdby = $('#createdby').val();
+            // var controlprocess =  $("#myselect option:selected").text();
+            // var acceptdate = $('#acceptdate').val();
+            // var recipientbranch = $('#recipientbranch').val();
+            // var reviewdate = $('#reviewdate').val();
+            // var supervisor = $('#supervisor').val();
+            // var currency = $('#currency').val();
+            // var otherreceivers = $('#otherreceivers').val();
+            // var owner = $('#owner').val();
+            // var exceptiondetail = $('#exceptiondetail').val(); 
+            // var implication = $('#implication').val();
+            // var action = $('#action').val();
+            // var calloverurl=$("#calloverurl").val()
+            // alert(acceptdate)
+            // args = {
+            //     manualexceptionid:manualexceptionid,
+            //     observation:observation,
+            //     mexrecommendation:mexrecommendation,
+            //     amount:amount,
+            //     severitylevel: severitylevel,
+            //     exceptiontitle: exceptiontitle,
+            //     exceptionweight: exceptionweight,
+            //     recipient: recipient,
+            //     additionalrecipients: additionalrecipients,
+            //     recipientemail: recipientemail,
+            //     createdby: createdby,
+            //     controlprocess: controlprocess,
+            //     acceptdate: acceptdate,
+            //     recipientbranch: recipientbranch,
+            //     reviewdate: reviewdate,
+            //     supervisor: supervisor,
+            //     currency: currency,
+            //     otherreceivers: otherreceivers,
+            //     owner: owner,
+            //     exceptiondetail: exceptiondetail,
+            //     implication: implication,
+            //     action: action,
+            // };
+            // $.ajax({
+            //     url: calloverurl+'manual_exception/acceptmanualexception/',
+            //     type: 'POST',
+            //     dataType: 'JSON',
+            //     data: args,
+            //     success: function (response) {
+                     
+                
+                    
+            //         if (response.flag){
+            //     location.reload()
+            //         // document.getElementById('id01').style.display='block'
+                                               
+             
+                       
+
+                  
+                
+            //         } 
+                    
+            //         else {
+                        
+
+            //             $.confirm({
+            //                 title: 'Encountered an error!',
+            //                 content: response.msg,
+            //                 type: 'blue',
+            //                 typeAnimated: true,
+            //                 buttons: {
+            //                     tryAgain: {
+            //                         text: 'Stickly Save',
+            //                         btnClass: 'btn btn-primary',
+            //                         action: function () {
+            //                             cde("False");
+            //                         }
+            //                     },
+            //                     close: function () {
+            //                     }
+            //                 }
+            //             });
+                    
+            //             location.reload()
+            //         }
+            //     }
+            // });
+  
+
+
+            // var trans_id = $("#trans_id").val();
+                
+            //     var voucher_id = $('#voucher_ID').val();
+            //     console.log(pdffile);
+            //     args = {
+            //         id: trans_id,
+            //         pdf: pdffile,
+            //         voucher: voucher_id,
+            //         status: status,
+            //     };
+              
+       
+       
+    }
+    
+    $("#exception-modal-btn").click(function () {
+        cde("True");
+    });
+    $("#confirm").click(function () {
+        cde("False");
+    });
+    
+</script>
+
+<script>
+    function doFunction(){
+        location.reload()
+    }
+
+
+    function abc(status){
+        if ($('input.checkthis').not(':checked').length > 0) {
+            alert("plz check all checkboxes");
+        } else {
+            document.getElementById('id02').style.display='block'
+            document.getElementById('button').onclick = function() {
+//    alert("button was clicked " + (count++) + " times");
+document.getElementById('id02').style.display='none'
+document.getElementById('loading').style.display='block'
+var calloverurl=$("#calloverurl").val()
+var trans_id = $("#trans_id").val();
+// alert(trans_id)
+            var voucher_id = $('#voucher_ID').val();
+            console.log(pdffile);
+            args = {
+                id: trans_id,
+                pdf: pdffile,
+                voucher: voucher_id,
+                status: status,
+            };
+        
+};
+
+        }
+    }
+    $("#accept-button").click(function () {
+        abc("True");
+        // location.reload()
+        // if (abc){
+        //     location.reload()
+        // }
+    });
+    $("#confirm").click(function () {
+        abc("False");
+    });
+</script>
+{#    ticket script#}
+<script>
+    $(".alert").hide();
+    // $("#exception-modal-btn").hide();
+    var pdffile;
+    $(document).ready(function () {
+        id = $('#voucher_ID').val();
+        ip = $('#IP_Address').val();
+        console.log(id);
+        console.log(ip);
+        $.ajax({
+            url: 'http://'+ ip +'/pdf/'+id+'' ,
+            type: 'GET',
+            success: function (res) {
+                console.log(res);
+                pdffile = res;
+                {#$('#content1').html('<embed src="data:application/pdf;base64,' + res + '"/>');#}
+                var pdfData = atob(res);
+                var pdfjsLib = window['pdfjs-dist/build/pdf'];
+                pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+                var loadingTask = pdfjsLib.getDocument({data: pdfData});
+                loadingTask.promise.then(function (pdf) {
+
+                    var __TOTAL_PAGES = pdf.numPages;
+                    var pageNumber = 1;
+                    for (let i = 1; i <= __TOTAL_PAGES; i += 1) {
+                        var id = 'the-canvas' + i;
+                        $('#canvas_div').append("<div style='background-color:gray;text-align: center;padding:20px;' ><canvas calss='the-canvas' id='" + id + "' style='max-width:100%; display:block'></canvas></div>");
+                        var canvas = document.getElementById(id);
+                        //var pageNumber = 1;
+                        renderPage(canvas, pdf, pageNumber++, function pageRenderingComplete() {
+                            if (pageNumber > pdf.numPages) {
+                                return;
+                            }
+                            // Continue rendering of the next page
+                            renderPage(canvas, pdf, pageNumber++, pageRenderingComplete);
+                        });
+                    }
+                });
+
+                function renderPage(canvas, pdf, pageNumber, callback) {
+                    pdf.getPage(pageNumber).then(function (page) {
+                        var scale = 1.5;
+                        var viewport = page.getViewport({scale: scale});
+                        var pageDisplayWidth = viewport.width;
+                        var pageDisplayHeight = viewport.height;
+                        //var pageDivHolder = document.createElement();
+                        // Prepare canvas using PDF page dimensions
+                        //var canvas = document.createElement(id);
+                        var context = canvas.getContext('2d');
+                        canvas.width = pageDisplayWidth;
+                        canvas.height = pageDisplayHeight;
+                        // pageDivHolder.appendChild(canvas);
+                        // Render PDF page into canvas context
+                        var renderContext = {
+                            canvasContext: context,
+                            viewport: viewport
+                        };
+                        page.render(renderContext).promise.then(callback);
+                    });
+                }
+            },
+            error: function (e) {
+                {#console.log("catch");#}
+                $("#ticket-heading").hide();
+                $("#canvas_div").hide();
+                // $("#ticket-section").html('<img src="{% static 'images/404.jpg' %}" style="margin-top:130px;">');
+                // $("#accept-button").hide();
+                // $(".edit-button").hide();
+                $(".alert").show();
+            }
+        });
+    });
+</script>
+{#    checkboxes select script#}
+<script>
+$(document).ready(function () {
+    $(".mytable #checkall").click(function () {
+        if ($(".mytable #checkall").is(':checked')) {
+            $(".mytable input[type=checkbox]").each(function () {
+                $(this).prop("checked", true);
+            });
+
+        } else {
+            $(".mytable input[type=checkbox]").each(function () {
+                $(this).prop("checked", false);
+            });
+        }
+    });
+
+    $("[data-toggle=tooltip]").tooltip();
+});
+
+</script>
+{#    table search script#}
+<script>
+(function () {
+    'use strict';
+    var $ = jQuery;
+    $.fn.extend({
+        filterTable: function () {
+            return this.each(function () {
+                $(this).on('keyup', function (e) {
+                    $('.filterTable_no_results').remove();
+                    var $this = $(this),
+                        search = $this.val().toLowerCase(),
+                        target = $this.attr('data-filters'),
+                        $target = $(target),
+                        $rows = $target.find('tbody tr');
+
+                    if (search == '') {
+                        $rows.show();
+                    } else {
+                        $rows.each(function () {
+                            var $this = $(this);
+                            $this.text().toLowerCase().indexOf(search) === -1 ? $this.hide() : $this.show();
+                        })
+                        if ($target.find('tbody tr:visible').size() === 0) {
+                            var col_count = $target.find('tr').first().find('td').size();
+                            var no_results = $('<tr class="filterTable_no_results"><td colspan="' + col_count + '">No results found</td></tr>')
+                            $target.find('tbody').append(no_results);
+                        }
+                    }
+                });
+            });
+        }
+    });
+    $('[data-action="filter"]').filterTable();
+})(jQuery);
+
+$(function () {
+    // attach table filter plugin to inputs
+    $('[data-action="filter"]').filterTable();
+
+    $('.container').on('click', '.panel-heading span.filter', function (e) {
+        var $this = $(this),
+            $panel = $this.parents('.panel');
+
+        $panel.find('.panel-body').slideToggle();
+        if ($this.css('display') != 'none') {
+            $panel.find('.panel-body input').focus();
+        }
+    });
+    $('[data-toggle="tooltip"]').tooltip();
+})
+</script>
+{#delete edit script#}
+<script>
+    $('.dlt-button').click(function () {
+        var button = this;
+        id = $(button).attr("data-trans-ID");
+        var calloverurl=$("#calloverurl").val()
+        bootbox.confirm("Do you really want to delete record?", function (result) {
+            if (result) {
+                $.ajax({
+                    url: calloverurl+'delete/' + id,
+                    type: 'GET',
+                    success: function (response) {
+
+                        $(button).closest('tr').css('background', 'gray');
+                        $(button).closest('tr').fadeOut(800, function () {
+                            $(this).remove();
+                        });
+                    }
+                });
+
+            }
+        });
+    });
+
+    $(function () {
+
+        $('table').on('click', 'button.edit-button',function (ele) {
+        //the <tr> variable is use to set the parentNode from "ele
+            var ID = $(this).attr("id");
+            console.log(ID);
+            var currow = $(this).closest('tr');
+            var col1 = currow.find('td:eq(1)').text();
+            var col2 = currow.find('td:eq(2)').text();
+            var col3 = currow.find('td:eq(3)').text();
+            var col4 = currow.find('td:eq(4)').text();
+            var col5 = currow.find('td:eq(5)').text();
+            var col6 = currow.find('td:eq(6)').text();
+            var col7 = currow.find('td:eq(7)').text();
+
+
+
+            $('#trans_id').val(col1);
+            $('#branch').val(col2);
+            $('#account-number').val(col3);
+            $('#acc-name').val(col4);
+            $('#date').val(col5);
+            $("#amount").val(col6)
+            $("#narrative").val(col7);
+            {#$(".edit-button").attr('id',ID);#}
+            $("#ID").val(ID);
+
+        });
+    });
+
+    $("#update-form").submit(function (e) {
+
+
+        e.preventDefault();
+        var serializedData = $(this).serialize();
+
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'updated' %}",
+            data: serializedData,
+            success: function (response) {
+                var ID = $("#ID").val();
+                var trans_id = $('#trans_id').val();
+                var branch = $('#branch').val();
+                var acc_num = $('#account-number').val();
+                var acc_name = $('#acc-name').val();
+                var date = $('#date').val();
+                var amount = $("#amount").val();
+                var narrative = $("#narrative").val();
+
+                $("#edit").modal('toggle');
+
+                var currow = $("#"+ID).parents('tr');
+                var cols = currow.children("td")
+                currow.find('td:eq(1)').text(trans_id);
+                currow.find('td:eq(2)').text(branch);
+                currow.find('td:eq(3)').text(acc_num);
+                currow.find('td:eq(4)').text(acc_name);
+                currow.find('td:eq(5)').text(date);
+                currow.find('td:eq(6)').text(amount);
+                currow.find("td:eq(7)").text(narrative);
+
+            }
+        });
+    });
+</script>
+
+
+
+
+{% endblock %}
+                </div>
+
+        </main>
+        <!-- page-content" -->
+        {% endblock  %}

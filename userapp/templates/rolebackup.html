@@ -1,0 +1,301 @@
+
+{% load static %}
+
+<html>
+<head>
+  <link rel='stylesheet' type='text/css' media='screen' href={% static "bootcss/bootstrap.css" %} >
+    <link rel='stylesheet' type='text/css' media='screen' href={% static "bootcss/bootstrap.min.css" %} >
+  <script src={% static 'bootjquery/jquery-3.4.0.min.js' %}></script>
+</head>
+<body>
+    
+<div class="container mt-4">
+   
+  <form id="createrole" method="POST" action="{% url 'createrole'   %}">
+    {% csrf_token %}
+    <div class="d-grid gap-2 d-md-flex mb-2 justify-content-md-end">
+      <button type="submit" class="btn btn-primary btn-sm">Save</button>
+      <!-- <button type="button" class="btn btn-danger btn-sm">Cancel</button> -->
+    </div>
+    
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Role
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Group Name:</label>
+              <div class="col-sm-10">
+                    <select name="groupname" id="groupname" value="hggh" style="width:32.6rem; height:2rem;">
+                     
+                      {% for f in group %}
+                      <option class="dropdown-item" value={{ f.Group_Id }}>{{ f.Group_Id}}</option>
+                      {% endfor %}
+                  </select>
+            </div>
+            </div>
+    
+    <div class="form-group row" style="margin-top: 1rem;">
+      <label class="col-sm-2 col-form-label">Role Name:</label>
+      <div class="col-sm-6">
+      <input type="text" name="rolename"  id="rolename" class="form-control"  required="">
+    </div>
+    </div>
+                      <div style="margin-top:1rem;">
+                         <Label for="Add" style="margin-left: 9rem;font-size:14;">Add Action:</Label>
+                          <select name="addaction" id="addaction" style="width:4.1rem; height:1.6rem;">
+                            <option class="dropdown-item">select</option>
+                            <option class="dropdown-item">Yes</option>
+                            <option class="dropdown-item">No</option>
+                        </select>
+                              <Label for="Edit" style="margin-left: 2.6rem;font-size:14;">Edit Action:</Label>
+                              <select name="editaction" id="editaction" style="width:4.1rem; height:1.6rem;">
+                                <option class="dropdown-item">select</option>
+                                <option class="dropdown-item">Yes</option>
+                                <option class="dropdown-item">No</option>
+                            </select>
+                            
+                               
+                              <Label for="Delete" style="margin-left: 2.6rem;font-size:14;">Delete Action:</Label>
+                              <select name="deleteaction" id="deleteaction" style="width:4.1rem; height:1.6rem;">
+                                <option class="dropdown-item">select</option>
+                                <option class="dropdown-item">Yes</option>
+                                <option class="dropdown-item">No</option>
+                            </select>
+                          </div>
+    <!-- <button type="submit" class="btn btn-success save-btn">Save</button> -->
+  </div>
+</div>
+</div>
+  </form>
+  <br/>
+  <div class="accordion" id="accordionExample2">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingTwo">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+         Role Details
+        </button>
+      </h2>
+      <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+        <div class="accordion-body">
+  <table class="table table-borderless table-striped data-table">
+    <thead>
+      <th>Group Name</th>
+      <th>Role Name</th>
+      <th>Add</th>
+      <th>Edit</th>
+      <th>Delete</th>
+      <th width="200px">Action</th>
+      <th style="display: none;">   </th>
+    </thead>
+    <tbody>
+      {% for roles in role %}
+      <tr data-groupname='{{  roles.Group_Id  }}' data-rolename='{{ roles.Menu_Name }}'
+       data-addaction='{{ roles.Add }}'
+       data-editaction='{{ roles.Edit }}' data-deleteaction='{{ roles.Delete }}'>
+       <td>{{ roles.Group_Id }}</td>
+       <td>{{ roles.Menu_Name }}</td>
+       <td>{{ roles.Add }}</td>
+       <td>{{ roles.Edit }}</td>
+       <td>{{ roles.Delete }}</td>
+      
+          <td><button class='btn btn-info btn-xs btn-edit'>Edit</button>
+            <button class='btn btn-danger btn-xs btn-delete'>Delete</button></td>
+            <td style="display:none;"> {{ roles.ID }} </td> 
+            <td style="display:none;">
+              <form id="editrole" method="POST" style="display: none;" action="{%  url 'editrole' roles.Menu_Name %}">
+                {% csrf_token %} 
+            <div class="form-group">
+              <label>Group Name:</label>
+              <input type="text" name="groupname2" class="form-control"  required="">
+              <input type="text" name="roleid" id="roleid" class="form-control" value=''  required="">
+            </div>
+            
+            <div class="form-group">
+              <label>UserRole</label>
+              <input type="text" name="userrole2" class="form-control"  required="">
+            </div>
+            <div class="form-group">
+              <Label for="exampleEmail" className="mr-sm-2" style="margin-left:1.8rem">Add Action</Label>
+              <select name="addaction2" id="addaction2" style="width:4.1rem; height:1.6rem;">
+                <option class="dropdown-item">select</option>
+                <option class="dropdown-item">Yes</option>
+                <option class="dropdown-item">No</option>
+            </select>
+            <select name="editaction2" id="editaction2" style="width:4.1rem; height:1.6rem;">
+              <option class="dropdown-item">select</option>
+              <option class="dropdown-item">Yes</option>
+              <option class="dropdown-item">No</option>
+          </select>
+          <select name="deleteaction2" id="deleteaction2" style="width:4.1rem; height:1.6rem;">
+            <option class="dropdown-item">select</option>
+            <option class="dropdown-item">Yes</option>
+            <option class="dropdown-item">No</option>
+        </select>
+                <Label for="exampleEmail" className="mr-sm-2" style="margin-left:20rem">Edit Action</Label>
+                <Input type="checkbox" name="editaction2" id="editaction2" style="width: 12rem; height:1.5rem;margin-left:-1rem" />
+               <br><br>
+               <Label for="exampleEmail" className="mr-sm-2" style="margin-left:1.3rem">Delete Action</Label>
+               <Input type="checkbox" name="deleteaction2" id="deleteaction2"  style="width: 12rem; height:1.5rem;margin-left: 0.1rem;"/>
+              </div>
+            <button type="submit" class="btn btn-success save-btn">Save</button>
+            
+          </form>
+            </td>
+            <td style="display:none;">
+              <form id="deleterole" method="POST" style="display: none;" action="{%  url 'deleterole' roles.Menu_Name %}">
+                {% csrf_token %} 
+            <div class="form-group">
+              <label>Group Name:</label>
+              <input type="text" name="groupname3" class="form-control"  required="">
+              <input type="text" name="roleid" id="roleid3" class="form-control" value=''  required="">
+            </div>
+            
+            <div class="form-group">
+              <label>UserRole</label>
+              <input type="text" name="userrole3" class="form-control"  required="">
+            </div>
+            <div class="form-group">
+              <Label for="exampleEmail" className="mr-sm-2" style="margin-left:1.8rem">Add Action</Label>
+              <Input type="checkbox" name="addaction3" id="addaction3"   style="width: 12rem;height:1.5rem; margin-left:1rem" />
+              
+                <Label for="exampleEmail" className="mr-sm-2" style="margin-left:20rem">Edit Action</Label>
+                <Input type="checkbox" name="editaction3" id="editaction3" style="width: 12rem; height:1.5rem;margin-left:-1rem" />
+               <br><br>
+               <Label for="exampleEmail" className="mr-sm-2" style="margin-left:1.3rem">Delete Action</Label>
+               <Input type="checkbox" name="deleteaction3" id="deleteaction3"  style="width: 12rem; height:1.5rem;margin-left: 0.1rem;"/>
+              </div>
+            <button type="submit" class="btn btn-success save-btn">Save</button>
+            
+          </form>
+            </td>
+            </tr>
+            {% endfor %}
+    </tbody>
+  </table>
+   
+</div>
+</div>
+</div>
+
+</div>
+   
+<script type="text/javascript">
+   
+   $("form").submit(function(e){
+        e.preventDefault();
+        var rolename = $("input[name='rolename']").val();
+        var groupname = document.getElementById("groupname").value;
+        var addaction= document.getElementById("addaction").value;
+        var editaction= document.getElementById("editaction").value
+        var deleteaction= document.getElementById("deleteaction").value
+        $(".data-table tbody").append("<tr data-groupname='"+groupname+"' data-rolename='"+rolename+"' data-addaction='"+addaction+
+        "' data-editaction='"+editaction+"' data-deleteaction='"+deleteaction +"'><td >"+
+          groupname+"</td><td>"+rolename+
+            "</td><td>"+addaction+"</td><td>"+editaction+"</td><td>"+deleteaction+"</td><td><button class='btn btn-info btn-xs btn-edit'>Edit</button><button class='btn btn-danger btn-xs btn-delete'>Delete</button></td></tr>");
+            document.getElementById('createrole').submit();
+        $("select[name='groupname']").val('');
+        $("input[name='addaction']").val('');
+        $("select[name='editaction']").val();
+        $("select[name='deleteaction']").val();
+        $("input[name='rolename']").val();
+    });
+   
+    $("body").on("click", ".btn-delete", function(){
+      var name = $(this).parents("tr").attr('data-rolename');
+       
+       $("input[name='userrole3']").val(name);
+       document.getElementById('deleterole').submit();
+       $(this).parents("tr").remove();
+    });
+    var globe
+    $("body").on("click", ".btn-edit", function(){
+      var rolename = $(this).parents("tr").attr('data-rolename'); 
+        globe= $(this).parents("tr").attr('data-rolename');
+        var groupname=$(this).parents("tr").attr('data-groupname')
+        var addaction=$(this).parents("tr").attr('data-addaction')
+        var editaction=$(this).parents("tr").attr('data-editaction')
+        var deleteaction=$(this).parents("tr").attr('data-deleteaction')
+        var txt
+        $("#groupname > option").each(function() {
+          txt +="<option"
+          txt+=" value="
+         txt+=this.value+" >"
+          txt+=this.value +"</option>"
+    // alert(this.text + ' ' + this.value);
+});
+var txtaddaction
+$("#addaction > option").each(function() {
+          txtaddaction +="<option"
+          txtaddaction+=" value="
+         txtaddaction+=this.value+" >"
+          txtaddaction+=this.value +"</option>"
+    // alert(this.text + ' ' + this.value);
+});
+var txteditaction
+$("#editaction > option").each(function() {
+          txteditaction +="<option"
+          txteditaction+=" value="
+         txteditaction+=this.value+" >"
+          txteditaction+=this.value +"</option>"
+    // alert(this.text + ' ' + this.value);
+});
+var txtdeleteaction
+$("#deleteaction > option").each(function() {
+          txtdeleteaction +="<option"
+          txtdeleteaction+=" value="
+         txtdeleteaction+=this.value+" >"
+          txtdeleteaction+=this.value +"</option>"
+    // alert(this.text + ' ' + this.value);
+});
+$(this).parents("tr").find("td:eq(0)").html('<select name="edit_groupname"  class="form-control" style="width:30px" value="3rdgroup" >'+txt+'</select>');
+        $(this).parents("tr").find("td:eq(1)").html('<input name="edit_rolename"  class="form-control"  value="'+rolename+'">');
+        $(this).parents("tr").find("td:eq(2)").html('<select name="edit_addaction"  class="form-control" style="width:30px" >'+txtaddaction+'</select>');        
+        $(this).parents("tr").find("td:eq(3)").html('<select name="edit_editaction"  class="form-control" style="width:30px" >'+txteditaction+'</select>');        
+        $(this).parents("tr").find("td:eq(4)").html('<select name="edit_deleteaction"  class="form-control" style="width:30px" >'+txtdeleteaction+'</select>');        
+
+        $(this).parents("tr").find("td:eq(5)").prepend("<button class='btn btn-info btn-xs btn-update'>Update</button><button class='btn btn-warning btn-xs btn-cancel'>Cancel</button>")
+        $(this).hide();
+    });
+   
+    $("body").on("click", ".btn-cancel", function(){
+        var name = $(this).parents("tr").attr('data-name');
+        var email = $(this).parents("tr").attr('data-email');
+    
+        $(this).parents("tr").find("td:eq(0)").text(name);
+        $(this).parents("tr").find("td:eq(1)").text(email);
+   
+        $(this).parents("tr").find(".btn-edit ").show();
+        $(this).parents("tr").find(".btn-update").remove();
+        $(this).parents("tr").find(".btn-cancel").remove();
+    });
+   
+    $("body").on("click", ".btn-update", function(){
+      var groupname = $(this).parents("tr").find("select[name='edit_groupname']").val();
+      var addaction = $(this).parents("tr").find("select[name='edit_addaction']").val();
+      var editaction = $(this).parents("tr").find("select[name='edit_editaction']").val();
+      var deleteaction = $(this).parents("tr").find("select[name='edit_deleteaction']").val();
+      var rolename=$(this).parents("tr").find("input[name='edit_rolename']").val();
+      document.getElementById("roleid").value=(globe)
+      $(this).parents("tr").find("td:eq(0)").text(groupname);
+        $(this).parents("tr").find("td:eq(1)").text(rolename);
+        $(this).parents("tr").find("td:eq(2)").text(addaction);
+        $(this).parents("tr").find("td:eq(3)").text(editaction);
+        $(this).parents("tr").find("td:eq(4)").text(deleteaction);
+        $("input[name='groupname2']").val(groupname);
+
+$("input[name='userrole2']").val(rolename);
+$("select[name='addaction2']").val(addaction);
+$("select[name='editaction2']").val(editaction);
+$("select[name='deleteaction2']").val(deleteaction);
+document.getElementById('editrole').submit();
+    });
+    
+</script>
+     
+</body>
+</html>

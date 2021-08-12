@@ -1,0 +1,147 @@
+<head>   
+    <meta charset="utf-8">   
+    <title>Group</title>   
+    <meta name="description" content="Bootstrap."> 
+    <link rel="stylesheet" href="../CSS/role.css">
+ 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+
+    </head>  
+    <body style="margin:20px auto"> 
+        <div class="container">
+        <div class="card" style="margin:auto">
+            <div class="card-header" style="background-color:#2196F3;color:white">
+              <b class="grouping">Group</b>
+            </div>
+            <div> 
+                <div>
+                    <div>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" style="margin-left: 1rem;">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Create
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm" >
+                        <i class="fa fa-eye" aria-hidden="true"></i> View
+                        </button>
+                    <button type="button" class="btn btn-primary btn-sm" ><i class="fa fa-eraser" aria-hidden="true"></i> Edit</button>
+                    <button type="button" class="btn btn-danger btn-sm">
+                        <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                        </button>
+                </div> 
+                    <!-- The Modal -->
+                    <div class="modal fade" id="myModal">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div>
+                            <div class="card-header" class="modal-title" style="background-color:#2196F3;color:white">Create New Group
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                          </div>
+                          <Form action={% url 'creategroup' %} inline method="POST">
+                            {% csrf_token %}
+						  <br>                            
+                            <Label class="label" className="mr-sm-2">Group Name</Label>
+                            <input type="text" 
+                             name="groupName" 
+                             id="groupName" placeholder="Enter Group Name" 
+                             required 
+                             autocomplete="on"
+                             >
+                             <Label class="describe" className="mr-sm-2">Group Description</Label>
+                             <input type="text" 
+                             name="description" 
+                             id="description" placeholder="Enter Group Description" 
+                             required 
+                             autocomplete="on"
+                             >
+                            <div>
+                              <input type="submit" class="btn btn-primary btn-sm"  style="margin-left: 1rem;">
+                              <i class="fa fa-check" aria-hidden="true"></i>Save
+                              </button>
+                              <button type="button" class="btn btn-danger btn-sm" ><i class="fa fa-times" aria-hidden="true"></i>Cancel</button>
+                                </div> 
+                             </Form>   
+                        </div>
+                      </div>
+                    </div>
+                </div> 
+                </div>      
+        <table id="myTable" class="table table-striped">  
+                <thead>  
+                  <tr>  
+                    <th>Select</th>
+                    <th>Group Name</th>  
+                    <th style="width: 11rem;">Group Description</th>  
+                    
+                  </tr>  
+                </thead>  
+                <tbody> 
+                  {% for f in group %}
+                      <tr>
+                          <td><button type="button" class="btn btn-primary btn-sm" onclick="GetSelected()" ><i class="fa fa-eraser" aria-hidden="true"></i> Edit</button>
+                          </td>                                
+                          <td>{{ f.Group_Name }}</td>
+                          <td>{{ f.Description }}</td>                                                         
+                      </tr>
+                  {% endfor %}      
+                </tbody>  
+              </table>
+              <div style="margin: auto;">
+                <nav aria-label="Page navigation example" style="margin-left:-6rem;">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item"><a class="page-link" href="#"><i class="fa fa-step-backward" aria-hidden="true"></i></a></li>
+                        <li class="page-item"><a class="page-link" href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i></a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#" >4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item"><a class="page-link" href="#"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+                        <li class="page-item"><a class="page-link" href="#"><i class="fa fa-step-forward" aria-hidden="true"></i></a></li>
+                        <li class="page-item"><a class="page-link" href="#"><i class="fa fa-chevron-down" aria-hidden="true"></i></a></li>
+                        
+                    </ul>
+                </nav> 
+            </div>      
+
+            
+        </div>
+    </div>
+        </body> 
+        <script type="text/javascript">
+          function GetSelected() {
+              //Reference the Table.
+              var grid = document.getElementById("myTable");
+       
+              //Reference the CheckBoxes in Table.
+              var checkBoxes = grid.getElementsByTagName("but");
+              var message = "Id Name                  Country\n";
+       
+              //Loop through the CheckBoxes.
+              for (var i = 0; i < checkBoxes.length; i++) {
+             
+                      var row = checkBoxes[i];
+                      message += row.cells[1].innerHTML;
+                      message += "   " + row.cells[2].innerHTML;
+                      message += "   " + row.cells[3].innerHTML;
+                      message += "\n";
+                  
+              }
+       
+              //Display selected Row data in Alert Box.
+              alert(row);
+          }
+      </script> 
+        <!-- <script>
+        $(document).ready(function(){
+            $('#myTable').dataTable();
+        });
+        </script> -->
+
+     
+    </html>  

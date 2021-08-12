@@ -1,0 +1,400 @@
+{% extends 'acc_back.html' %}
+{% load static %}
+
+{% block content %}
+        <!-- page-content  -->
+<main class="page-content pt-2">
+         
+    <a href="#" id="fmp-button" data-theme="ice-theme" class="theme ice-theme" style="display: none;"></a>
+    <div id="overlay" class="overlay"></div>
+    <div class="container-fluid p-5">
+      <div class="card" style="margin:auto;margin-top: 3rem;">
+        <div class="card-header" style="background-color: #2c6db8;height:2.5rem; color:white">
+          <h5 style="margin-top: -0.5rem;">Exception Investigation Manager</h5>
+        </div> 
+        <form class="form-horizontal" style="margin-top: 1rem;" id='calloverexceptionreview' method="POST" action="{% url 'alertreview_acceptreview' %}" enctype="multipart/form-data">
+          {% csrf_token %}
+        <div class="bs-example">
+            <nav class="navbar navbar-expand-md navbar-light">
+                 
+                   
+                    <div class="navbar-nav ml-auto">
+                      {% if isOwner %}
+                      <input type="submit"  class="btn btn-success" value="Accept" />
+                        {% endif %}
+                        <button type="button" class="btn btn-primary ml-2" id='btnSend'>Save</button>
+                        <button type="button" class="btn btn-primary ml-2" id='btnSend'>Message</button>
+                        <button type="button" class="btn btn-danger ml-2"><a href="{% url 'alertreviewindexall' %}">Close</a></button>
+                    </div>
+            </nav>
+        </div>
+      
+      
+  {% for result in results %}
+    <div class="card-header" style="background-color: #2c6db8; margin: 1rem; color: white; height:2.4rem;">
+        <h5 style="margin-top: -0.5rem;">Exception Information Details</h5>
+     </div>
+     <div style="margin-right: 3rem;">
+    <div class="form-group" style="margin-top: 1rem;">
+      {{htmb}}
+      <label class="control-label col-sm-2" for="callover">Alert ID*</label>
+      <div class="col-sm-10">          
+        <input type="text" class="form-control" value="{{ result.ALERT_ID }}" readOnly id="callover" name="alertid">
+        <input type="text" class="form-control" value="{{ result.ID }}" readOnly id="id" name="id">
+        <input type="text" class="form-control" style="display: none;"  id="sendSignal" name="sendSignal">
+      </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="branch">Branch Code*</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" value="{{ result.BRANCH_CODE }}" readOnly id="branch"  name="branchCode">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="observe">Exception Name*</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" value="{{ result.EXCEPTION_NAME }}" readOnly id="observe" name="observation">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="observe">Upload File</label>
+        <div class="col-sm-10">          
+          <input type="file" class="form-control"  id="fp" name="fp">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="severe">Severity Level</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" value="{{ result.SEVERITY_LEVEL }}" readOnly id="severe"  name="severity">
+        </div>
+      </div>
+      <div class="card-header" style="background-color: #2c6db8;margin: 1rem; color: white; height:2.3rem;">
+        <h5 style="margin-top: -0.5rem;">Transaction References</h5>
+     </div>
+    
+     <div class="form-group">
+      <label class="control-label col-sm-2" for="action">Transaction Id</label>
+      <div class="col-sm-10">    
+        <input type="text" class="form-control" readOnly value="{{ result.CALLOVER_OFFICER }}" id="officer"  name="calloverOfficer">
+      </div>
+    </div>
+       
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="action">Transaction Type</label>
+      <div class="col-sm-10">    
+        <input type="text" class="form-control" readOnly value="{{ result.IC4_TRANS_TYPE}}" id="officer"  name="transactiontype">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="action">Transaction Code</label>
+      <div class="col-sm-10">    
+        <input type="text" class="form-control" readOnly value="{{ result.IC4_TRANS_CODE }}" id="officer"  name="calloverOfficer">
+      </div>
+    </div>  
+    <div class="card-header" style="background-color: #2c6db8;margin: 1rem; color: white; height:2.3rem;">
+      <h5 style="margin-top: -0.5rem;">Account Details</h5>
+   </div>
+  
+   <div class="form-group">
+    <label class="control-label col-sm-2" for="action">Account Number</label>
+    <div class="col-sm-10">    
+      <input type="text" class="form-control" readOnly value="{{ result.IC4_ACCOUNT_NO }}" id="officer"  name="accountnumber">
+    </div>
+  </div>
+     
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="action">Account Name</label>
+    <div class="col-sm-10">    
+      <input type="text" class="form-control" readOnly value="{{ result.IC4_ACCOUNT_NAME}}" id="officer"  name="accountname">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="action">Customer Number</label>
+    <div class="col-sm-10">    
+      <input type="text" class="form-control" readOnly value="{{ result.IC4_CUSTOMER_NO }}" id="officer"  name="calloverOfficer">
+    </div>
+  </div>  
+  <div class="card-header" style="background-color: #2c6db8;margin: 1rem; color: white; height:2.3rem;">
+    <h5 style="margin-top: -0.5rem;">Date References</h5>
+ </div>
+
+ <div class="form-group">
+  <label class="control-label col-sm-2" for="action">Posting Date</label>
+  <div class="col-sm-10">    
+    <input type="text" class="form-control" readOnly value="{{ result.IC4_POST_DATE }}" id="officer"  name="postingdate">
+  </div>
+</div>
+   
+<div class="form-group">
+  <label class="control-label col-sm-2" for="action">Value Date</label>
+  <div class="col-sm-10">    
+    <input type="text" class="form-control" readOnly value="{{ result.IC4_VALUE_DATE}}" id="officer"  name="calloverOfficer">
+  </div>
+</div>
+
+<div class="card-header" style="background-color: #2c6db8;margin: 1rem; color: white; height:2.3rem;">
+  <h5 style="margin-top: -0.5rem;">Amount & Currency Details</h5>
+</div>
+
+<div class="form-group">
+<label class="control-label col-sm-2" for="action">Transaction CCY</label>
+<div class="col-sm-10">    
+  <input type="text" class="form-control" readOnly value="{{ result.IC4_TRANS_CCY }}" id="officer"  name="calloverOfficer">
+</div>
+</div>
+ 
+<div class="form-group">
+<label class="control-label col-sm-2" for="action">Transaction Amount</label>
+<div class="col-sm-10">    
+  <input type="text" class="form-control" readOnly value="{{ result.IC4_TRANS_AMOUNT}}" id="officer"  name="transactionamount">
+</div>
+</div>
+
+
+<div class="card-header" style="background-color: #2c6db8;margin: 1rem; color: white; height:2.3rem;">
+  <h5 style="margin-top: -0.5rem;">Cheque & Narrative</h5>
+</div>
+
+<div class="form-group">
+<label class="control-label col-sm-2" for="action">Cheque Number</label>
+<div class="col-sm-10">    
+  <input type="text" class="form-control" readOnly value="{{ result.IC4_CHEQUE_NO }}" id="officer"  name="calloverOfficer">
+</div>
+</div>
+ 
+<div class="form-group">
+<label class="control-label col-sm-2" for="action">Narrative</label>
+<div class="col-sm-10">    
+  <input type="text" class="form-control" readOnly value="{{ result.IC4_NARRATIVE}}" id="officer"  name="narrative">
+</div>
+</div>
+
+<div class="card-header" style="background-color: #2c6db8;margin: 1rem; color: white; height:2.3rem;">
+  <h5 style="margin-top: -0.5rem;">Branch</h5>
+</div>
+
+<div class="form-group">
+<label class="control-label col-sm-2" for="action">Transaction Branch</label>
+<div class="col-sm-10">    
+  <input type="text" class="form-control" readOnly value="{{ result.IC4_CHEQUE_NO }}" id="officer"  name="calloverOfficer">
+</div>
+</div>
+ 
+<div class="form-group">
+<label class="control-label col-sm-2" for="action">Domicile Branch</label>
+<div class="col-sm-10">    
+  <input type="text" class="form-control" readOnly value="{{ result.IC4_NARRATIVE}}" id="officer"  name="calloverOfficer">
+</div>
+</div>
+
+
+<div class="card-header" style="background-color: #2c6db8;margin: 1rem; color: white; height:2.3rem;">
+  <h5 style="margin-top: -0.5rem;">Account Officer & User Details</h5>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-sm-2" for="action">Inputter</label>
+  <div class="col-sm-10">    
+    <input type="text" class="form-control" readOnly value="{{ result.IC4_INPUTTER }}" id="officer"  name="calloverOfficer">
+  </div>
+  </div>
+
+<div class="form-group">
+<label class="control-label col-sm-2" for="action">Authorizer</label>
+<div class="col-sm-10">    
+  <input type="text" class="form-control" readOnly value="{{ result.IC4_AUTHORISER }}" id="officer"  name="calloverOfficer">
+</div>
+</div>
+ 
+<div class="form-group">
+<label class="control-label col-sm-2" for="action">Domicile Branch</label>
+<div class="col-sm-10">    
+  <input type="text" class="form-control" readOnly value="{{ result.IC4_NARRATIVE}}" id="officer"  name="calloverOfficer">
+</div>
+</div>
+
+
+
+
+    </div>
+      <div class="card-header" style="background-color: #2c6db8; margin: 1rem; color: white; height:2.3rem;">
+        <h5 style="margin-top: -0.5rem;">Exception and Owners</h5>
+     </div>
+     <div style="margin-right: 3rem;">
+     <div class="form-group" style="margin-top: 1rem;">
+        <label class="control-label col-sm-2" for="details">Owner</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" value="{{ result.OWNER}}" readOnly id="details" name="observationdetails">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="implicate">Owner Detail</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" value="{{ result.OWNER_DETAIL }}" readOnly id="implicate" name="ownerdetail">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="action">Next Owner</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" value="{{ result.NEXT_OWNER }}" readOnly id="action" name="action">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="action">Next Owner Detail</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" value="{{ result.NEXT_OWNER_DETAIL }}" readOnly id="action" name="nextownerdetail">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="action">Respondent</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" value="{{ result.RESPONDENT }}" readOnly id="action" name="action">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="action">Respondent Details</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" value="{{ result.RESPONDENT_DETAIL }}" readOnly id="action" name="respondentdetail">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="action">Other Receivers</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" value="{{ result.OTHER_RECEIVER_EMAILS }}" readOnly id="action" name="action">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="action">Date Created</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" value="{{ result.DATE_CREATED }}" readOnly id="action" name="action">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="action">Review Date</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" value="{{ result.REVIEW_DATE }}" readOnly id="action" name="action">
+        </div>
+      </div>
+    </div>
+ 
+   
+      <div class="card-header" style="background-color: #2c6db8;margin: 1rem; color: white; height:2.3rem;">
+        <h5 style="margin-top: -0.5rem;">Review & Investigation</h5>
+     </div>
+     <div style="margin-right: 3rem;">
+     <div class="form-group" style="margin-top: 1rem;">
+        <label class="control-label col-sm-2" for="others">Investigation</label>
+        <div class="col-sm-10">          
+          <textarea type="others" class="form-control" value="{{ result.Investigation }}" id="Investigation"  name="Investigation"></textarea>
+        </div>
+      </div>
+    </div>
+      <div class="card-header" style="background-color: #2c6db8;margin: 1rem; color: white; height:2.3rem;">
+        <h5 style="margin-top: -0.5rem;">New Respondent & Notifier</h5>
+     </div>
+
+     <div class="form-group">
+      <label class="control-label col-sm-2" for="action">Next Respondent Detail</label>
+      <div class="col-sm-10">    
+        <input type="text" class="form-control"  id="action" name="nextrespondentdetail">  
+       
+      </div>
+    </div>
+
+  
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="action">Next Notifier Detail</label>
+      <div class="col-sm-10">    
+        <input type="text" class="form-control"   id="action" name="nextnotifierdetail">
+      </div>
+    </div>
+    
+ 
+    <div class="card-header" style="background-color: #2c6db8;margin: 1rem; color: white; height:2.3rem;">
+      <h5 style="margin-top: -0.5rem;">Comments from Users</h5>
+   </div>
+
+   <div class="form-group">
+    <label class="control-label col-sm-2" for="action">Comments</label>
+    <div class="col-sm-10">          
+      <textarea type="others" class="form-control"  id="comments"  name="comments"></textarea>
+    
+    <textarea type="others" class="form-control"  id="prevcomments"  name="prevcomments">{{ result.ALERT_COMMENTS }}</textarea>
+  </div>
+  </div>
+  <div class="card-header" style="background-color: #2c6db8;margin: 1rem; color: white; height:2.3rem;">
+    <h5 style="margin-top: -0.5rem;">Exception Status Details</h5>
+ </div>
+
+
+<div class="form-group">
+  <label class="control-label col-sm-2" for="action">Accepted By</label>
+  <div class="col-sm-10">    
+    <input type="text" class="form-control" readOnly value="{{ result.ACCEPTED_BY }}" id="officer"  name="calloverOfficer">
+  </div>
+</div>
+<div class="form-group">
+  <label class="control-label col-sm-2" for="action">Accepted Date</label>
+  <div class="col-sm-10">    
+    <input type="text" class="form-control" readOnly value="{{ result.ACCEPTED_DATE }}" id="officer"  name="calloverOfficer">
+  </div>
+</div>
+    </div>
+    {% endfor %}
+  </form>
+
+</div>
+<scr src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+crossorigin="anonymous"></scr>
+<scr src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+crossorigin="anonymous"></scr>
+<scr src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+crossorigin="anonymous"></scr>
+
+<script>
+  document.getElementById('btnSend').onclick=function(){
+
+  
+        // var inputF = document.getElementById("sendSignal"); 
+  
+      
+        //     inputF.value = "textValue"; 
+        document.getElementById('sendSignal').value='send'
+        // alert(document.getElementById('sendSignal').value)
+        // calloverexceptionreview
+  
+  document.getElementById('calloverexceptionreview').submit()
+    
+  }
+  
+  
+</script>
+{#<scr src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></scr>#}
+{#    <!-- jQuery UI !-->#}
+{#<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>#}
+
+{% block script %}
+
+<script src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
+<script>
+$('.basicAutoComplete').autoComplete(
+    {minLength: 1}
+);
+$('.dropdown-menu').css({'top': 'auto', 'left': 'auto'})
+
+</script>
+<script>
+$("td.contribution").each(function() { $(this).html(parseFloat($(this).text()).toLocaleString('en-US', { style: "currency", currency: "USD" })); })
+</script>
+{% endblock %}
+
+</main>
+
+{% endblock %}

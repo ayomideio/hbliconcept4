@@ -1,0 +1,183 @@
+html {
+    height: 100%;
+  }
+  body {
+    font-family: "cabin", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #212121;
+    -webkit-font-smoothing: antialiased;
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
+    background-color: #f2f2f2;
+  }
+
+  .login-body {
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+  }
+  .login-body .login-content img {
+    display: inline-block;
+    margin-bottom: 100px;
+    width: 200px;
+  }
+  .login-body .login-content h1 {
+    font-size: 28px;
+    font-weight: 500;
+    margin: 14px 0;
+    color: #212121;
+    font-family: "cabin", sans-serif;
+  }
+  .login-body .login-content h1 span {
+    color: #727272;
+    font-family: "cabin", sans-serif;
+  }
+  .login-body .login-content p {
+    font-size: 17px;
+    color: #727272;
+    margin: 0 0 32px 0;
+    font-family: "cabin", sans-serif;
+  }
+  .login-body .login-content .login-input-wrapper {
+    position: relative;
+    width: 300px;
+    margin-bottom: 24px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .login-body .login-content .login-input-wrapper input {
+    width: 100%;
+    padding-right: 16px;
+  }
+  .login-body .login-content .login-input-wrapper i {
+    position: absolute;
+    color: #727272;
+    font-size: 16px;
+    top: 50%;
+    right: 0.429em;
+    margin-top: -8px;
+  }
+  .login-body .login-content button {
+    min-width: 150px;
+  }
+  
+
+  @media screen and (min-width: 768px) {
+    .login-body {
+      background: url("../images/pages/bg-login.jpg");
+      background-size: cover;
+    }
+    .login-body .login-panel {
+        padding: 80px;
+        display: block;
+        position: fixed;
+        background-color: #ffffff;
+        height: 200%;
+        width: 90%;
+        left: -50%;
+        top: -50%;
+        opacity: 0.95;
+        filter: alpha(opacity=95);
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+      }
+    .login-body .login-content {
+        text-align: left;
+        position: fixed;
+        padding: 80px 0 0 80px;
+      }
+    .login-body .login-content .login-input-wrapper {
+        width: 300px;
+        margin-left: 0;
+        margin-right: 0;
+        text-align: left;
+      }
+}
+
+/* Input style */
+body .p-inputtext {
+    font-size: 14px;
+    color: #212121;
+    background: #f5f5f5;
+    padding: 0.429em;
+    border: 1px solid #E0E0E0;
+    -moz-transition: border-color 0.3s, box-shadow 0.3s;
+    -o-transition: border-color 0.3s, box-shadow 0.3s;
+    -webkit-transition: border-color 0.3s, box-shadow 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+  }
+  body .p-inputtext:enabled:hover {
+    border-color: #bdbdbd;
+  }
+  body .p-inputtext:enabled:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    -webkit-box-shadow: 0 0 0 0.2em #9acffa;
+    -moz-box-shadow: 0 0 0 0.2em #9acffa;
+    box-shadow: 0 0 0 0.2em #9acffa;
+    border-color: #2196F3;
+  }
+  body .p-component {
+    font-family: "cabin", sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+  }
+  body .p-disabled, body .p-component:disabled {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+  }
+
+  /*Button Styles*/
+  body .p-button {
+    margin: 0;
+    color: #ffffff;
+    background-color: #2196F3;
+    border: 1px solid #2196F3;
+    font-size: 14px;
+    -moz-transition: background-color 0.3s, box-shadow 0.3s;
+    -o-transition: background-color 0.3s, box-shadow 0.3s;
+    -webkit-transition: background-color 0.3s, box-shadow 0.3s;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+  }
+  body .p-button:enabled:hover {
+    background-color: #1976D2;
+    color: #ffffff;
+    border-color: #1976D2;
+  }
+  body .p-button:enabled:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    -webkit-box-shadow: 0 0 0 0.2em #9acffa;
+    -moz-box-shadow: 0 0 0 0.2em #9acffa;
+    box-shadow: 0 0 0 0.2em #9acffa;
+  }
+  body .p-button:enabled:active {
+    background-color: #1565C0;
+    color: #ffffff;
+    border-color: #1565C0;
+  }
+  body .p-button.p-button-text-only .p-button-text {
+    padding: 0.429em 1em;
+  }
+  .p-button .p-button-text {
+    display: block;
+    line-height: normal;
+}
+
+.scrollx {
+  overflow-x:scroll;
+}
+ 

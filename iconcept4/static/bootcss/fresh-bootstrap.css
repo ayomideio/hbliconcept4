@@ -1,0 +1,62 @@
+@charset "UTF-8";
+/*
+    Fresh Bootstrap Table redesign by Creative Tim
+    http://www.creative-tim.com
+    @CreativeTim
+
+*/
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+ 
+ 
+ 
+ 
+.bootstrap-table .fixed-table-container .fixed-table-body .fixed-table-loading {
+  align-items: center;
+  background: #fff;
+  display: none;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+}
+.bootstrap-table .fixed-table-container .fixed-table-body .fixed-table-loading .loading-wrap {
+  align-items: baseline;
+  display: flex;
+  justify-content: center;
+}
+.bootstrap-table .fixed-table-container .fixed-table-body .fixed-table-loading .loading-wrap .loading-text {
+  font-size: 2rem;
+  margin-right: 6px;
+}
+.bootstrap-table .fixed-table-container .fixed-table-body .fixed-table-loading .loading-wrap .animation-wrap {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.bootstrap-table .fixed-table-pagination > .pagination {
+  margin-right: 35rem;
+  margin-top:-0.7rem;
+}
+.bootstrap-table .fixed-table-pagination > .pagination-detail{
+  font-size: large;
+  margin-left: 20rem;
+  margin-top: 1rem;
+}
+ 
+ 

@@ -1,0 +1,61 @@
+{% extends 'basic.html' %}
+{% load static %}
+<!DOCTYPE html>
+<head>
+	<title>Login Page</title>
+ <!--Custom styles-->
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/styles.css' %}">
+</head>
+{% block content %}
+    <div class="container" background="color:grey">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card">
+			<div class="login-content">
+				
+				
+			</div>
+			<div class="card-body" >
+			{% comment %} <p><img src="{% static 'images/logo.png' %}" alt="Login Image" /></p> {% endcomment %}
+			<p><span>SIGN IN</span> TO ICONCEPT4 </p>
+       		 <p>Welcome, please use the form to sign-in.</p>
+				<form action="{% url 'account_login' %}" method="POST">
+                      {% csrf_token %}
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text" style="background-color: #007bff"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" id="{{ form.login.id_for_label }}" name="{{ form.login.html_name}}" class="form-control" placeholder="username">
+
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text" style="background-color: #007bff"><i class="fas fa-key"></i></span>
+						</div>
+						<input id="{{ form.password.id_for_label }} " name="{{ form.password.html_name}}" type="password" class="form-control" placeholder="password">
+					</div>
+					<div class="row align-items-center remember">
+						<input id="{{ form.remember.id_for_label }}"  name="{{ form.remember.html_name}}" type="checkbox">Remember Me
+					</div>
+                     {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{% url 'home' %}" />
+                        {% endif %}
+					<div class="form-group">
+						<input type="submit" value="Login" class="btn float-right login_btn" style="background-color: #007bff;color: white">
+					</div>
+				</form>
+             <div>
+            <p style="color: red">{{ form.errors }}</p>
+        </div>
+			</div>
+			 <div class="card-footer">
+				<div class="d-flex justify-content-center links">
+					{% comment %} Don't have an account?<a href="{% url 'signup' %}">Sign Up</a> {% endcomment %}
+				</div>
+				<div class="d-flex justify-content-center">
+					{% comment %} <a href="{% url 'account_reset_password' %}">Forgot your password?</a> {% endcomment %}
+				</div>
+			</div> 
+		</div>
+	</div>
+</div>
+{% endblock %}

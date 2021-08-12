@@ -1,0 +1,216 @@
+<div class="modal fade" id="exception" tabindex="-1" role="dialog" aria-labelledby="exception" aria-hidden="true"
+id="update-model" style="position: absolute;margin-left: 200px;">
+<div class="modal-dialog">
+    {% comment %} <div class="modal-content"> {% endcomment %}
+        {% comment %} <div class="modal-header">
+            <h4 class="modal-title" id="exampleModalLongTitle">Enter Transaction Exception</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div> {% endcomment %}
+        {% comment %} <div class="modal-footer "> {% endcomment %}
+
+
+        </div>
+{% comment %} <div class="modal-body"> {% endcomment %}
+                <form method="post">
+                    {% csrf_token %}
+                   
+
+<div class="container" style="margin-top:50px !important; ">
+<div style="margin:auto">
+{% comment %} <div class="card-header" style="background-color:#1565C0;color:white; height:2rem; padding: 0%;">
+<p class="grouping" style="margin-left: 1rem;">Callover Exception</p>
+</div> {% endcomment %}
+<div> 
+<div>
+{% comment %} <div>
+<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" style="margin-left:1rem;background-color:#1565C0;">
+<i class="fa fa-plus" aria-hidden="true"></i>Exception
+</button>
+  </div>  {% endcomment %}
+<!-- The Modal -->
+{% comment %} <div class="modal fade" id="myModal"> {% endcomment %}
+  {% comment %} <div class="modal-dialog modal-xl"> {% endcomment %}
+    {% comment %} <div class="modal-content"> {% endcomment %}
+      <div>
+        <button type="button" class="close" data-dismiss="modal" style="color: #ee0b0b;">&times;</button>
+        <div class="card-header" style="background-color:#1565C0;color:white;height:2rem;padding: 0%; margin:1rem">
+          <p class="grouping" style="margin-left: 1rem;">Callover Exception</p>
+        </div>
+      </div>
+
+      <Form inline style="margin:1rem;">
+        
+          <Label className="mr-sm-2" style="margin-left:2rem;">Exception ID</Label>
+          <Input type="text" name="Callover" id="transRef" disabled style="width:37rem;"/>
+        
+        <FormGroup>
+          <Label className="mr-sm-2" style="margin-left:2.9rem;">Branch Code</Label>
+          <Input type="text" name="branch" id="branchCode" disabled style="width:47rem;" />
+        </FormGroup>
+        <FormGroup>
+          <FormGroup>
+            <Label style="margin-left: 2rem;">Observation*</Label>
+            <select name="grouping" id="myselect" style="width:27rem;">
+           
+              <option class="dropdown-item">Select Exception</option>
+                 {% for f in yListr %}
+                <option class="dropdown-item" value={{ f.DESCRIPTION }}>{{ f.DESCRIPTION}}</option>
+                 {% endfor %}
+            </select>
+          </FormGroup>
+          <Label className="mr-sm-2" style="margin-left: 5rem;">Trans ID</Label>
+          <Input type="text" name="trans" id="transID" disabled  style="width:55rem;"/>
+        </FormGroup>
+        
+        <FormGroup>
+          <Label className="mr-sm-2" style="margin-left:3.9rem;">Severity*</Label>
+          <Input type="text" name="Severity" disabled id="severity" style="width:27rem;"/>
+        </FormGroup>
+        <FormGroup className="mb-2 mr-sm-2">
+          <Label className="mr-sm-2"  style="margin-left:3.5rem;">Entry Date*</Label>
+          <input  id='enteryDate' disabled  placeholder='dd/mm/yyyy' style="width:25rem;">
+        </FormGroup>
+        <FormGroup className="mb-2 mr-sm-2">
+          <Label className="mr-sm-2">BSM/Head Teller*</Label> 
+          <select name="grouping" id="select" style="width:27rem;">
+            <option class="dropdown-item">Select BSM/Head Teller</option>
+             {% for f in yLists %}
+             <option class="dropdown-item" value={{ f.USER_ID }}>{{ f.FIRST_NAME}}</option>
+              {% endfor %}
+          </select>
+        </FormGroup>
+        <FormGroup>
+          <Label className="mr-sm-2" style="margin-left:5rem;">Inputter</Label>
+          <Input type="text" name="Severity" id="email" disabled style="width:25rem;"/>
+        </FormGroup>
+         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+          <Label for="exampleEmail" className="mr-sm-2" style="margin-left:-1rem">Callover Officer</Label>
+          <Input type="text" name="officer" id="officer" disabled style="width:27.7rem;"/>
+        </FormGroup>
+        <FormGroup className="mb-2 mr-sm-2">
+          <Label className="mr-sm-2" style="margin-left: 3rem;">Callover Date</Label>
+          <Input type='text' id='calloverDate' disabled 
+           style="width:26rem; margin-top:-0.5rem;" />
+        </FormGroup>
+        <div style="text-align:left">
+          <Label style="margin-left:4.7rem">Review Date</Label>
+            <input  id='reviewDate' placeholder="dd/mm/yyyy"  style="width:25rem;" disabled>
+        </div>
+        <br>
+         
+        <FormGroup className="mb-2 mr-sm-2">
+        <div style="text-align:left">
+          <Label for="examplePassword" className="mr-sm-2">Exception Detail</Label>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" id="exceptionx" name="exception" rows="2"></textarea>
+          </div>
+        </FormGroup>
+          
+        <div style="text-align:left">
+         <label>Implication</label><label style="margin-left:30rem">Action</label>
+          </div>
+          <FormGroup>
+          <textarea id="implication" rows="2" style="width:34rem;" disabled></textarea>
+         </FormGroup>
+        <FormGroup>
+           <textarea id="action" rows="2" style="width:33.7rem;margin-left:1rem;" disabled></textarea>
+        </FormGroup>
+
+     
+    </div>
+       
+      <input type="hidden", name="transID" id="transID">
+    {% comment %} <button type="submit" class="btn btn-primary" id="exception-modal-btn" style="margin:1rem;background-colo:green">Confirrm Exception</button> {% endcomment %}
+     <button class="btn btn-primary btn-lg"
+      id="exception-modal-btn"  
+     
+      style="margin:1rem; background-color: green;"
+      >
+     Save Exception
+     </button>
+  {% comment %} </div> {% endcomment %}
+{% comment %} </div> {% endcomment %}
+{% comment %} </div>  {% endcomment %}
+</div>  
+</div>
+</div>
+
+
+
+
+
+{% comment %} 
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputEmail4">Inputter Email</label>
+            <input type="email" name="inputter-email" class="form-control" id="email" readonly>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Entery Date</label>
+            <input type="datetime-local" name="enteryDate" class="form-control" id="enteryDate" readonly>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <label>Action</label>
+            <input type="text" name="action" class="form-control" id="action">
+        </div>
+        <div class="form-group col-md-4">
+            <label>Branch Code</label>
+            <input type="text" name="branchCode" class="form-control" id="branchCode"  readonly>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label>Severity</label>
+            <select name="severity" class="form-control">
+                <option class="dropdown-item" selected="selected" disabled>Select Severity Level</option>
+                <option class="dropdown-item" value="High">High</option>
+                <option class="dropdown-item" value="Medium">Medium</option>
+                <option class="dropdown-item" value="Low">Low</option>
+            </select>
+        </div>
+        <div class="form-group col-md-8">
+            <label>Implication</label>
+            <input type="text" name="implication" class="form-control" id="implication">
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Observation</label>
+        <input type="text" name="observation" class="form-control" id="observation"
+               placeholder="e.g date mot matched">
+    </div>
+    <div class="form-group">
+        <label>Exception Details</label>
+        <input type="text" name="exceptionDetails" class="form-control" id="exceptionDetails"
+               placeholder="e.g date mot matched">
+    </div>
+    <div class="form-group">
+        <label>Callover Officer</label>
+        <input type="email" name="officer" class="form-control" id="officer"
+               placeholder="Apartment, studio, or floor" readonly>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Review Date</label>
+            <input type="date" name="reviewDate" class="form-control" id="reviewDate" readonly>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Callover Date</label>
+            <input type="date" name="calloverDate" class="form-control" id="calloverDate" readonly>
+        </div>
+    </div>
+    <input type="hidden", name="transID" id="transID">
+    <button type="submit" class="btn btn-primary" id="exception-modal-btn">Add Exception</button> {% endcomment %}
+</form>
+                </form>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

@@ -1,0 +1,176 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+
+    {#<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">#}
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <style>
+    .panel{margin-bottom:0;background-color:#fff;border:1px solid transparent;border-radius:4px;-webkit-box-shadow:0 1px 1px rgba(0,0,0,.05);box-shadow:0 1px 1px rgba(0,0,0,.05)}.panel-body{padding:15px}.panel-heading{padding:10px 15px;border-bottom:1px solid transparent;border-top-left-radius:3px;border-top-right-radius:3px}
+    
+    .panel-primary{border-color:#337ab7}.panel-primary>.panel-heading{color:#fff;background-color:#337ab7;border-color:#337ab7}.panel-primary>.panel-heading+.panel-collapse>.panel-body{border-top-color:#337ab7}.panel-primary>.panel-heading .badge{color:#337ab7;background-color:#fff}.panel-primary>.panel-footer+.panel-collapse>.panel-body{border-bottom-color:#337ab7}
+    
+    .row{margin-top:25px;padding: 0 10px;}  r;}.panel-heading div {margin-top: -18px;font-size: 15px;}  .panel-heading div span{margin-left:5px;}  .panel-body{display: none;} i[class*=fa-edit]::before{
+   background:transparent;} .fa-edit{color: #007bff} .fa-trash{color: #dc3545} .fa-edit:hover{color: black} .fa-trash:hover{color: black}
+    </style>
+
+
+    <div class="container">
+      
+        <div class="row" style="margin-left:-100px;">
+            <div class="col-md-15" style="margin-right:-100px;">
+              <button  style="background-color: #d9534f;">  <a  style="color:#ffff;background-color:#d9534f ;" href="{% url 'index' %}">Back</a></button>
+    <div style="height:5px"></div>
+                <div class="panel panel-primary"  style="margin-right:-100px;">
+                    <div class="panel-heading" style="height:30px;">
+                  
+                        <h6 class="panel-title" style="height:20px;">Callover for Teller</h6>
+                        <div class="float-right">
+                            <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter"
+                                  data-container="body">
+                                <i style="margin-top:1.0rem; color:#d9534f;" class="fas fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <input type="text" class="form-control" id="dev-table-filter" data-action="filter"
+                               data-filters="#dev-table" placeholder="Filter Callovers"/>
+                    </div>
+                    {% comment %} <div> {{ results}} </div> {% endcomment %}
+                    <table id="dev-table" class="table table-bordered table-striped mytable" style="line-height: 1;width:1300px;">
+
+                        <thead class="thead-light">
+                        <tr>
+                            <th style="background-color: #2c6db8; color: white;">ITEM/ENTRY NO</th>
+                            <th style="background-color: #2c6db8; color: white;">ENTRY DATE</th>
+                            <th style="background-color: #2c6db8; color: white;">ENTRY USER ID</th>
+                            <th style="text-align: right;background-color: #2c6db8; color: white;">NO OF ENTRIES</th>
+                            <th style="text-align: right;background-color: #2c6db8; color: white;">CREDIT FREQ</th>
+                            <th style="text-align: right;background-color: #2c6db8; color: white;">TOTAL CREDIT</th>
+                            <th style="text-align: right;background-color: #2c6db8; color: white;">DEBIT FREQ</th>
+                            <th style="text-align: right;background-color: #2c6db8; color: white;">TOTAL DEBIT</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for result in results %}
+                         <form method="POST" action='{% url 'acc_trans' result.GRP_BY_REF %}' >
+                                {% csrf_token %}
+                            <tr>
+                            <td style="display: none;">
+                                 <u>   <input type="text" name="vala" id="vala" value={{ result.GRP_BY_DATE }} />
+                                 </u>
+                                </td>
+                                <td style="text-align: left;"><input type="submit" value={{ result.GRP_BY_REF }} 
+                                style="background-color:transparent;border:none;underlined:true;color:#007bff" /> </td>
+                                <td style="text-align: left;">{{ result.GRP_BY_DATE }}</td>
+                                <td style="text-align: left;" title="this is uer">{{ result.GRP_BY_USER }}</td>
+                                <td style="text-align: right;">{{ result.CALL_NO_OF_VOUCHERS }}</td>
+                                <td style="text-align: right;">{{ result.CALL_CREDIT_FREQ }}</td>
+                                <td style="text-align: right;">{{ result.CALL_CREDIT_TOTAL }}</td>
+                                <td style="text-align: right;">{{ result.CALL_DEBIT_FREQ }}</td>
+                                <td style="text-align: right;">{{ result.CALL_DEBIT_TOTAL }}</td>
+                            </tr>
+                            </form>
+                        {% endfor %}
+
+
+                        </tbody>
+
+                    </table>
+
+
+                </div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% block javascript %}
+{#checkbox script#}
+<script>
+    $(document).ready(function () {
+        $(".mytable #checkall").click(function () {
+            if ($(".mytable #checkall").is(':checked')) {
+                $(".mytable input[type=checkbox]").each(function () {
+                    $(this).prop("checked", true);
+                });
+
+            } else {
+                $(".mytable input[type=checkbox]").each(function () {
+                    $(this).prop("checked", false);
+                });
+            }
+        });
+
+        $("[data-toggle=tooltip]").tooltip();
+    });
+
+</script>
+{#search field script#}
+<script>
+    (function () {
+        'use strict';
+        var $ = jQuery;
+        $.fn.extend({
+            filterTable: function () {
+                return this.each(function () {
+                    $(this).on('keyup', function (e) {
+                        $('.filterTable_no_results').remove();
+                        var $this = $(this),
+                            search = $this.val().toLowerCase(),
+                            target = $this.attr('data-filters'),
+                            $target = $(target),
+                            $rows = $target.find('tbody tr');
+
+                        if (search == '') {
+                            $rows.show();
+                        } else {
+                            $rows.each(function () {
+                                var $this = $(this);
+                                $this.text().toLowerCase().indexOf(search) === -1 ? $this.hide() : $this.show();
+                            })
+                            if ($target.find('tbody tr:visible').size() === 0) {
+                                var col_count = $target.find('tr').first().find('td').size();
+                                var no_results = $('<tr class="filterTable_no_results"><td colspan="' + col_count + '">No results found</td></tr>')
+                                $target.find('tbody').append(no_results);
+                            }
+                        }
+                    });
+                });
+            }
+        });
+        $('[data-action="filter"]').filterTable();
+    })(jQuery);
+
+    $(function () {
+        // attach table filter plugin to inputs
+        $('[data-action="filter"]').filterTable();
+
+        $('.container').on('click', '.panel-heading span.filter', function (e) {
+            var $this = $(this),
+                $panel = $this.parents('.panel');
+
+            $panel.find('.panel-body').slideToggle();
+            if ($this.css('display') != 'none') {
+                $panel.find('.panel-body input').focus();
+            }
+        });
+        $('[data-toggle="tooltip"]').tooltip();
+    })
+</script>
+
+{% endblock javascript %}

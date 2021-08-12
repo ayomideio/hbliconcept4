@@ -1,0 +1,238 @@
+{% extends 'libraryback.html' %}
+{% load static %}
+
+{% block content %}
+        <!-- page-content  -->
+<main class="page-content pt-2">
+         
+    <a href="#" id="fmp-button" data-theme="ice-theme" class="theme ice-theme" style="display: none;"></a>
+    <div id="overlay" class="overlay"></div>
+    <div class="container-fluid p-5">
+      <div class="card" style="margin:auto;margin-top: 3rem;">
+        <div class="card-header" style="background-color: #2c6db8;height:2.5rem; color:white">
+          <h5 style="margin-top: -0.5rem;">Callover Exception</h5>
+        </div> 
+        <form class="form-horizontal" style="margin-top: 1rem;" id='calloverexceptionreview' method="POST" action="{% url 'calloverexceptionreview_acceptreview' %}">
+          {% csrf_token %}
+        <div class="bs-example">
+            <nav class="navbar navbar-expand-md navbar-light">
+                 
+                    <div>
+                        <h5><a href="#" style="text-decoration: none; pointer:cursor">CallOver Exception</a></h5>
+                    </div>
+                    <div class="navbar-nav ml-auto">
+                      {% if isOwner %}
+                      <input type="submit"  class="btn btn-success" value="Accept" />
+                        {% endif %}
+                        <button type="button" class="btn btn-primary ml-2" id='btnSend'>Send</button>
+                        <button type="button" class="btn btn-danger ml-2"><a href="{% url 'calloverexceptionreviewindex' %}">Close</a></button>
+                    </div>
+            </nav>
+        </div>
+        <div class="card-header" class="bg-light" style="background-color:#cccccc;color: white; margin: 0.2rem; height:2.4rem;">
+            <h5 style="margin-top: -0.5rem;">Info</h5>
+         </div>
+         {% for result in results %}
+  
+    <div class="card-header" style="background-color: #2c6db8; margin: 1rem; color: white; height:2.4rem;">
+        <h5 style="margin-top: -0.5rem;">Exception Information Details</h5>
+     </div>
+     <div style="margin-right: 3rem;">
+    <div class="form-group" style="margin-top: 1rem;">
+      <label class="control-label col-sm-2" for="callover">Call Over ID*</label>
+      <div class="col-sm-10">          
+        <input type="text" class="form-control" value="{{ result.CALLOVER_ID }}" readOnly id="callover" name="calloverId">
+        <input type="text" class="form-control" style="display: none;" value='ththftf' id="sendSignal" name="sendSignal">
+      </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="branch">Affected Branch*</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" value="{{ result.BRANCH_CODE }}" readOnly id="branch"  name="branchCode">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="observe">Observation*</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" value="{{ result.OBSERVATION }}" readOnly id="observe" name="observation">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="severe">Severity</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" value="{{ result.SEVERITY_LEVEL }}" readOnly id="severe"  name="severity">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="status">Exception Status</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" value="{{ result.EXCEPTION_STATUS }}" readOnly id="status" name="exceptionStatus">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="level">Callover Level</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" value="{{ result.CALLOVER_LEVEL }}" readOnly id="level" name="calloverLevel">
+        </div>
+      </div>
+    </div>
+      <div class="card-header" style="background-color: #2c6db8; margin: 1rem; color: white; height:2.3rem;">
+        <h5 style="margin-top: -0.5rem;">Exception Owners</h5>
+     </div>
+     <div style="margin-right: 3rem;">
+     <div class="form-group" style="margin-top: 1rem;">
+        <label class="control-label col-sm-2" for="owners">Owners</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" value="{{ result.OWNER_DETAIL }}" readOnly id="owners" name="owners">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="inputter">Inputter Email</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" value="{{ result.INPUTTER_EMAIL }}" readOnly id="inputter" name="inputterEmail">
+        </div>
+      </div>
+    </div>
+      <div class="card-header" style="background-color: #2c6db8; margin: 1rem; color: white; height:2.3rem;">
+        <h5 style="margin-top: -0.5rem;">Review and Investigation</h5>
+     </div>
+     <div style="margin-right: 3rem;">
+     <div class="form-group" style="margin-top: 1rem;">
+        <label class="control-label col-sm-2" for="details">Observation Details</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" value="{{ result.OBSERVATION }}" readOnly id="details" name="observationdetails">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="implicate">Implication</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" value="{{ result.IMPLICATION }}" readOnly id="implicate" name="implication">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="action">Action</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" value="{{ result.ACTION }}" readOnly id="action" name="action">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="action">Choose File</label>
+      <div class="col-sm-10">          
+        <input type="file"  id="action" name="act">
+      </div>
+    </div>
+   
+      <div class="card-header" style="background-color: #2c6db8;margin: 1rem; color: white; height:2.3rem;">
+        <h5 style="margin-top: -0.5rem;">New Respondent & Notifier</h5>
+     </div>
+     <div style="margin-right: 3rem;">
+     <div class="form-group" style="margin-top: 1rem;">
+        <label class="control-label col-sm-2" for="others">Other Receivers Email</label>
+        <div class="col-sm-10">          
+          <input type="others" class="form-control" value="{{ result.OTHER_RECEIVERS }}" id="others"  name="otherReceivers">
+        </div>
+      </div>
+    </div>
+      <div class="card-header" style="background-color: #2c6db8;margin: 1rem; color: white; height:2.3rem;">
+        <h5 style="margin-top: -0.5rem;">Comments From Users</h5>
+     </div>
+     <div style="margin-right: 3rem;">
+        <fieldset class="col-md-12">    	
+                <legend>Previous Comments</legend>
+                <div>
+                    <textarea class="form-control" id="comment" value='{{ result.ALERT_COMMENTS }}' readonly rows="2">
+                      {{ result.ALERT_COMMENTS }}
+                    </textarea>
+                </div>
+                <legend> Comments</legend>
+                <div>
+                    <textarea class="form-control" id="comment" value='{{ result.ALERT_COMMENTS }}' name="comments" rows="2">
+                      
+                    </textarea>
+                </div>
+            </fieldset>				
+            <div class="clearfix"></div>
+    </div>
+      <div class="card-header" style="background-color: #2c6db8; margin: 1rem; color: white; height:2.3rem;">
+        <h5 style="margin-top: -0.5rem;">Account Officers & Users Detail</h5>
+     </div>
+     <div style="margin-right: 3rem;">
+     <div class="form-group" style="margin-top: 1rem;">
+        <label class="control-label col-sm-2" for="officer">CallOver Officer</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" readOnly value="{{ result.CALLOVER_OFFICER }}" id="officer"  name="calloverOfficer">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="tbDat">Call Over Date</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" readOnly value="{{ result.CALLOVER_DATE }}" id='tbDat' name='calloverDate' placeholder='dd/mm/yyyy'>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="checker">Checker Identity</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" readOnly value="{{ result.CHECKER_ID }}" id="checker" name="checkerIdentity">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2"  for="Suppervisor">Suppervisor</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control" readOnly value="{{ result.INPUTTER_EMAIL }}" id="Suppervisor" name="supervisor">
+        </div>
+      </div>
+    </div>
+  </form>
+  {% endfor %}
+</div>
+<scr src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+crossorigin="anonymous"></scr>
+<scr src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+crossorigin="anonymous"></scr>
+<scr src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+crossorigin="anonymous"></scr>
+
+<script>
+  document.getElementById('btnSend').onclick=function(){
+
+  
+        // var inputF = document.getElementById("sendSignal"); 
+  
+      
+        //     inputF.value = "textValue"; 
+        document.getElementById('sendSignal').value='send'
+        // alert(document.getElementById('sendSignal').value)
+        // calloverexceptionreview
+  
+  document.getElementById('calloverexceptionreview').submit()
+    
+  }
+  
+  
+</script>
+{#<scr src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></scr>#}
+{#    <!-- jQuery UI !-->#}
+{#<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>#}
+
+{% block script %}
+
+<script src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
+<script>
+$('.basicAutoComplete').autoComplete(
+    {minLength: 1}
+);
+$('.dropdown-menu').css({'top': 'auto', 'left': 'auto'})
+
+</script>
+<script>
+$("td.contribution").each(function() { $(this).html(parseFloat($(this).text()).toLocaleString('en-US', { style: "currency", currency: "USD" })); })
+</script>
+{% endblock %}
+
+</main>
+
+{% endblock %}

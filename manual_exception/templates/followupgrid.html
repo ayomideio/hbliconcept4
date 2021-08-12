@@ -1,0 +1,273 @@
+{% extends 'libraryback.html' %}
+{% load static %}
+
+{% block content %}
+        <!-- page-content  -->
+      
+
+        <main class="page-content pt-2">
+            
+           
+            <a href="#" id="fmp-button" data-theme="ice-theme" class="theme ice-theme" style="display: none;"></a>
+            <div id="overlay" class="overlay"></div>
+            <div class="container-fluid p-5">
+            
+             
+                <div class="row">
+                 
+                   
+                    <div class="col col-lg-2" style=" padding-right: 3px; border-radius: 10px; margin-left: 2px; ">
+                        <a onclick="generateWord();"  title="Export to Word"><img src="{% static 'img/word-icon.png' %}" width="25" alt="word file icon" /></a>
+                          <a   onclick="generate();"   title="Export to Pdf"><img src="{% static 'img/pdf-icon.png' %}" width="25" alt="png pdf file icon" /></a>
+                          <a id="btnExport" title="Export to Excel"><img src="{% static 'img/xls-icon.png'  %}" width="25" alt="Excel Icon Small" /></a>
+                      </div>
+                    <div class="col col-lg-6">
+                     
+            
+            
+                    </div>
+                  
+                    
+           
+            </div> 
+            <div class="row">
+                <div class="col col-lg-12">
+        
+                    <a href="" class=""
+                            style="border-radius: 10px; border: 1px solid lightblue; margin-bottom: 5px; margin-top: 2px">
+                        Refresh Tnx
+                </a
+                
+                >
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading" style="height:30px;">
+              
+                    <h6 class="panel-title" style="height:20px;">Follow Up</h6>
+                    <!-- <div class="float-right">
+                        <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter"
+                              data-container="body">
+                            <i style="margin-top:1.0rem; color:#d9534f;" class="fas fa-search"></i>
+                        </span>
+                    </div> -->
+                </div>
+                <div class="panel-body">
+                    <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Exceptions">
+                
+                    <div style="height: 5px;"></div>
+                  
+
+                
+                
+                
+                  <div style="height: 10px;"></div>
+                  <select class="form-control" name="state" id="maxRows" style="border-color: #337ab7;height: 40px;" >
+                    <option value="5000">Show ALL Rows</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="70">70</option>
+                    <option value="100">100</option>
+                  </select>               
+                </div>
+             
+                  
+        <table  id="dev-table" class="table table-bordered table-striped table-hover mytable"
+        style="line-height: 1;  display: block; margin-bottom: 0; white-space: nowrap; ">
+                        <thead class="thead-light" >
+                        <tr>
+                          <th style="background-color: #1565C0; color: white;text-align: left;"></th>
+                       
+                          <th style="background-color: #1565C0; color: white;text-align: left;">Alert Id</th>
+                          <th style="background-color: #1565C0; color: white;text-align: left;">Branch Code</th>
+                          <th style="background-color: #1565C0; color: white;text-align: left;">Exception Name</th>
+                          <th style="background-color: #1565C0; color: white;text-align: left;">Severity Level</th>                          
+                          <th style="background-color: #1565C0; color: white;text-align: left;">Owner Details</th>                          
+                          <th style="background-color: #1565C0; color: white;text-align: left;">Next Owner Details</th>                          
+                          <th style="background-color: #1565C0; color: white;text-align: left;">Respondent Detail</th>
+                          <th style="background-color: #1565C0; color: white;text-align: left;">Recievers</th>
+                          <th style="background-color: #1565C0; color: white;text-align: left;">Risk Indicator</th>
+                          <th style="background-color: #1565C0; color: white;text-align: left;">REVIEW</th>       
+                        
+                        </tr>
+                    </thead>
+                        </tr>
+                        </thead>
+                        <tbody>
+        
+                            {% for result in results %}
+                   
+
+                     
+                            <tr>
+                                <td></td>
+                               
+                                <td  >
+                                   <a href="{% url  'followdetail'  result.ALERT_ID %}"> {{ result.ALERT_ID }} </a> 
+                                </td>
+                                <td >
+                                    {{ result.BRANCH_CODE }}
+                                </td>
+                                <td >
+                                    {{ result.EXCEPTION_NAME }}
+                                </td>
+                                <td >
+                                    {{ result.SEVERITY_LEVEL }}
+                                </td>
+    
+                                
+                                <td >
+                                    {{ result.OWNER_DETAIL }}
+                                </td>
+                                
+                                <td >
+                                    {{ result.NEXT_OWNER_DETAIL }}
+                                </td>
+                                
+                                <td >
+                                    {{ result.RESPONDENT_DETAIL }}
+                                </td>
+                                <td >
+                                    {{ result.RECEIVER }}
+                                </td>
+                                <td >
+                                    {{ result.RISK_INDICATOR }}
+                                </td>
+                                <td >
+                                    {{ result.REVIEW }}
+                                </td>
+                            </tr>
+                            
+                         {% endfor %}
+                        </tbody>
+                    </table>
+        
+          
+              
+              </div>
+              
+                      <div class="col col-lg-6" style=" padding-right: 3px; border-radius: 10px;  ">
+                        <nav>
+                          <ul class="pagination">
+                            <li data-page="prev" >
+                              <span> < <span class="sr-only">(current)</span></span>
+                            </li>
+                            <!--	Here the JS Function Will Add the Rows -->
+                            <li data-page="next" id="prev">
+                              <span> > <span class="sr-only">(current)</span></span>
+                            </li>
+                           
+                          </ul>
+                         
+                        </nav>
+                       
+                       
+                      </div>
+                      <div class="col col-lg-2" style=" padding-right: 3px; border-radius: 10px; margin-left: 85%; ">
+                    
+                    
+                      <input id="toalnpages" type="text" style="border: none;" />
+                      </div>
+      
+                </div>
+       
+      
+        
+      
+      
+      
+                      {% block javascript %}
+                      {#checkbox script#}
+                      <script>
+                              $("#myselect").change(function () {
+      
+                                  // var selectedVal = $("#myselect option:selected").text();
+                                  var selectedVal = $("#myselect option:selected").text();
+                                  if(selectedVal)
+                                  {
+                              document.getElementById("profileform").submit()
+      
+                                  }
+      
+                                  });
+                      </script>
+                      <script>
+                          $(document).ready(function () {
+                              $(".mytable #checkall").click(function () {
+                                  if ($(".mytable #checkall").is(':checked')) {
+                                      $(".mytable input[type=checkbox]").each(function () {
+                                          $(this).prop("checked", true);
+                                      });
+                      
+                                  } else {
+                                      $(".mytable input[type=checkbox]").each(function () {
+                                          $(this).prop("checked", false);
+                                      });
+                                  }
+                              });
+                      
+                              $("[data-toggle=tooltip]").tooltip();
+                          });
+                      
+                      </script>
+                      {#search field script#}
+                      <script>
+                          (function () {
+                              'use strict';
+                              var $ = jQuery;
+                              $.fn.extend({
+                                  filterTable: function () {
+                                      return this.each(function () {
+                                          $(this).on('keyup', function (e) {
+                                              $('.filterTable_no_results').remove();
+                                              var $this = $(this),
+                                                  search = $this.val().toLowerCase(),
+                                                  target = $this.attr('data-filters'),
+                                                  $target = $(target),
+                                                  $rows = $target.find('tbody tr');
+                      
+                                              if (search == '') {
+                                                  $rows.show();
+                                              } else {
+                                                  $rows.each(function () {
+                                                      var $this = $(this);
+                                                      $this.text().toLowerCase().indexOf(search) === -1 ? $this.hide() : $this.show();
+                                                  })
+                                                  if ($target.find('tbody tr:visible').size() === 0) {
+                                                      var col_count = $target.find('tr').first().find('td').size();
+                                                      var no_results = $('<tr class="filterTable_no_results"><td colspan="' + col_count + '">No results found</td></tr>')
+                                                      $target.find('tbody').append(no_results);
+                                                  }
+                                              }
+                                          });
+                                      });
+                                  }
+                              });
+                              $('[data-action="filter"]').filterTable();
+                          })(jQuery);
+                      
+                          $(function () {
+                              // attach table filter plugin to inputs
+                              $('[data-action="filter"]').filterTable();
+                      
+                              $('.container').on('click', '.panel-heading span.filter', function (e) {
+                                  var $this = $(this),
+                                      $panel = $this.parents('.panel');
+                      
+                                  $panel.find('.panel-body').slideToggle();
+                                  if ($this.css('display') != 'none') {
+                                      $panel.find('.panel-body input').focus();
+                                  }
+                              });
+                              $('[data-toggle="tooltip"]').tooltip();
+                          })
+                      </script>
+                      
+                      {% endblock javascript %}
+        </main>
+        <!-- page-content" -->
+   {% endblock %}
